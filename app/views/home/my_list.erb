@@ -92,13 +92,16 @@
                                 </div>
                                 <div class = "col-md-2 col-xs-3">
                                     <div style = "margin-top:33px;">
-                                        <span class="label label-info">카카오페이</span>
+                                        <% if x.credit_method == "kakao" %>
+                                            <span class="label label-warning">카카오페이</span>
+                                        <% else %>
+                                            <span class="label label-info">카드결제</span>
+                                        <% end %>
+                                        
                                     </div>
                                 </div>
                                 <div class = "col-md-1 col-xs-5">
-                                    <div style = "margin-top:33px;">
-                                        <span class="label label-success">영수증</span>
-                                    </div>
+                                    
                                 </div>
                                 <div class = "col-md-2 col-xs-3">
                                     <div style = "margin-top:33px;">
@@ -111,12 +114,8 @@
                        <% end %> 
                         
                     </div>
-
-                    
-                    
-                    
+                    <p class = "bold">* 해당구매상품의 영수증은 e-mail을 통해 확인 하실 수 있습니다.</p>
                 </div>
-                
             </div>
             <div class = "col-md-1"></div>
         </div>
