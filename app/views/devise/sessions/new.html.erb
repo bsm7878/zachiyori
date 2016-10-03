@@ -1,0 +1,90 @@
+
+    <!-- step css -->
+    <link rel="stylesheet" type="text/css" href="/css/step_style.css">
+    
+    
+    <!-- Main Navigation 
+    ================================================== -->
+    <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class = "row">
+                <div class = "col-md-2">    
+                      <a class="navbar-brand" href="/"><img src="/logo.png" alt="자취요리연구소"></a>
+                </div>
+                <!-- step by step 1,2,3 시작 -->
+                <div class = "col-md-10" style = "margin-top:13px; float:right;">
+                <ul class = "up_step" style = "list-style:none;" >
+                    <li class = "one">
+                        <span class = "circle">1</span> <span class = "bold num_1" style = "font-size:20px; color: #FFCC33;" >로그인</span> 
+                    </li>
+                    
+                    <li>
+                        <span class = "line"></span> <span class = "circle" style = "background-color: #6F6F6F;">2</span> <span class = "bold num_2" style = "font-size:20px;" >메뉴선택</span>
+                    </li>
+                    
+                    <li>
+                        <span class = "line"></span> <span class = "circle" style = "background-color: #6F6F6F;">3</span> <span class = "bold num_3" style = "font-size:20px;" >결제</span>
+                    </li>
+                </ul>
+                </div>
+                <!-- step by step 1,2,3 끝 -->
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+    
+
+
+        <div class = "container" style = "padding-top: 100px; padding-bottom: 10%;" >
+
+            <!-- 회원가입 form  시작-->
+            <div class = "row" style = "padding-top:0px;">
+                <div class="section-header" style = "padding-bottom:0px;">
+                    <h2 class = "bold">요리가<span class="highlight"> <strong>쉬워집니다</strong></span></h2> 
+                    <h5 > 저희가 도와드리겠습니다.</h5>
+                    <div class="fancy"><span><img src="/img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
+                </div>
+                
+                <div class = "col-md-2"></div>
+                <div class = "col-md-4" style = "margin-right: 40px;">
+                    <img src = "/step1.PNG" style = "width:320px; height:320px;">
+                </div>
+                <div class = "col-md-4">
+                    <form class="new_user noto" id="new_user" action="/users/sign_in" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="Xx6egWY9HQrq/fZYMqNS9A9WDbWrcR6LTY7FmcvrnqKLWZOzt1jWjOnvCQmPz/2lrAk1EBzacPDCVq7HABIk9w==" />
+                      <div class="field form-group">
+                        <label for="user_email" style = "color: black;">이메일</label><br />
+                        <input autofocus="autofocus" class="form-control" type="email"  name="user[email]" id="user_email"  placeholder="이메일을 입력하세요" />
+                      </div>
+                    
+                      <div class="field form-group">
+                        <label for="user_password" style = "color: black;">암호</label><br />
+                        <input autocomplete="off" class="form-control" type="password" name="user[password]" id="user_password" placeholder="암호" />
+                      </div>
+                    
+                      <div class="actions form-group">
+                        <input type="submit" class="btn btn-warning bold" name="commit" style = "width:100%; font-size:20px;" value="메뉴 선택" />
+                      </div>
+                    </form>
+                    <hr>
+                     <a href="/users/sign_up" class="btn btn-info bold" style = "width:100%; font-size:20px;" role="button">회원가입</a>
+                     <div class = "bold" style = "text-align: center; margin-top:10px;"> 
+                         <a style = "cursor:pointer;" href = "/users/password/new">비밀번호를 모르겠어요</a>
+                     </div>
+                </div>
+                <div class = "col-md-2"></div>
+            </div>
+            <!-- 회원가입 form  끝-->
+            
+            
+        </div>
+
+
+
+
+         <!-- Footer 
+         ================================================== -->
+         <%= render :partial => "home/footer" %> 
+    
+
+
+    

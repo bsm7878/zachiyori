@@ -1,0 +1,65 @@
+<!-- Main Navigation 
+    ================================================== -->
+    <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img src="/logo.png" alt="자취요리연구소"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right" >
+                <li class = "bold"><a href="/home/info" class="scroll">자주묻는질문</a></li>
+                <li class = "bold"><a href="/home/contact" class="scroll">연락하기</a></li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class = "container" style = "margin-top:120px;">
+      <div class = "row">
+        <div class = "col-md-4"></div>
+        <div class = "col-md-4">
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+            <%= devise_error_messages! %>
+            <%= f.hidden_field :reset_password_token %>
+            <div class="field ">
+              <%= f.label :password, "새로운 비밀번호" %><br />
+              <%= f.password_field :password, class: 'form-control', placeholder: '새로운 암호는 최소 6자 이상이어야합니다', autofocus: true, autocomplete: "off" %>
+            </div>
+          
+            <div class="field" style = "margin-top:10px;">
+              <%= f.label :password_confirmation, "새로운 비밀번호 확인" %><br />
+              <%= f.password_field :password_confirmation, class: 'form-control', placeholder: '위 암호를 한번 더 입력해주세요', autocomplete: "off" %>
+            </div>
+          
+            <div class="actions" style = "text-align:center; margin-top:10px;">
+             <input type="submit" class="btn btn-warning bold" name="commit" style = "width:80%; font-size:20px;" value="비밀번호 변경하기" />
+            </div>
+          <% end %>  
+        </div>
+        <div class = "col-md-4"></div>
+      </div>  
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+        <div class = "container" style = "margin-top:210px;"></div>
+         <!-- Footer 
+         ================================================== -->
+         <%= render :partial => "home/footer" %> 

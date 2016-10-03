@@ -1,0 +1,241 @@
+
+
+    <!-- Main Navigation 
+    ================================================== -->
+    <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img src="/top.png" alt="자취요리연구소"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right" >
+                <li class = "bold"><a href="/home/contact" class="scroll">문의</a></li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    
+    <div class = "container" style = "margin-top:80px;">
+      <div class = "row">
+        <div class = "col-md-8">
+          <ul class="nav nav-pills">
+            <li role="presentation" class="active"><a href="/home/order/<%= params[:id] %>">개요</a></li>
+            <li role="presentation"><a href="/home/buy_five/<%= params[:id] %>">5시 배송 내역</a></li>
+            <li role="presentation"><a href="/home/buy_seven/<%= params[:id] %>">7시 배송 내역</a></li>
+            <li role="presentation"><a href="/home/buy_total/<%= params[:id] %>">정산내역</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+<div class = "container" >
+    <div class = "row">
+     
+          <div id = "mydiv">
+        	   <!-- 5시 주문 배송 현황 start -->
+            	  <div class = "row" style = "margin-bottom:15px;">
+            	    <div class = "col-md-9">
+            	    </div>
+            	    <div class = "col-md-3 bold" style = "text-align:center;">
+            	      <p class="bg-primary" style = "padding:3px;">
+            	        <%= Time.zone.now.to_s.split[0] %>&nbsp;&nbsp;&nbsp;&nbsp;오후 5시 배송 주문현황
+            	      </p>
+            	    </div>
+            	    <div class = "row">
+            	      <div class = "col-md-12">
+              	      <div style = "font-size:20px; text-align:right;">
+              	        <% if Time.zone.now.between?(Time.zone.now.midnight, Time.zone.now.midnight + 16.hours + 30.minute) %>
+              	          <span class="label label-danger">아직 주문 접수가 진행중입니다.(오후 4시 30분 이후 출력해주세요)</span>
+              	        <% else %>
+              	          <span class="label label-success" style="cursor:pointer" onclick="PrintElem('#mydiv')" >해당 시간 주문접수가 완료되었습니다(클릭시 출력 됩니다.)</span>
+              	        <% end %>
+              	      </div>
+            	      </div>
+            	    </div>
+                </div>
+        	   <!-- 5시 시간별 주문 배송 현황 end -->
+        	  
+                <div class = "row">
+                  <!-- 5시 메뉴보기 start -->
+                  <% @menu.where(:menu_choice => true).all.each do |x| %>
+                    <div class = "col-md-6">
+                        <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>
+                                    <% x.ingredients[0..-2].each do |a| %>
+                                      <%= a.ingredient_name %> <%= a.ingredient_amount %>,
+                                    <% end %>
+                                  </th>
+                                  <th>갯수</th>
+                                  <th>총합</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">1</th>
+                                  <td><%= x.menu_name %></td>
+                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 5시").where(:option_1 => false).where(:option_2 => false).count %></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">2</th>
+                                  <td><%= x.menu_name %> + 오뚜기밥2개</td>
+                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 5시").where(:option_1 => true).where(:option_2 => false).count %></td>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">3</th>
+                                  <td><%= x.menu_name %> + 소스박스</td>
+                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 5시").where(:option_1 => false).where(:option_2 => true).count %></td>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">4</th>
+                                  <td><%= x.menu_name %> + 오뚜기밥2개 + 소스박스</td>
+                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 5시").where(:option_1 => true).where(:option_2 => true).count %></td>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">총합</th>
+                                  <td></td>
+                                  <td></td>
+                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 5시").count %></td>
+                                </tr>
+                              </tbody>
+                        </table>
+                    </div>
+                  <% end %>
+                  <!-- 5시 메뉴보기 end --> 
+                </div>
+              </div>
+              <!-- 5시 주문현황 전체 end -->
+             
+             <div id ="seven">
+                <!-- 7시 주문 배송 현황 start -->
+            	  <div class = "row" style = "margin-bottom:15px;">
+            	    <div class = "col-md-9"></div>
+            	    <div class = "col-md-3 bold" style = "text-align:center;">
+            	      <p class="bg-info" style = "padding:3px;">
+            	        <%= Time.zone.now.to_s.split[0] %>&nbsp;&nbsp;&nbsp;&nbsp;오후 7시 배송 주문현황
+            	      </p>
+            	    </div>
+            	    <div class = "row">
+            	      <div class = "col-md-12">
+              	      <div style = "font-size:20px; text-align:right;">
+              	        <% if Time.zone.now.between?(Time.zone.now.midnight, Time.zone.now.midnight + 18.hours + 30.minute) %>
+              	          <span class="label label-danger">아직 주문 접수가 진행중입니다.(오후 6시 30분 이후 출력해주세요)</span>
+              	        <% else %>
+              	          <span class="label label-success" style="cursor:pointer" onclick="PrintElem('#seven')">해당 시간 주문접수가 완료되었습니다(클릭시 출력 됩니다.)</span>
+              	        <% end %>
+              	      </div>
+            	      </div>
+            	    </div>
+            	  </div>
+        	      <!-- 7시 시간별 주문 배송 현황 end -->
+        	      
+        	      
+        	      <div class = "row">
+                  <!-- 7시 메뉴보기 start -->
+                  <% @menu.where(:menu_choice => true).each do |x| %>
+                    <div class = "col-md-6">
+                        <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>#</th>
+                                  <th>
+                                    <% x.ingredients[0..-2].each do |a| %>
+                                      <%= a.ingredient_name %> <%= a.ingredient_amount %>,
+                                    <% end %>
+                                  </th>
+                                  <th>갯수</th>
+                                  <th>총합</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">1</th>
+                                  <td><%= x.menu_name %></td>
+                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 7시").where(:option_1 => false).where(:option_2 => false).count %></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">2</th>
+                                  <td><%= x.menu_name %> + 오뚜기밥2개</td>
+                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 7시").where(:option_1 => true).where(:option_2 => false).count %></td>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">3</th>
+                                  <td><%= x.menu_name %> + 소스박스</td>
+                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 7시").where(:option_1 => false).where(:option_2 => true).count %></td>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">4</th>
+                                  <td><%= x.menu_name %> + 오뚜기밥2개 + 소스박스</td>
+                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 7시").where(:option_1 => true).where(:option_2 => true).count %></td>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">총합</th>
+                                  <td></td>
+                                  <td></td>
+                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 7시").count %></td>
+                                </tr>
+                              </tbody>
+                              
+                        </table>
+                    </div>
+                  <% end %>
+                  <!-- 7시 메뉴보기 end --> 
+      
+                </div>
+              </div>
+              <!-- 7시 주문현황 전체 end -->
+
+
+
+    </div>
+
+</div>
+
+   <div class = "row" style = "margin-top:300px;">
+   <!-- Footer 
+    ================================================== -->
+    <%= render :partial => "home/footer" %> 
+
+
+  <script>
+  function PrintElem(elem)
+    {
+        Popup($(elem).html());
+    }
+
+    function Popup(data) 
+    {
+        var mywindow = window.open('', 'my div', 'height=400,width=600');
+        mywindow.document.write('<html><head><title>my div</title>');
+        /*optional stylesheet*/ //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+        mywindow.document.write('</head><body >');
+        mywindow.document.write(data);
+        mywindow.document.write('</body></html>');
+
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10
+
+        mywindow.print();
+        mywindow.close();
+
+        return true;
+    }
+  
+  </script>

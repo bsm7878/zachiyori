@@ -1,0 +1,154 @@
+<!-- Main Navigation 
+    ================================================== -->
+    <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <a class="navbar-brand" href="/"><img src="/top.png" alt="자취요리연구소"></a>
+              <!-- Button trigger modal -->
+              <% if Access.where(:access_email => current_user.email).take.access_step <= 0 %>
+                <div style = "text-align:right;">
+                  <button type="button"  style = "margin-top:8px;" class="btn btn-primary bold" data-toggle="modal" data-target="#myModal_access">
+                    관리자 추가
+                  </button>
+                  <button type="button"  style = "margin-top:8px;" class="btn btn-warning bold" data-toggle="modal" data-target="#myModal">
+                    마트 추가
+                  </button>
+              </div>
+              <% else %>
+              
+              <% end %>
+              
+              
+              
+        </div><!-- /.container-fluid -->
+    </nav>
+    
+    
+              <!-- 마트 추가 Modal start -->
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">마트 정보 추가하기</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action = "/home/mart_save" enctype="multipart/form-data" method = "post">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">마트 상호</label>
+                              <input type="text" class="form-control" id="exampleInputEmail1" name = "mart_name" placeholder="마트상호" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="mart_email">마트 이메일</label>
+                              <input type="email" class="form-control" id="mart_email" name = "mart_email" placeholder="마트 email을 입력해주세요" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputFile">마트 대표 사진</label>
+                              <input type="file" name = "mart_img" id="exampleInputFile">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputFile1">준비 사진_1</label>
+                              <input type="file" name = "mart_img1" id="exampleInputFile1">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputFile2">준비 사진_2</label>
+                              <input type="file" name = "mart_img2" id="exampleInputFile2">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">대표이름</label>
+                              <input type="text" class="form-control" id="exampleInputPassword1" name = "mart_leader" placeholder="대표이름" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword2">사업자번호</label>
+                              <input type="text" class="form-control" id="exampleInputPassword2" name = "mart_number" placeholder="사업자번호" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInput2">협약일</label>
+                              <input type="text" class="form-control" id="exampleInput2" name = "agreement_day" placeholder="ex_2016-9-1" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword3">주소</label>
+                              <input type="text" class="form-control" id="exampleInputPassword3" name = "mart_address" placeholder="사업자주소" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword4">운영시간</label>
+                              <input type="text" class="form-control" id="exampleInputPassword4" name = "mart_time" placeholder="운영시간" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword5">전화번호</label>
+                              <input type="text" class="form-control" id="exampleInputPassword2" name = "mart_phone" placeholder="마트전화번호" required>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-primary">저장</button>
+                            </div>
+                        </form>    
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 마트 추가 Modal end -->
+              
+              <!-- 관리자 추가 Modal start -->
+              <div class="modal fade" id="myModal_access" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_access" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel_access">관리자 추가하기</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action = "/home/access_save" method = "get">
+                            <div class="form-group">
+                              <label for="access_email">관리자 이메일</label>
+                              <input type="email" class="form-control" id="access_email" name = "access_email" placeholder="관리자 email을 입력해주세요" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="access_step">관리자 권한</label>
+                              <input type="text" class="form-control" id="access_step" name = "access_step" placeholder="ex_ 0, 1, 2" required>
+                            </div>
+                            <div>
+                              0 - 추가 및 수정 및 열람 가능<br>
+                              1 - 열람 가능<br>
+                              2 - 마트 사장님 권한<br>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-primary">저장</button>
+                            </div>
+                        </form>    
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 관리자 추가 Modal end -->
+
+<div class = "container bold" style = "margin-top:90px;">
+    <div class="row">
+      <% @mart.each do |x| %>  
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <div class="caption" style = "text-align: center;">
+                <h3><%= x.mart_name %></h3>
+                <p><%= x.mart_address %></p>
+                <p>
+                  <% if Access.where(:access_email => current_user.email).take.access_step <= 1 %>
+                    <a href="/home/mart/<%= x.id %>" class="btn btn-primary" role="button">관리</a>
+                    <a href="/home/order/<%= x.id %>" class="btn btn-info" role="button">주문정보</a>
+                  <% else %>
+                  <% end %>
+                  <% if x.mart_email == current_user.email %>
+                    <a href="/home/order/<%= x.id %>" class="btn btn-info" role="button">주문정보</a>
+                  <% end %>
+                </p>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+</div>
+
+
+         <div style = "padding-top:230px;"></div> 
+         <!-- Footer 
+         ================================================== -->
+         <%= render :partial => "home/footer" %> 
+         

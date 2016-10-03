@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <!-- 나눔고딕B 수정필요
+   <link href='//googledrive.com/host/0BxmAw3HA4YGCflZpYWI1M3BIYUI2Zm9CUDhKaXVqZGFYV29CQ05xN2pKTlo5YjVWUkJPeWs/nanum-barun-gothic-bold.css' rel='stylesheet' type='text/css'>-->
+   <link href='//fonts.googleapis.com/earlyaccess/jejugothic.css' rel='stylesheet' type='text/css'>
+   <!-- 나눔고딕R 수정필요 -->
+   <link href='//googledrive.com/host/0BxmAw3HA4YGCfmhCUFc0SGdQbVlJcllDU2NPYUp6WlFDT1RPem5Eb2lMZm16c0R4N0J2VVU/nanum-barun-gothic-regular.css' rel='stylesheet' type='text/css'>
+   <!-- Noto Sans  -->
+   <link href='//fonts.googleapis.com/earlyaccess/notosanskr.css' rel='stylesheet' type='text/css'>
+   
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>레시피,식재료 주문 대행 서비스, 자취요리연구소</title>
+    <meta name="description" content="Ethanol is an Agency and Personal Portfolio Template built with bootstrap 3.3.2. This is created for a cause to support my uncle's campaign. Go and Donate at - https://life.indiegogo.com/fundraisers/medical-support-for-a-filipino-overseas-worker--3/x/10058181">
+    <meta name="keywords" content="portfolio, agency, bootstrap theme, mobile responsive, template, personal">
+    <meta name="author" content="ThemeForces.Com">
+    
+    <!-- Jquery CDN -->
+    <script  src="//code.jquery.com/jquery-latest.min.js"></script>
+    <!-- Boostrap CDN -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- font awesome -->
+    <script src="//use.fontawesome.com/4f21ea7504.js"></script>
+    <!-- 테마 css -->
+    <link rel="stylesheet" type="text/css"  href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/responsive.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    
+  <%= csrf_meta_tags %>
+  
+  <style>
+       @media (max-width: 768px) { 
+
+        .navbar-brand img {height:40px;}
+        .navbar-brand{padding-top:10px;}
+        
+    }
+    
+    @media (min-width: 1200px) { 
+        .get_cook { display: none; }
+        
+        .navbar-brand img {height:60px;}
+        .navbar-brand{padding-top:2px;}
+        
+        .up_step li:first-child{margin-left:200px;}
+    }
+
+          
+      .bold{
+          /*font-family:nanum-barun-gothic-bold !important; */
+          font-family: 'Jeju Gothic', serif;
+
+      }
+      .regular{
+          font-family:nanum-barun-gothic-regular !important;
+      }
+      .noto{
+          font-family:'Noto Sans KR'; 
+          font-weight: 700;
+      }
+      .noto_regular{
+          font-family:'Noto Sans KR'; 
+          font-weight: 400;
+      }
+  </style>
+  
+</head>
+<body>
+
+<%= yield %>
+    
+
+</body>
+</html>

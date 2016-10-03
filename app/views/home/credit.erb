@@ -1,0 +1,324 @@
+    <!-- index css -->
+    <link rel="stylesheet" type="text/css" href="/css/credit_style.css">
+    <!-- I'm port js -->
+    <script type="text/javascript" src="//service.iamport.kr/js/iamport.payment-1.1.1.js"></script>
+    
+    <!-- Main Navigation 
+    ================================================== -->
+    <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class = "row">
+                <div class = "col-md-2">    
+                      <a class="navbar-brand" href="/"><img src="/logo.png" alt="..."></a>
+                </div>
+                <!-- step by step 1,2,3 시작 -->
+                <div class = "col-md-10" style = "margin-top:13px; float:right;">
+                <ul class = "up_step" style = "list-style:none;" >
+                    <li style = "opacity:0.5;" >
+                        <span class = "circle" style = "background-color: #6F6F6F;"><i class="fa fa-check" aria-hidden="true"></i></span> <span class = "bold num_3" style = "font-size:20px;" >로그인</span>
+                    </li>
+                    
+                    <li style = "opacity:0.5;">
+                        <span class = "line"></span> <span class = "circle" style = "background-color: #6F6F6F;"><i class="fa fa-check" aria-hidden="true"></i></span> <span class = "bold num_2" style = "font-size:20px;" >메뉴선택</span>
+                    </li>
+                    
+                    <li>
+                       <span class = "line"></span>  <span class = "circle">3</span> <span class = "bold num_1" style = "font-size:20px; color: #FFCC33;" >결제</span> 
+                    </li>
+                </ul>
+                </div>
+                <!-- step by step 1,2,3 끝 -->
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+    
+
+
+        <div class = "container" style = "padding-top: 100px; padding-bottom: 10%;" >
+            
+                <div class = "row">
+                    
+                    <div class = "col-md-7" style = "border-style:solid; border-width:1px; border-radius:5px; border-color:#ecf0f1; padding-left:35px; padding-right:35px;">
+                        <div class = "row" style = "border-bottom-style: solid; border-width:1px; border-radius:5px; border-color:#ecf0f1; padding-top:20px; padding-bottom:20px;">
+                            <span class = "noto_regular" id = "head_info" style = "font-size: 25px; color: black;"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 배송정보</span>
+                        </div>
+                        <div class = "row" style = "margin-top:20px;">
+                              <div class = "row">
+                                  <div class = "col-md-6">    
+                                      <div class="form-group" >
+                                        <label class = "noto_regular" for="name_form" style = "color: black;">이름</label>
+                                          <% unless current_user.privacy.nil? %>
+                                            <input type="text" class="form-control" value = "<%= current_user.privacy.name %>" id="name_form" name = "name" placeholder="이름">
+                                          <% else %>
+                                            <input type="text" class="form-control" id="name_form" name = "name" placeholder="이름">
+                                          <% end %>
+                                      </div>
+                                  </div>
+                                  <div class = "col-md-6"></div>
+                              </div>
+                              <div class = "row">
+                                  <div class = "col-md-12">    
+                                      <div class="form-group" >
+                                        <label class = "noto_regular" for="exampleInputEmail1" style = "color: black;">주소</label>
+                                        <div><%= @consumer_final_address %></div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class = "row">
+                                  <div class = "col-md-6">    
+                                      <div class="form-group" >
+                                        <label class = "noto_regular" for="phone_form" style = "color: black;">전화번호</label>
+                                          <% unless current_user.privacy.nil? %>
+                                            <input type="text" class="form-control" id="phone_form" value = "<%= current_user.privacy.phone %>" name = "phone" placeholder="'-'는 빼고 적어주세요" >
+                                          <% else %>
+                                            <input type="text" class="form-control" id="phone_form" name = "phone" placeholder="'-'는 빼고 적어주세요">
+                                          <% end %>
+                                      </div>
+                                  </div>
+                                  <div class = "col-md-6">
+                                      <div class="form-group">
+                                        <label class = "noto_regular" for="InputPassword1" style = "color: black;">공동현관 비밀번호</label>
+                                        <% if current_user.privacy.nil? %>
+                                            <input type="text" class="form-control" id="public_pw" name = "public_pw"  placeholder="공동현관 비밀번호가 있을시 적어주세요">
+                                        <% else %>
+                                            <% if current_user.privacy.public_pw.nil? %>
+                                                <div>없습니다</div>
+                                            <% else %>
+                                                <div><%= current_user.privacy.public_pw %></div>
+                                            <% end %>
+                                        <% end %>
+                                      </div>    
+                                  </div>
+                              </div>
+                              <div class = "row">
+                                  <div class = "col-md-12">    
+                                      <div class="form-group">
+                                        <label class = "noto_regular" for="want_content" style = "color: black;">요구사항</label>
+                                        <textarea class="form-control" id="want_content" placeholder="ex)문고리에 걸어주시고 노크해주세요, 우유주머니에 넣어주세요 등" rows="3"></textarea>
+                                      </div>
+                                  </div>
+                              </div>
+                        </div>
+                        <div class = "row" style = "margin-top:20px;">
+                            <span class = "noto_regular" id = "head_info" style = "font-size: 25px; color: black; margin-left:18px;"><i class="fa fa-credit-card" aria-hidden="true"></i> 결제방법</span>
+                        </div>
+                        <hr>
+                        <div class = "row noto_regular" style = "margin-bottom:40px;">
+                            <div class = "col-md-4 col-xs-6 method_div">
+                                <div class = "credit nice" value = "nice" style = "cursor:pointer; background-color:#ecf0f1; border-radius:5px; border-style:solid; border-width:1px; display:inline-block; color:#9b9b9b; display: table; border-style: hidden; ">
+                                    <div style = "text-align:center; display: table-cell; vertical-align: middle; font-size:16px;  ">신용카드</div>
+                                </div>
+                            </div>
+                            <div class = "col-md-4 col-xs-6 method_div">
+                                <div class = "credit kakao" value = "kakao" style = "cursor:pointer; background-color:#ecf0f1; border-radius:5px; border-style:solid; border-width:1px; display:inline-block; color:#9b9b9b; display: table; border-style: hidden; ">
+                                    <div  style = "text-align:center; display: table-cell; vertical-align: middle; font-size:16px;  ">카카오페이(간편결제)</div>
+                                </div>
+                            </div>
+                            <div class = "col-md-4"></div>
+                        </div>
+                    </div>
+                    <div class = "col-md-4 food_info" style = "border-style:solid; border-width:1px; border-radius:5px; border-color:#ecf0f1;">
+                        <div class = "row" style = " margin-top:18px;">
+                            <span class = "noto_regular" id = "head_info" style = "font-size: 25px; color: black; margin-left:18px; margin-left:30px;"><i class="fa fa-cutlery" aria-hidden="true"></i> 상품정보</span>
+                        </div>
+                        <hr>
+                        <div class = "row" style = "padding-left:30px; padding-top:20px;">
+                            <div style = "float:left;">
+                                <img src = "<%= @menu.menu_img1 %>" style = "width:95px; height:95px;"/> 
+                            </div>
+                            <div style = "float:left; margin-left:15px;">
+                                <span class = "bold" style = "font-size: 18px; color: black;"><%= @menu.menu_name %></span> <span class = "bold" style = "margin-top:0px;">(식재료 SET)</span><br>
+                                <span class = "bold"><%= @menu.menu_say %></span><br>
+                                <span class = "bold">2인분</span><br>
+                                <span class = "bold">판매자 | <%= @menu.mart.mart_name %></span><br>
+                            </div>
+                        </div>
+                        <div class = "row bold" style = "margin-top:20px;">
+                                <div class = "col-md-1 col-xs-1"></div>
+                                <div class = "col-md-8 col-xs-8">
+                                    상품명 
+                                </div>
+                                <div class = "col-md-2 col-xs-2">
+                                    용량
+                                </div>
+                                <div class = "col-md-1 col-xs-1"></div>
+                        </div>
+                        <hr style = "margin-top:10px; margin-bottom:10px;">
+                        
+                        <% @menu.ingredients[0..-2].each do |x| %>
+                            <div class = "row bold" style = "margin-top:10px;">
+                                    <div class = "col-md-1 col-xs-1"></div>
+                                    <div class = "col-md-8 col-xs-8">
+                                        <i class="fa fa-check-square-o" style = "margin-right:4px;" aria-hidden="true"></i> <%= x.ingredient_name %>
+                                    </div>
+                                    <div class = "col-md-2 col-xs-2">
+                                        <%= x.ingredient_amount %>
+                                    </div>
+                                    <div class = "col-md-1 col-xs-1"></div>
+                            </div>
+                        <% end %>
+                        
+                        <% unless params[:source] == "0" %>
+                         <% @menu.sources.each do |a| %>
+                            <div class = "row bold" style = "margin-top:10px;">
+                                    <div class = "col-md-1 col-xs-1"></div>
+                                    <div class = "col-md-8 col-xs-8">
+                                        <i class="fa fa-check-square-o" style = "margin-right:4px;" aria-hidden="true"></i> <%= a.source_name %>
+                                    </div>
+                                    <div class = "col-md-2 col-xs-2">
+                                        10g
+                                    </div>
+                                    <div class = "col-md-1 col-xs-1"></div>
+                            </div>
+                         <% end %> 
+                        <% end %>
+                        
+                         <% unless params[:bob] == "0" %> 
+                            <div class = "row bold" style = "margin-top:10px;">
+                                    <div class = "col-md-1 col-xs-1"></div>
+                                    <div class = "col-md-8 col-xs-8">
+                                        <i class="fa fa-check-square-o" style = "margin-right:4px;" aria-hidden="true"></i> 오뚜기밥(200g)-2개
+                                    </div>
+                                    <div class = "col-md-2 col-xs-2">
+                                        무료
+                                    </div>
+                                    <div class = "col-md-1 col-xs-1"></div>
+                            </div>
+                        <% end %>
+                        
+                        <div class = "row bold" style = "margin-top:10px;">
+                                <div class = "col-md-1 col-xs-1"></div>
+                                <div class = "col-md-8 col-xs-8">
+                                    <i class="fa fa-check-square-o" style = "margin-right:4px;" aria-hidden="true"></i> 배송료
+                                </div>
+                                <div class = "col-md-2 col-xs-2">
+                                    무료
+                                </div>
+                                <div class = "col-md-1 col-xs-1"></div>
+                        </div> 
+                        <hr style = "margin-top:10px; margin-bottom:10px;">
+                        <div class = "row bold" style = "margin-top:10px;">
+                                <div class = "col-md-1 col-xs-1"></div>
+                                <div class = "col-md-5 col-xs-5">
+                                    <span style = "font-size: 33px;">합계</span>
+                                </div>
+                                <div class = "col-md-6 col-xs-5 price_content">
+                                    <span style = "font-size: 33px; color:#FFCC33;"> <%= number_with_delimiter(@final_total_price, :delimiter => ',') %></span><span style = "font-size: 16px; color:#FFCC33;"> 원</span>
+                                </div>
+                                <div class = "col-xs-1">
+                                
+                                </div>
+                        </div> 
+                        <div class = "row">
+                            <div class = "col-md-1"></div>
+                            <div class = "col-md-10">
+                                <div class="alert alert-info" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;" id = "name_show" role="alert">이름을 입력해주세요..</div>
+                                <div class="alert alert-danger" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;"  id = "phone_show" role="alert">번호를 입력해주세요..</div>
+                                <button type="button" class="btn btn-default bold" id = "pay" style = "width:100%;  font-size:20px; margin-top:20px; margin-bottom:20px;">결제하기</button>
+                            </div>
+                            <div class = "col-md-1"></div>
+                        </div>
+                        <div style = "text-align:center; margin-bottom:15px;">본 제품 특성상 단순변심으로 인한 <br>환불 및 교환은 불가함을 알려드립니다.</div>
+                    </div>
+                    <div class = "col-md-1"></div>
+                </div>
+
+        </div>
+
+
+
+
+    <!-- Footer 
+    ================================================== -->
+    <%= render :partial => "home/footer" %>
+    
+    <!-- i'm port -->
+    <script>
+    
+                                
+    
+    
+                    var IMP = window.IMP;
+                    IMP.init('imp96245329'); //'iamport' 대신 부여받은 "가맹점 식별코드"를 사용.
+                    
+                    $("#pay").click(function(){
+                        if ($('#name_form').val() == '' && $('#phone_form').val() == ''){
+                            $("#name_show").show();
+                            $("#phone_show").show();
+                        } else if ($('#name_form').val() != '' && $('#phone_form').val() == ''){
+                            $("#name_show").hide();
+                            $("#phone_show").show();
+                        } else if ($('#name_form').val() == '' && $('#phone_form').val() != '') {
+                            $("#name_show").show();
+                            $("#phone_show").hide();
+                        } else {
+                        
+                        var payment = $(".payment").attr("value"); //payment 방법
+                        // credit func - start
+                        var name_form = $('#name_form').val();
+                        var phone_form = $('#phone_form').val(); 
+
+                        IMP.request_pay({
+                        pg : payment, // version 1.1.0부터 지원.
+                                    
+                        pay_method : 'card', // 'card' : 신용카드 | 'trans' : 실시간계좌이체 | 'vbank' : 가상계좌 | 'phone' : 휴대폰소액결제
+                        merchant_uid : 'merchant_' + new Date().getTime(),
+                        name : '돼지고기짜글이',
+                        amount : 1000,
+                        buyer_email : '<%= current_user.email %>',
+                        buyer_name : name_form, 
+                        buyer_tel : phone_form,
+                        buyer_addr : '<%= current_user.address + current_user.sub_address %>',
+                        app_scheme : 'iamporttest' //in app browser결제에서만 사용 
+                        
+                    }, function(rsp) { 
+                        if ( rsp.success ) {
+                            // ajax 코드 시작
+                            $.ajax({
+                                data: {
+                                    name: $("#name_form").val(),
+                                    phone: $("#phone_form").val(),
+                                    public_pw: $("#public_pw").val(),
+                                    menu_id: <%= params[:menu_id] %>,
+                                    imp_uid: rsp.imp_uid,
+                                    want_time: "<%= params[:wanted_time] %>",
+                                    credit_method: rsp.pg_provider,
+                                    total_price: rsp.paid_amount,
+                                    together_zone: <%= Address.where(:ok_address => current_user.address).take.together_zone %>,
+                                    want_content: $("#want_content").val(),
+                                    option_1: <%= params[:bob] %>,
+                                    option_2: <%= params[:source] %>
+                                    
+                                },
+                                url: "/home/purchase_save",
+                                success: function(data){
+                                    window.location.replace("/home/comming_soon");
+                                }
+                            });
+                            // ajax 코드 종료
+                        } else {
+                            var msg = '결제에 실패하였습니다.';
+                                msg += '에러내용 : ' + rsp.error_msg;
+                            
+                        }
+                    });
+                    // credit func - end     
+                        
+                 }                       
+
+            });
+
+            
+       
+                
+            
+
+    
+  
+    </script>
+    
+    
+    <!-- credit_js --> 
+    <script  src="/js/credit_js.js"></script>    
+    

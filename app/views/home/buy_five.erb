@@ -1,0 +1,149 @@
+<!-- Main Navigation 
+    ================================================== -->
+    <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img src="/top.png" alt="자취요리연구소"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right" >
+                <li class = "bold"><a href="/home/contact" class="scroll">문의</a></li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    
+    <div class = "container" style = "margin-top:80px;">
+      <div class = "row">
+        <div class = "col-md-8">
+          <ul class="nav nav-pills">
+            <li role="presentation" ><a href="/home/order/<%= params[:id] %>">개요</a></li>
+            <li role="presentation" class="active"><a href="/home/buy_five/<%= params[:id] %>">5시 배송 내역</a></li>
+            <li role="presentation"><a href="/home/buy_seven/<%= params[:id] %>">7시 배송 내역</a></li>
+            <li role="presentation"><a href="/home/buy_total/<%= params[:id] %>">정산내역</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+<div class = "container" id = "five" >
+<div class = "row" style = "margin-bottom:15px;">
+            	    <div class = "col-md-9"></div>
+            	    <div class = "col-md-3 bold" style = "text-align:center;">
+            	      <p class="bg-primary" style = "padding:3px;">
+            	        <%= Time.zone.now.to_s.split[0] %>&nbsp;&nbsp;&nbsp;&nbsp;오후 5시 배송 주문현황
+            	      </p>
+            	    </div>
+            	    <div class = "row">
+            	      <div class = "col-md-12">
+              	      <div style = "font-size:20px; text-align:right;">
+              	        <% if Time.zone.now.between?(Time.zone.now.midnight, Time.zone.now.midnight + 16.hours + 30.minute) %>
+              	          <span class="label label-danger">아직 주문 접수가 진행중입니다.(오후 4시 30분 이후 출력해주세요)</span>
+              	        <% else %>
+              	          <span class="label label-success" style="cursor:pointer" onclick="PrintElem('#five')">해당 시간 주문접수가 완료되었습니다(클릭시 출력 됩니다.)</span>
+              	        <% end %>
+              	      </div>
+            	      </div>
+            	    </div>
+            	  </div>
+                <div class = "row">
+                    <div class = "col-md-12">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <th>밀집지역</th>
+                              <th>이름</th>
+                              <th>주문메뉴</th>
+                              <th>주소</th>
+                              <th>공동현관</th>
+                              <th>요구사항</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% @five_time.each do |b| %>
+                              <tr>
+                                <th scope="row"><%= b.together_zone %></th>
+                                <td>
+                                  <% unless User.where(:id => b.user_id).nil? %>
+                                    탈퇴회원
+                                  <% else %>
+                                    <%= User.where(:id => b.user_id).take.privacy.name %>
+                                  <% end %>
+                                </td>
+                                <td>
+                                  <% if b.option_1 == true && b.option_2 == true %>
+                                    <%= Menu.find(b.menu_id).menu_name %> + 오뚜기밥 2개 + 소스박스
+                                  <% elsif b.option_1 == true && b.option_2 == false  %>
+                                    <%= Menu.find(b.menu_id).menu_name %> + 오뚜기밥 2개 
+                                  <% elsif b.option_1 == false && b.option_2 == true %>
+                                    <%= Menu.find(b.menu_id).menu_name %> + 소스박스
+                                  <% else %>
+                                    <%= Menu.find(b.menu_id).menu_name %>
+                                  <% end %>
+                                </td>
+                                <td>
+                                  <% unless User.where(:id => b.user_id).nil? %>
+                                    탈퇴회원
+                                  <% else %>
+                                    <%= User.where(:id => b.user_id).take.address + User.where(:id => b.user_id).take.sub_address  %>
+                                  <% end %>
+                                </td>
+                                <td>
+                                  <% unless User.where(:id => b.user_id).nil? %>
+                                    탈퇴회원
+                                  <% else %>
+                                    <%= User.where(:id => b.user_id).take.privacy.public_pw %>
+                                  <% end %>
+                                </td>
+                                <td><%= b.want_content %></td>
+                              </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                        *배달이 완료되면 해당 용지는 반드시 파쇄하여 버려주셔야 합니다.
+                    </div>
+                </div>
+ </div>              
+                
+    <div class = "row" style = "margin-top:300px;">
+    </div>            
+    <!-- Footer 
+    ================================================== -->
+    <%= render :partial => "home/footer" %> 
+    
+  <script>
+    function PrintElem(elem)
+      {
+          Popup($(elem).html());
+      }
+  
+      function Popup(data) 
+      {
+          var mywindow = window.open('', 'my div');
+          mywindow.document.write('<html><head><title>my div</title>');
+          /*optional stylesheet*/ //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
+          mywindow.document.write('</head><body >');
+          mywindow.document.write(data);
+          mywindow.document.write('</body></html>');
+  
+          mywindow.document.close(); // necessary for IE >= 10
+          mywindow.focus(); // necessary for IE >= 10
+  
+          mywindow.print();
+          mywindow.close();
+  
+          return true;
+      }
+  
+  </script>

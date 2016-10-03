@@ -1,0 +1,58 @@
+ @media (max-width: 768px) { 
+        .mobile_grid {
+            margin-top:70px;
+        }
+        .mobile_font{
+            font-size:20px;
+        }
+        .sub_mobile_font{
+            font-size:14px;
+        }
+    
+        #tf-home .overlay{
+            padding: 45% 0;
+            background-attachment: fixed;
+        }
+        
+        /* 요리 시작하기 버튼 만들기 */
+        .get_cook{
+            font-size:32px;
+            line-height: 64px;
+            height: 64px;
+            padding:0 33px;
+            display: block;
+            border-radius: 6px;
+            text-decoration: none;
+            border: 0px;
+            text-align: center;
+            color: white;
+            background-color: #ffc219;
+            outline: none;
+            position: relative;
+            margin-top: 30px;
+            vertical-align: baseline;
+        }
+        .get_cook:hover{
+            color: white;
+        }
+        
+        video{
+            margin-top: 70px;
+
+        }
+        .buy_box {
+            position: relative;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ecf0f1; 
+        }
+        
+        
+        
+    }
+    
+    @media (min-width: 1200px) { 
+        .get_cook { display: none; }
+        
+    }

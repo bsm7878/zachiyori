@@ -1,0 +1,154 @@
+
+    <!-- index css -->
+    <link rel="stylesheet" type="text/css" href="css/index_style.css">
+
+
+    <!-- Main Navigation 
+    ================================================== -->
+    <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img src="logo.png" alt="자취요리연구소"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right" >
+                <li class = "bold"><a href="/home/choice" class="scroll">주문하기</a></li>
+                <% if user_signed_in? %>
+                <li class = "bold"><a href="/home/my_list" class="scroll">내정보</a></li>
+                <li class = "bold"><a href="/users/sign_out" class="scroll">로그아웃</a></li>
+                <% else %>
+                <li class = "bold"><a href="/home/contact" class="scroll">연락하기</a></li>
+                <% end %>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    
+
+    <div class = "container-fluid" style = "padding:0px;">
+        <div class = "row">
+            <div class = "col-md-12">
+                <!-- <video poster="//cdn.selz.com/plyr/1.5/View_From_A_Blue_Moon_Trailer-HD.jpg"  controls>
+                    <source src="jachiyori_introduce.mp4" type="video/mp4"> 
+                </video> 
+                <div data-type="vimeo" data-video-id="143418951"></div>
+                <div data-type="youtube" data-video-id="bTqVqk7FSmY"></div>-->
+                <iframe src="https://player.vimeo.com/video/184481187" width="100%;" height="700" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- 요리 시작하기 버튼_mobile -->
+    <div class = "container-fluid">
+        <div class = "row">
+            <div class = "col-md-12">
+                <a href = "/home/choice" class = "get_cook bold">요리 시작하기</a>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Service 소개
+    ================================================== -->
+    <div id="tf-services">
+        <div class="container-fluid"> <!-- container -->
+            <div class="section-header">
+                <h2 class = "bold">주문방법은<span class="highlight"> 간단합니다</span></h2> 
+                <h6>여러분 대신 저희가 인근 중형마트에 대신 주문해드립니다.</h6>
+                <div class="fancy"><span><img src="img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
+            </div>
+            <!-- 어떤 요리를 해야할지 몰라요 -->
+            <div class = "row " style = "text-align:center;">
+                  <div class = "col-md-4">
+                        <img src = "screen.png" style = "width: 160px; height: 160px; "/>    
+                        <h3 class = "bold mobile_font" style = "margin-bottom:10px;"><span class="highlight"> <strong>Step 01.</strong></span> 웹에서 먹고싶은 요리를 주문</h3>
+                        <p class = "bold sub_mobile_font" >회원가입 후 요리를 선택하고 결제를 합니다.</p>
+                        <p class = "bold sub_mobile_font" >주문 신청은 24시간 언제든 가능합니다.</p>    
+                  </div>
+                  
+                  <div class = "col-md-4">
+                        <img src = "truck.png" class = "mobile_grid" style = "width: 160px; height: 160px; "/>    
+                        <h3 class = "bold mobile_font" style = "margin-bottom:10px;"><span class="highlight"> <strong>Step 02.</strong></span> 인근 마트에서 식재료 배송</h3> 
+                        <p class = "bold sub_mobile_font" >저희와 협약한 인근 중형마트로 대신 주문접수해드립니다.</p>
+                        <p class = "bold sub_mobile_font" >선택하신 요리를 만들어 먹을 수 있는 정량의 식재료와</p>
+                        <p class = "bold sub_mobile_font" >만드는 방법이 담긴 레시피 카드가 중형마트에서 배송됩니다.</p>   
+                        <p class = "bold sub_mobile_font" >* 수령 시간은 당일 오후 5시~6시, 7시~8시 두 타임만 선택 가능합니다.</p>    
+                  </div>
+                  
+                  <div class = "col-md-4">
+                       <img src = "frying-pan.png" class = "mobile_grid" style = "width: 160px; height: 160px; "/>      
+                       <h3 class = "bold mobile_font" style = "margin-bottom:10px;"><span class="highlight"> <strong>Step 03.</strong></span> 직접요리</h3> 
+                       <p class = "bold sub_mobile_font" >배송 받은 정량의 식재료와 레시피 카드를</p>
+                       <p class = "bold sub_mobile_font" >활용하여 직접 요리하여 먹습니다.</p>
+                       <p class = "bold sub_mobile_font" >* 수령 후 3일 이내 요리해 드실 것을 권장합니다.</p>   
+                  </div>
+              </div>
+
+            </div>
+
+            
+        </div><!-- end container -->
+    </div>
+    
+     <!-- 간단한 궁금증 Section
+    ================================================== -->
+        <div class="container" style = "margin-bottom:100px;"> <!-- container -->
+            <div class="section-header" style = "margin-top:50px;">
+                <h2 class = "bold">무엇이<span class="highlight"> 좋은걸까요</span></h2> 
+                <h6 >웹으로 모든걸 결제해보세요</h6>
+                <div class="fancy"><span><img src="img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
+            </div>
+            
+            <div class = "row" style = "text-align:center;">
+  
+                <div class = "col-md-4">
+                    <img src = "harvest.png" style = "width:130px; height:130px;">
+                    <h3 class = "bold" style = "margin-top:40px;">식재료가 남지 않습니다</h3>
+                    <p class = "bold">사실 저희가 필요한건 감자1개? 고추1개 아닌가요?</p>
+                    <p class = "bold">2인분에 필요한 정량의 식자재만 마트에 주문해 드릴게요</p>
+                    <p class = "bold">냉장고에 넣을 고민 더이상 하지 마세요</p>
+                </div>
+                <div class = "col-md-4">
+                    <img src = "salt.png" class = "mobile_grid" style = "width:130px; height:130px;">
+                    <h3 class = "bold" style = "margin-top:40px;">양념이 없어도 됩니다</h3>
+                    <p class = "bold">선택하신 요리를 만드는데 필요한</p>
+                    <p class = "bold">정량의 양념을 보내드립니다</p>
+                    <p class = "bold">(단, 선택시)</p>
+                </div>
+                <div class = "col-md-4">
+                    <img src = "money-bag.png" class = "mobile_grid" style = "width:130px; height:130px;">
+                    <h3 class = "bold" style = "margin-top:40px;">싸다</h3>
+                    <p class = "bold">나가서 사먹으면 비싸잖아요</p>
+                    <p class = "bold">확실히 집에서 만들어 먹는게 저렴합니다</p>
+                </div>
+            </div>
+            <hr>
+            <div class = "row" style = "text-align: center; margin-top:50px;">
+                <div class = "col-md-6 bold" style = "margin-top:40px;">
+                    <div><h5 style = "color:black;">주문 대행 서비스가 낯서시죠?</h5></div>
+                    <div><a href = "/home/info" style = "text-decoration: underline;">그렇다면 여기를 클릭해주세요</a></div>
+                </div>
+                <div class = "col-md-6 bold" style = "margin-top:40px;">
+                    <div><h5 style = "color:black;">메뉴가 궁금하시진 않나요?</h5></div>
+                    <div><a href = "/home/choice" style = "text-decoration: underline;">그렇다면 여기를 클릭해주세요</a></div>
+                </div>
+            </div>
+        </div><!-- end container -->
+        
+
+    
+         <!-- Footer 
+         ================================================== -->
+         <%= render :partial => "home/footer" %> 
+  
+    

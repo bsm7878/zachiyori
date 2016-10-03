@@ -1,0 +1,130 @@
+    
+    <!-- choice css -->
+    <link rel="stylesheet" type="text/css" href="/css/choice_style.css">
+    
+        
+
+    
+    <!-- Main Navigation 
+    ================================================== -->
+    <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class = "row">
+                <div class = "col-md-2">    
+                      <a class="navbar-brand" href="/"><img src="/logo.png" alt="로고"></a>
+                </div>
+            
+                <!-- step by step 1,2,3 시작 -->
+                <div class = "col-md-10" style = "margin-top:13px; float:right;">
+                <ul class = "up_step" style = "list-style:none;" >
+                    <li style = "opacity:0.5;">
+                        <span class = "circle" style = "background-color: #6F6F6F;"><i class="fa fa-check" aria-hidden="true"></i></span> <span class = "bold step num_1" style = "font-size:20px;" >로그인</span> 
+                    </li>
+                    
+                    <li>
+                        <span class = "line"></span> <span class = "circle">2</span> <span class = "bold step num_2" style = "font-size:20px; color: #FFCC33;">메뉴선택</span>
+                    </li>
+                    
+                    <li>
+                        <span class = "line"></span> <span class = "circle" style = "background-color: #6F6F6F;">3</span> <span class = "bold step num_3" style = "font-size:20px;" >결제</span>
+                    </li>
+                </ul>
+                </div>
+                <!-- step by step 1,2,3 끝 -->
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+    
+
+    <div class = "container" style = "padding-top: 100px;" >
+            
+            <div class = "row" style = "padding-top:0px;">
+                <div class="section-header" style = "padding-bottom:0px;">
+                    <h2 class = "bold">한끼 뚝딱<span class="highlight"> <strong>메뉴</strong></span></h2> 
+                    <span class = "sub_title">인기없는 메뉴는 사라지고 새로운 메뉴가 출시됩니다</span>
+                    <div class="fancy"><span><img src="/img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
+                </div>
+            </div>
+            
+
+
+            <!-- menu 선택 시작 -->
+            
+            <div class = "row">
+                <% @mart.menus.where(:menu_choice => true).all.each do |x| %>
+                    <div class = "col-md-4"  >
+                      <% unless (x.provides.sum(:recipe) - Purchase.where(:menu_id => x.id).count) < 1 %>    
+                        <a href = "/home/option/<%= x.id %>">
+                            <div class="thumbnail thumbnail_<%= x.id %>" style="cursor:pointer">
+                              <img src = "<%= x.menu_img1 %>" style = "width: 100%; height: 350px;">
+                              <div class="caption">
+                                <span class = "bold" style = "color: black; font-size:24px;"><%= x.menu_name %></span> <span class = "bold" style = "font-size:12px;">(식재료 SET)</span> 
+                                <h6 class = "bold"><%= x.menu_say %></h6>
+                                <h6 class = "bold">총 판매 갯수: <%= Purchase.where(:menu_id => x.id).count %>개</h6>
+                                <div style = "text-align: right;">
+                                    <span class = "bold" style = "font-size:24px; color: #FFCC33;"><%= number_with_delimiter(x.ingredients.sum(:ingredient_price) - x.ingredients.last.ingredient_price , :delimiter => ',') %></span> <span class = "bold" style = "font-size:16px; color: #FFCC33;">원</span>
+                                    <br>
+                                    <span class = "bold" style = "font-size:12px;">(1인분-<%= number_with_delimiter((x.ingredients.sum(:ingredient_price) - x.ingredients.last.ingredient_price)/2, :delimiter => ',') %>원)</span>
+                                </div>
+                              </div>
+                            </div>
+                        </a>
+                      <% else %>
+                            <div class="thumbnail thumbnail_<%= x.id %>" style="cursor:pointer">
+                              <img src = "/menu1.jpg" style = "width: 100%; height: 350px;" >
+                              <div class="caption bold" style = "font-size:25px; text-align:center;">
+                                  <div>준비된 물량이</div>
+                                  <div>모두 소진 되었습니다.</div>
+                                  <div class = "highlight" style = "font-size:16px;">곧 입고될 예정입니다.</div>
+                              </div>
+                            </div>
+                      <% end %>
+                        
+                    </div>
+                <% end %>
+            </div>
+            
+            <!-- menu 선택 끝 -->
+    </div>
+    
+    
+    <!-- 판매자 정보 -->
+    <div class = "container" style = "margin-top:30px; padding-top: 0px; padding-bottom: 10%;" >
+            
+            <div class = "row" style = "padding-top:0px;">
+                <div class="section-header" style = "padding-bottom:0px;">
+                    <h2 class = "bold">판매 Mart <span class="highlight"> <strong>정보</strong></span></h2> 
+                    <span class = "sub_title">위 상품은 <span class="highlight">'<%= Mart.find(@mart_number).mart_name %>'</span>에서 판매하는 상품 입니다.</span>
+                    <div class="fancy"><span><img src="/img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
+                </div>
+            </div>
+            
+            <div class = "row bold">
+                <div class = "col-md-4">
+                    <img src = "<%= Mart.find(@mart_number).mart_img %>" style = "width:100%;" />
+                </div>
+                <div class = "col-md-4" >
+                    <div class = "mart_info">
+                    <br>
+                    <span >상호</span> | <%= Mart.find(@mart_number).mart_name %><br><br>
+                    <span >대표</span> | <%= Mart.find(@mart_number).mart_leader %><br><br>
+                    사업자번호 | <%= Mart.find(@mart_number).mart_number %><br><br>
+                    주소 | <%= Mart.find(@mart_number).mart_address %><br><br>
+                    운영시간 | <%= Mart.find(@mart_number).mart_time %><br><br>
+                    문의전화 | <%= Mart.find(@mart_number).mart_phone %>
+                    </div>
+                </div>
+                <div class = "col-md-4">
+                    
+                </div>
+            </div>
+    </div>
+
+
+
+         <!-- Footer 
+         ================================================== -->
+         <%= render :partial => "home/footer" %> 
+        
+ 
