@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   
-  before_action :authenticate_user!, :except => [:index, :contact, :info, :privacy, :agreement, :email_send]  #로그인 하지 않으면 index 제외 다른 페이지로 이동 불가
+  before_action :authenticate_user!, :except => [:index, :contact, :info, :privacy, :agreement, :email_send, :who_are_you]  #로그인 하지 않으면 index 제외 다른 페이지로 이동 불가
   
   	
   
@@ -180,6 +180,10 @@ class HomeController < ApplicationController
     @mart_menu = Mart.find(params[:id]).menus.ids
     @five_time = Purchase.where(:menu_id => @mart_menu).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 5시").order(:together_zone)
     @seven_time = Purchase.where(:menu_id => @mart_menu).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 7시").order(:together_zone)
+  end
+  
+  def who_are_you #서비스소개
+    
   end
   
   ##################### 저장하기 ##############################

@@ -58,7 +58,7 @@
             <!-- 회원가입 form  시작-->
             <div class = "row" style = "padding-top:0px;">
                 <div class="section-header" style = "padding-bottom:0px;">
-                    <h2 class = "bold">20초<span class="highlight"> <strong>가입</strong></span></h2> 
+                    <h2 class = "bold"><span id="count">40</span>초<span class="highlight"> 가입</span></h2> 
                     <h5 > 저희가 도와드리겠습니다.</h5>
                     <div class="fancy"><span><img src="/img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
                 </div>
@@ -143,6 +143,27 @@
                 $(".js-example-basic-multiple-limit").select2({
                   maximumSelectionLength: 1
                 });
+                
+                window.onload = function(){
+                (function(){
+                  var counter = 40;
+                
+                  setInterval(function() {
+                    counter--;
+                    if (counter >= 0) {
+                      span = document.getElementById("count");
+                      span.innerHTML = counter;
+                    }
+                    // Display 'counter' wherever you want to display it.
+                    if (counter === 0) {
+                        clearInterval(counter);
+                    }
+                    
+                  }, 1000);
+                    
+                })();
+                  
+                }
             </script>
 
 
