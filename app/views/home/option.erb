@@ -64,7 +64,7 @@
                     <span style = "color:black;  font-size: 30px;"><%= @menu.menu_name %></span> <span>(식재료 SET)</span><br>
                     <div><%= @menu.menu_say %></div><br>
                     <div style = "font-size:16px;"><span style = "margin-right:10px;">판매마트</span>|&nbsp;&nbsp;<%= Mart.find(Menu.find(params[:id]).mart_id).mart_name %></div>
-                    <div style = "font-size:16px;"><span style = "margin-right:39px;">인분</span>|&nbsp;&nbsp;2인</div>
+                    <div style = "font-size:16px;"><span style = "margin-right:39px;">인분</span>|&nbsp;&nbsp;2인분</div>
                     <div style = "font-size:16px;"><span style = "margin-right:24px;">배송비</span>|&nbsp;&nbsp;무료</div>
                     <hr>
                     <form action ="/home/credit" method = "post">

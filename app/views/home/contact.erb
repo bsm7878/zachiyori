@@ -20,6 +20,7 @@
                    <% unless user_signed_in? %>    
                     <div style = "padding-top:7px; padding-bottom:7px; margin-top:15px;"><a href = "/home/info"> Q&A</a></div>
                     <div style = "padding-top:7px; padding-bottom:7px; margin-top:15px; background-color:#f5f5f5; color: black;"><i class="fa fa-envelope" aria-hidden="true"></i> <a href = "/home/contact">연락</a></div>
+                    <div style = "padding-top:7px; padding-bottom:7px; margin-top:15px;"><a href = "/home/who_are_you">서비스소개</a></div>
                     <hr>
                     <div style = "padding-top:7px; padding-bottom:7px; margin-top:15px; margin-bottom:15px;"><a href = "/home/choice">메뉴보기</a></div>
                   <% else %>
@@ -28,6 +29,7 @@
                     <div style = "padding-top:7px; padding-bottom:7px; margin-top:15px;"><a href = "/home/adjust_privacy">개인정보수정</a></div>
                     <div style = "padding-top:7px; padding-bottom:7px; margin-top:15px;"><a href = "/home/info"> Q&A</a></div>
                     <div style = "padding-top:7px; padding-bottom:7px; margin-top:15px; background-color:#f5f5f5; color: black;"><a href = "/home/contact"><i class="fa fa-envelope" aria-hidden="true"></i> 연락</a></div>
+                    <div style = "padding-top:7px; padding-bottom:7px; margin-top:15px;"><a href = "/home/who_are_you">서비스소개</a></div>
                     <hr>
                     <div style = "padding-top:7px; padding-bottom:7px; margin-top:15px;"><a href = "/home/bye_bye">회원탈퇴</a></div>
                     <div style = "padding-top:7px; padding-bottom:7px; margin-top:15px; margin-bottom:15px;"><a href = "/users/sign_out">로그아웃</a></div>
@@ -54,7 +56,7 @@
                              <form action = "/home/email_send" method = "post">
                                   <div class="form-group">
                                     <label for="sender_person">받는사람</label>
-                                    <div>&nbsp;jachiyori@naver.com</div>
+                                    <div>&nbsp;zachiyori@zachiyori.com</div>
                                   </div> 
                                   <div class="form-group">
                                     <label for="sender_person">보내는사람</label>

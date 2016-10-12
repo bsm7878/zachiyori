@@ -39,11 +39,11 @@
       </div>
     </div>
     
-<div class = "container" >
+<div class = "container-fluid" >
 <!-- date search form start -->
             <div class = "row" style = "margin-top: 40px; height: 45px;">
               <div class = "col-md-6"></div>
-              <form action = "/home/order/<%= params[:id] %>" method = "get">
+              <form action = "/home/buy_total/<%= params[:id] %>" method = "get">
                 <div class = "col-md-2">
                   <input class = "form-control" name = "start_date" type = "text" placeholder = "언제부터">
                 </div>
@@ -71,10 +71,9 @@
                       <th>배달날짜</th>
                       <th>주문자</th>
                       <th>주문메뉴</th>
-                      <th>결제금액</th>
-                      <th>수수료</th>
-                      <th>부과가치세</th>
-                      <th>입금금액</th>
+                      <th>결제금액<sup data-toggle="tooltip" data-placement="right" title="고객이 자취요리연구소에 결제한 총 금액입니다.(단, 즉석밥과 소스박스 선택 유무에 따라 가격이 달라질 수 있습니다.)"><span class="badge">?</span></sup></th>
+                      <th>주문대행수수료<sup data-toggle="tooltip" data-placement="right" title="카드수수료(3.2%) + 주문대행수수료(10%) + 카드결제부과과치세(0.32%) + 주문대행부과가치세(1%) = 14.52% "><span class="badge">?</span></sup></th>
+                      <th>입금금액<sup data-toggle="tooltip" data-placement="left" title="자취요리연구소가 사장님께 입금하여야 하는 금액입니다."><span class="badge">?</span></sup></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -90,10 +89,24 @@
                               <%= User.find(c.user_id).privacy.name.sub(User.find(2).privacy.name.split(//)[1], '*') %>
                             <% end %>
                           </td>
-                          <td><%= Menu.find(c.menu_id).menu_name %></td>
+                          <td>
+                            <% if c.option_1 == true && c.option_2 == true %>
+                              <%= Menu.find(c.menu_id).menu_name %><br>
+                              오뚜기밥2개<br>
+                              소스 박스
+                            <% elsif c.option_1 == true && c.option_2 == false %>
+                              <%= Menu.find(c.menu_id).menu_name %><br>
+                              오뚜기밥2개
+                            <% elsif c.option_1 == false && c.option_2 == true %>
+                              <%= Menu.find(c.menu_id).menu_name %><br>
+                              소스 박스
+                            <% else %>
+                               <%= Menu.find(c.menu_id).menu_name %>
+                            <% end %>
+                      
+                          </td>
                           <td><%= number_with_delimiter(c.total_price, :delimiter => ',')  %></td>
-                          <td>500</td>
-                          <td>500</td>
+                          <td><%= c.total_price.to_i * 0.1452 %></td>
                           <td>4,000</td>
                         </tr>
                       <% end %>
@@ -119,15 +132,16 @@
                 <div class="thumbnail">
                   <div class="caption">
                     <div class = "row">
-                      <div class = "col-md-4">
+                      <div class = "col-md-2">
                         
                       </div>
-                      <div class = "col-md-8" style = "text-align: right;">
+                      <div class = "col-md-10" style = "text-align: right;">
                         <% unless params[:start_date].nil? %>
                           <%= params[:start_date] %> ~ <%= params[:end_date] %>
                         <% else %>
                           검색 날짜를 지정해주세요
                         <% end %>
+                        <div style = "color:black;">* 고객의 결제날짜가 기준입니다.</div>
                       </div>
                     </div>
                     <hr>
@@ -183,4 +197,9 @@
   $('input').dcalendarpicker({
     format: 'yyyy-mm-dd'
   });
+  
+  $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(); 
+    });
 </script>
+

@@ -58,4 +58,5 @@
         @media (min-width: 1200px) { 
             .up_step li{margin-left:70px;}
             .sub_title{font-size:16px;}
+            #choice_menu_img{height: 240px;}
         }
