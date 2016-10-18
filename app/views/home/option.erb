@@ -64,8 +64,9 @@
                     <span style = "color:black;  font-size: 30px;"><%= @menu.menu_name %></span> <span>(식재료 SET)</span><br>
                     <div><%= @menu.menu_say %></div><br>
                     <div style = "font-size:16px;"><span style = "margin-right:10px;">판매마트</span>|&nbsp;&nbsp;<%= Mart.find(Menu.find(params[:id]).mart_id).mart_name %></div>
-                    <div style = "font-size:16px;"><span style = "margin-right:39px;">인분</span>|&nbsp;&nbsp;2인분</div>
-                    <div style = "font-size:16px;"><span style = "margin-right:24px;">배송비</span>|&nbsp;&nbsp;무료</div>
+                    <div style = "font-size:16px; margin-top:5px;"><span style = "margin-right:10px;">준비할것</span>|&nbsp;&nbsp;<% @need[0..-2].each do |z| %><%= z.ready %>, <% end %> <%= @need.last.ready %></div>
+                    <div style = "font-size:16px; margin-top:5px;"><span style = "margin-right:39px;">인분</span>|&nbsp;&nbsp;2인분</div>
+                    <div style = "font-size:16px; margin-top:5px;"><span style = "margin-right:24px;">배송비</span>|&nbsp;&nbsp;무료</div>
                     <hr>
                     <form action ="/home/credit" method = "post">
                         <input type = "hidden" name = "menu_id" value = "<%= params[:id] %>">
@@ -81,7 +82,7 @@
                             <option value = "<%=@menu.ingredients.last.ingredient_price %>">2인 정량 소스박스 ---- <%= number_with_delimiter(@menu.ingredients.last.ingredient_price, :delimiter => ',') %>원</option>
                         </select>  
                         <br>
-                        <spanstyle = "font-size: 16px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 배송 희망 시간<sup data-toggle="tooltip" data-placement="right" title="배송희망 시작 시간의 30분 이전은 해당 마트의 포장 및 준비시간으로 주문에 제한이 있습니다. 배송희망시간이 지난 시간에는 다음날 주문이 가능합니다."> <span class="badge" >?</span></sup></span>
+                        <spanstyle = "font-size: 16px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 배송 희망 시간<sup data-toggle="tooltip" data-placement="right" title="배송희망 시작 시간의 30분 이전은 판매 마트의 포장 및 준비시간으로 주문에 제한이 있습니다. 배송희망시간이 지난 시간에는 다음날 주문이 가능합니다."> <span class="badge" >?</span></sup></span>
                         <% if Time.zone.now.between?(Time.zone.now.midnight, Time.zone.now.midnight + 16.hours + 30.minute) %> <!--오늘 자정 ~ 오후 4:30분 -->
                             <select class="form-control" id ="wanted_time" name = "wanted_time">
                               <option value = "<%= @five_time %>" >오늘 오후 5시 - 오후 6시</option>
@@ -118,47 +119,14 @@
                 <div class="fancy"><span><img src="/img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
             </div>
             
-            <div class = "col-md-8">
-                <% Menu.find(params[:id]).howtos.each do |c| %>
-                    <img src = "<%= c.howto_img %>" style = "width: 100%; margin-bottom: 30px;" />
-                <% end %>
+            <!--Menu.find(params[:id]).howtos.each do |c| 
+                    <img src = " c.howto_img %>" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                 end -->
+            <div class = "col-md-12">
+                
             </div>
             
-            <div class = "col-md-4">
-                <div class="thumbnail">
-                  <div class="caption">
-                      
-                    <div class = "bold">
-                        <h3 style = "color: black;">꼭 알아두셔야 할 것</h3>
-                        <div style = "font-size: 15px; margin-bottom:8px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 한번에 요리하는 것을 권장합니다.</div>
-                        <div style = "font-size: 15px; margin-bottom:8px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 한끼 요리시 각 재료의 반을 사용해 주세요</div>
-                        <div style = "font-size: 15px; margin-bottom:8px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 채소는 흐르는 물에 깨긋이 씻어 사용해주세요</div>
-                        <div style = "font-size: 15px; margin-bottom:8px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> <%= Mart.find(Menu.find(params[:id]).mart_id).mart_name %>에서 판매하는 상품입니다.</div>
-                    </div>
-                    <hr>
-                    <div class = "bold">
-                        <h3 style = "color: black;">준비해야할 것</h3>
-                        <% Menu.find(params[:id]).readies.each do |g| %>
-                            <div style = "font-size: 15px; margin-bottom:8px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> <%= g.ready %></div>
-                        <% end %>
-                    </div>
-                    <hr>
-                    <div class = "bold">
-                        <h3 style = "color: black;">식재료 -------- 원산지</h3>
-                        <% Menu.find(params[:id]).ingredients[0..-2].each do |h| %>
-                            <div style = "font-size: 15px; margin-bottom:8px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> <%= h.ingredient_name %>(<%= h.ingredient_amount %>) ------------ <%= h.ingredient_country %></div>
-                        <% end %>
-                    </div>
-                    <hr>
-                    <div class = "bold">
-                        <h3 style = "color: black;">필요양념 -------- 제조사</h3>
-                        <% Menu.find(params[:id]).sources.each do |i| %>
-                            <div style = "font-size: 15px; margin-bottom:8px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> <%= i.source_name %>(30g) ------------ 백림</div>
-                        <% end %>
-                    </div>
-                  </div>
-                </div>
-            </div>
+
         </div>
 
         

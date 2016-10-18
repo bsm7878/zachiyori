@@ -3,7 +3,7 @@ class CreateReadies < ActiveRecord::Migration
     create_table :readies do |t|
 
       t.integer :menu_id
-      t.string :ready
+      t.string :ready #필요한거 ex_그릇
       
       t.timestamps null: false
     end

@@ -167,7 +167,7 @@
                                         <i class="fa fa-check-square-o" style = "margin-right:4px;" aria-hidden="true"></i> <%= a.source_name %>
                                     </div>
                                     <div class = "col-md-2 col-xs-2">
-                                        10g
+                                        <%= a.source_amount %>
                                     </div>
                                     <div class = "col-md-1 col-xs-1"></div>
                             </div>
@@ -239,8 +239,8 @@
                                 
     
     
-                    var IMP = window.IMP;
-                    IMP.init('imp96245329'); //'iamport' 대신 부여받은 "가맹점 식별코드"를 사용.
+                     // var IMP = window.IMP;
+                     // IMP.init('imp96245329'); //'iamport' 대신 부여받은 "가맹점 식별코드"를 사용. 
                     
                     $("#pay").click(function(){
                         if ($('#name_form').val() == '' && $('#phone_form').val() == ''){
@@ -258,7 +258,32 @@
                         // credit func - start
                         var name_form = $('#name_form').val();
                         var phone_form = $('#phone_form').val(); 
-
+                        
+                        
+                         // ajax 코드 시작
+                            $.ajax({
+                                data: {
+                                    name: $("#name_form").val(),
+                                    phone: $("#phone_form").val(),
+                                    public_pw: $("#public_pw").val(),
+                                    menu_id: <%= params[:menu_id] %>,
+                                    want_time: "<%= params[:wanted_time] %>",
+                                    together_zone: <%=  Address.where(:ok_address => current_user.address).take.together_zone %>,
+                                    want_content: $("#want_content").val(),
+                                    option_1: <%= params[:bob] %>,
+                                    option_2: <%= params[:source] %>
+                                    
+                                },
+                                url: "/home/purchase_save",
+                                success: function(data){
+                                    window.location.replace("/home/comming_soon");
+                                }
+                            });
+                            // ajax 코드 종료
+                       
+                        
+                        
+                        /* credit func - start     
                         IMP.request_pay({
                         pg : payment, // version 1.1.0부터 지원.
                                     
@@ -266,10 +291,10 @@
                         merchant_uid : 'merchant_' + new Date().getTime(),
                         name : '돼지고기짜글이',
                         amount : 1000,
-                        buyer_email : '<%= current_user.email %>',
+                        buyer_email : 'current_user.email %>',
                         buyer_name : name_form, 
                         buyer_tel : phone_form,
-                        buyer_addr : '<%= current_user.address + current_user.sub_address %>',
+                        buyer_addr : 'current_user.address + current_user.sub_address %>',
                         app_scheme : 'iamporttest' //in app browser결제에서만 사용 
                         
                     }, function(rsp) { 
@@ -280,15 +305,15 @@
                                     name: $("#name_form").val(),
                                     phone: $("#phone_form").val(),
                                     public_pw: $("#public_pw").val(),
-                                    menu_id: <%= params[:menu_id] %>,
+                                    menu_id: params[:menu_id] %>,
                                     imp_uid: rsp.imp_uid,
-                                    want_time: "<%= params[:wanted_time] %>",
+                                    want_time: "params[:wanted_time] %>",
                                     credit_method: rsp.pg_provider,
                                     total_price: rsp.paid_amount,
-                                    together_zone: <%= Address.where(:ok_address => current_user.address).take.together_zone %>,
+                                    together_zone: Address.where(:ok_address => current_user.address).take.together_zone %>,
                                     want_content: $("#want_content").val(),
-                                    option_1: <%= params[:bob] %>,
-                                    option_2: <%= params[:source] %>
+                                    option_1: params[:bob] %>,
+                                    option_2: params[:source] %>
                                     
                                 },
                                 url: "/home/purchase_save",
@@ -302,8 +327,8 @@
                                 msg += '에러내용 : ' + rsp.error_msg;
                             
                         }
-                    });
-                    // credit func - end     
+                    }); 
+                     credit func - end */    
                         
                  }                       
 

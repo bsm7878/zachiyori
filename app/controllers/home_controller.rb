@@ -8,9 +8,15 @@ class HomeController < ApplicationController
   def index
   end
   
-  def practice
+  
+  
+  def practice #모의 결제 하기
+
     
   end
+  
+  
+  
   def info # 자세한 정보 보기
     
   end
@@ -25,6 +31,7 @@ class HomeController < ApplicationController
   def option #step3 => 옵션선택
     
       mart_number = Address.where(:ok_address => current_user.address).take.mart_id
+      @need = Ready.where(:menu_id => params[:id]) #그 메뉴에 '필요한것' 갖가져오기
       
       if Mart.find(mart_number).menus.ids.include?(params[:id].to_i)
         @menu = Menu.find(params[:id])
@@ -263,6 +270,7 @@ class HomeController < ApplicationController
     source = Source.new
     source.menu_id = params[:menu_id]
     source.source_name = params[:source_name]
+    source.source_amount = params[:source_amount]
     source.save
     redirect_to :back
     

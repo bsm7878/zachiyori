@@ -3,29 +3,32 @@
     <link rel="stylesheet" type="text/css" href="css/index_style.css">
     <style>
     @media (max-width: 768px) { 
-        #bye_div{padding-left:0px; height: 60px; background-color:black;}
-        #bar_main{text-align:right;  margin-top:0px; padding-right:0px; }
-        #bar_main img{width:90%; height:70px;}
+        #bye_div{padding-left:0px; height: 60px; background-color:#00b050;}
         #close{margin-top:17px; padding-left:0px;}
         #bye_button{font-size:20px; }
         #pack{display: none;}
-        #index_main{padding:0px; background-color: #523738; height: 750px; padding-top:40px;}
-        #three_list img{width:80%; margin-top:15px;}
+        #index_main{padding:0px; background-color: #fa4b00; height: 750px; padding-top:50px;}
+        #three_list{text-align:center;}
+        #three_list img{width:90%; margin-top:15px;}
         #first_row{margin-top:30px;}
+        #order_button{text-align:center;}
+        #bar_main{display: none;}
+        #one{width:80%; }
     }
     
     @media (min-width: 1200px) { 
-        #bye_div{padding-left:0px; height: 65px; background-color:black;}
-        #bar_main{text-align:center;  margin-top:10px; }
-        #bar_main img{height: 50px;}
+        #bye_div{padding-left:0px; height: 70px; background-color:#00b050;}
         #close{margin-top:9px;}
         #bye_button{font-size:30px; cursor:pointer;}
         #one{margin-right:10px;}
         #three{margin-right:10px;}
         #only_mobile{display: none;}
-        #index_main{padding:0px; background-color: #523738;}
-        #three_list img{width:70%;}
+        #index_main{padding:0px; background-color: #fa4b00;}
+        #three_list img{width:95%; margin-left:32px; margin-top:20px;}
         #first_row{margin-top:100px; margin-bottom:100px;}
+        #order_button{margin-left:38px; text-align:center;}
+        #one{height:70px;}
+        #bar_mobile_main{display: none;}
     }
 
     </style>
@@ -64,8 +67,17 @@
     <div class = "container-fluid" id = "bye_div" style = "margin-top:70px;">
         <div class = "row">
             <div class = "col-md-1"></div>
-            <div class = "col-md-10 col-xs-11" id = "bar_main" >
-                <a href= "/home/choice"><img src = "bar_img.png" /></a>
+            <div class = "col-md-10 col-xs-11" id = "bar_main" style = "text-align:center; margin-top:4px;" >
+                <a href= "/home/choice">
+                    <img src = "bar_1.png" style = "width:4%; margin-right:10px;" /> 
+                    <img src = "bar_4.png" style = "width:35%; margin-top:10px; margin-right:10px;" /> 
+                    <img src = "bar_5.png" style = "width:35%; margin-top:10px;" /> 
+                </a>
+            </div>
+            <div class = "col-md-10 col-xs-11" id = "bar_mobile_main" style = "text-align:right; margin-top:4px;" >
+                <a href= "/home/choice">
+                    <img src = "bar_10.png" style = "width:90%; margin-top:5px;" /> 
+                </a>
             </div>
             <div class = "col-md-1 col-xs-1" id = "close">
                 <span id = "bye_button"><i class="fa fa-times" style = "color:white;" aria-hidden="true"></i></span>
@@ -81,27 +93,22 @@
             <div class = "col-md-2"></div>
             <div class = "col-md-4" style = "padding-right:0px;">
                 <div style = "text-align:center;"><!-- 제목 -->
-                    <img src = "main1.png" style = "width:85%;" />
+                    <img src = "title_10_14.png" style = "width:85%;" />
                 </div>
                 <div id = "only_mobile" style = "text-align:center; margin-top:15px;"><!-- only mobile pack -->
-                    <img src= "main2.png" style = "width:80%;">
+                    <img src= "image_10_17.png" style = "width:80%;">
                 </div>
-                <div style = "text-align:center;" id = "three_list"><!-- 3가지 나열 --> 
-                    <img src = "main3.png" />
+                <div id = "three_list"><!-- 3가지 나열 --> 
+                    <img src = "sub_title_10_14.png" />
                 </div>
-                <div style = "margin-top:30px;"><!-- 4가지 버튼 -->
-                    <div style = "text-align:center;">
-                        <a href = "/home/choice"><img id = "one" src = "order_button.png" style = "height:70px;"/></a>
-                        <a href = "#tf-services"><img id = "two" src = "arround_button.png" style = "height:70px;"/></a>
-                    </div>
-                    <div style = "text-align:center; margin-top:10px;">
-                        <a href = "/home/contact"><img id = "three" src = "mail_button.png" style = "height:70px;"/></a>
-                        <a href="https://www.facebook.com/zachiyori/" target="_blank"><img id = "four" src = "facebook_button.png" style = "height:70px;"/></a>
+                <div style = "margin-top:55px;"><!-- 주문하기 버튼 -->
+                    <div id = "order_button">
+                        <a href = "/home/choice"><img id = "one" src = "order_button_10_14.png"/></a>
                     </div>
                 </div>
             </div>
-            <div class = "col-md-4" id = "pack" style = "padding-left:0px; text-align:center;"> <!-- 패키징 이미지 -->
-                <img src = "main2.png" style = "width:100%;" />
+            <div class = "col-md-4" id = "pack" style = "margin-left: 60px; padding-left:0px; text-align:center;"> <!-- 패키징 이미지 -->
+                <img src = "image_10_17.png" style = "width:90%;" />
             </div>
             <div class = "col-md-2"> </div>
         </div>
@@ -125,11 +132,12 @@
                         <img src = "screen.png" style = "width: 160px; height: 160px; "/>    
                         <h3 class = "bold mobile_font" style = "margin-bottom:10px;"><span class="highlight"> <strong>Step 01.</strong></span> 웹에서 요리를 주문</h3>
                         <p class = "bold sub_mobile_font" >회원가입 후 요리를 선택하고 결제를 합니다.</p>
-                        <p class = "bold sub_mobile_font" >주문 신청은 24시간 언제든 가능합니다.</p>    
+                        <p class = "bold sub_mobile_font" >주문 신청은 24시간 언제든 가능합니다.</p>   
+                        <p class = "bold sub_mobile_font" ><a href= "/home/choice">여기를 클릭하시면 지금 바로도 가능합니다.</a></p>  
                   </div>
                   
                   <div class = "col-md-4">
-                        <img src = "truck.png" class = "mobile_grid" style = "width: 160px; height: 160px; "/>    
+                        <img src = "truck2.png" class = "mobile_grid" style = "width: 160px; height: 160px; "/>    
                         <h3 class = "bold mobile_font" style = "margin-bottom:10px;"><span class="highlight"> <strong>Step 02.</strong></span> 인근 마트로 주문접수</h3> 
                         <p class = "bold sub_mobile_font" >저희와 협약한 중형마트로 대신 주문접수해드립니다.</p>
                         <p class = "bold sub_mobile_font" >선택하신 요리를 만들어 먹을 수 있는 정량의 식재료와</p>
@@ -187,10 +195,10 @@
             <hr style = "margin-bottom:0px;">
             <div class = "row" style = "text-align: center;">
                 <div class = "col-md-6 bold" style = "margin-top:40px;">
-                    <a href = "/home/info"><img src = "left.png" style = "width:100%;" /></a>
+                    <a href = "/home/info"><img src = "left_1.png" style = "width:100%;" /></a>
                 </div>
                 <div class = "col-md-6 bold" style = "margin-top:40px;">
-                    <a href = "/home/choice"><img src = "right.png" style = "width:100%;" /></a>
+                    <a href = "/home/choice"><img src = "right_1.png" style = "width:100%;" /></a>
                 </div>
             </div>
         </div><!-- end container -->
@@ -216,37 +224,6 @@
                });
             });
             
-             $(document).ready(function(){
-                $("#one").mouseover(function() {
-                    $(this).attr("src", "order2_button.png");
-                })
-                $("#one").mouseout(function() {
-                    $(this).attr("src", "order_button.png");
-                })
-                
-                $("#two").mouseover(function() {
-                    $(this).attr("src", "arround2_button.png");
-                })
-                $("#two").mouseout(function() {
-                    $(this).attr("src", "arround_button.png");
-                })
-                
-                $("#three").mouseover(function() {
-                    $(this).attr("src", "mail2_button.png");
-                })
-                $("#three").mouseout(function() {
-                    $(this).attr("src", "mail_button.png");
-                })
-                
-                $("#four").mouseover(function() {
-                    $(this).attr("src", "facebook2_button.png");
-                })
-                $("#four").mouseout(function() {
-                    $(this).attr("src", "facebook_button.png");
-                })
-            });
-
-
 
         </script>
         
