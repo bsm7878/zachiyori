@@ -78,7 +78,7 @@
                               <tr>
                                 <th scope="row">1</th>
                                 <td>
-                                  <% unless User.where(:id => b.user_id).nil? %>
+                                  <% if User.where(:id => b.user_id).nil? %>
                                     탈퇴회원
                                   <% else %>
                                     <%= User.where(:id => b.user_id).take.privacy.name %>
@@ -96,14 +96,14 @@
                                   <% end %>
                                 </td>
                                 <td>
-                                  <% unless User.where(:id => b.user_id).nil? %>
+                                  <% if User.where(:id => b.user_id).nil? %>
                                     탈퇴회원
                                   <% else %>
                                     <%= User.where(:id => b.user_id).take.address + User.where(:id => b.user_id).take.sub_address  %>
                                   <% end %>
                                 </td>
                                 <td>
-                                  <% unless User.where(:id => b.user_id).nil? %>
+                                  <% if User.where(:id => b.user_id).nil? %>
                                     탈퇴회원
                                   <% else %>
                                     <%= User.where(:id => b.user_id).take.privacy.public_pw %>
