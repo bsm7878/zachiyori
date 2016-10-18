@@ -70,13 +70,13 @@
                     <hr>
                     <form action ="/home/credit" method = "post">
                         <input type = "hidden" name = "menu_id" value = "<%= params[:id] %>">
-                        <span style = "font-size: 16px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 오늘 밥을 안해놓고 왔는데요?</span>
+                        <span style = "font-size: 16px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 밥이 없다면?</span>
                         <select class="form-control" id = "bob" name = "bob">
                             <option value = "0">있어요 --- 0원</option>
                             <option value = "1400">오뚜기즉석밥(200g) 2개 ---- 1,400원</option>
                         </select>  
                         <br>
-                        <span style = "font-size: 16px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 집에 필요한 양념이 없는데요?<sup data-toggle="tooltip" data-placement="right" title="2인분 정량에 필요한 소포장된 양념 소스를 보내드립니다. 집에 필요한 양념이 있다면 구매안하셔도 무방합니다."><span class="badge">?</span></sup></span>
+                        <span style = "font-size: 16px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 필요한 양념이 없다면?<sup data-toggle="tooltip" data-placement="right" title="2인분 정량에 필요한 소포장된 양념 소스를 보내드립니다. 집에 필요한 양념이 있다면 구매안하셔도 무방합니다."><span class="badge">?</span></sup></span>
                         <select class="form-control" id = "source" name = "source">
                             <option value = "0">있어요 --- 0원</option>
                             <option value = "<%=@menu.ingredients.last.ingredient_price %>">2인 정량 소스박스 ---- <%= number_with_delimiter(@menu.ingredients.last.ingredient_price, :delimiter => ',') %>원</option>
@@ -114,16 +114,25 @@
         
         <div class = "row">
             <div class="section-header" style = "margin-top:50px;">
-                <h2 class = "bold">냉장고에 <span class="highlight">재료가 있어요?</span></h2> 
-                <h6>어휴 그럼 사먹지말고 냉장고 언능 비웁시다.</h6>
+                <h2 class = "bold">상품 <span class="highlight">상세설명</span></h2> 
+                <h6>궁금한 내용은 언제든 물어봐주세요.</h6>
                 <div class="fancy"><span><img src="/img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
             </div>
             
-            <!--Menu.find(params[:id]).howtos.each do |c| 
-                    <img src = " c.howto_img %>" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
-                 end -->
+            
             <div class = "col-md-12">
-                
+                <img src = "/intro/1.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/intro/2.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/intro/3.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/intro/4.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/intro/5.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <% Menu.find(params[:id]).howtos.each do |c| %>
+                    <img src = "<%= c.howto_img %>" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <% end %> 
+                <img src = "/intro/15.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/intro/16.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/intro/17.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/intro/18.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
             </div>
             
 
