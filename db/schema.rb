@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161002145857) do
+ActiveRecord::Schema.define(version: 20161103020307) do
 
   create_table "accesses", force: :cascade do |t|
     t.string   "access_email"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 20161002145857) do
   create_table "ingredients", force: :cascade do |t|
     t.integer  "menu_id"
     t.string   "ingredient_name"
-    t.integer  "ingredient_price"
     t.string   "ingredient_amount"
     t.string   "ingredient_country"
     t.datetime "created_at",         null: false
@@ -62,23 +61,25 @@ ActiveRecord::Schema.define(version: 20161002145857) do
     t.string   "mart_address"
     t.string   "mart_time"
     t.string   "mart_phone"
-    t.string   "mart_img1"
-    t.string   "mart_img2"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "deliver_amount"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "menus", force: :cascade do |t|
     t.integer  "mart_id"
     t.string   "menu_name"
     t.string   "menu_say"
+    t.integer  "menu_price"
+    t.integer  "bob_price"
+    t.integer  "source_box_price"
     t.boolean  "menu_choice"
     t.string   "menu_img1"
     t.string   "menu_img2"
     t.string   "menu_img3"
     t.string   "menu_img4"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "privacies", force: :cascade do |t|
@@ -115,6 +116,13 @@ ActiveRecord::Schema.define(version: 20161002145857) do
   create_table "readies", force: :cascade do |t|
     t.integer  "menu_id"
     t.string   "ready"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "relaxes", force: :cascade do |t|
+    t.integer  "mart_id"
+    t.string   "relax_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

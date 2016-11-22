@@ -26,16 +26,17 @@ class HomeController < ApplicationController
     @mart_number = Address.where(:ok_address => current_user.address).take.mart_id
     @mart = Mart.where(:id => @mart_number).take
     
+    Relax.where(:mart_id => @mart_number).exists?(:relax_date => Time.zone.now.to_s.split[0])
+    
   end
   
   def option #step3 => 옵션선택
     
-      mart_number = Address.where(:ok_address => current_user.address).take.mart_id
+      mart_number = Address.where(:ok_address => current_user.address).take.mart_id #해당마트 id 
       @need = Ready.where(:menu_id => params[:id]) #그 메뉴에 '필요한것' 갖가져오기
       
       if Mart.find(mart_number).menus.ids.include?(params[:id].to_i)
         @menu = Menu.find(params[:id])
-        @price = @menu.ingredients.sum(:ingredient_price) - @menu.ingredients.last.ingredient_price
         @five_time = Time.zone.now.to_s.split[0] + " "  + "5시" #오늘 5시 주문 접수 들어감
         @seven_time = Time.zone.now.to_s.split[0] + " "  + "7시" #오늘 7시 주문 접수 들어감
         
@@ -44,7 +45,14 @@ class HomeController < ApplicationController
       else
         redirect_to '/'
       end
-    
+      
+      @deliver_amount = Mart.where(:id => mart_number).take.deliver_amount #해당마트 타임당 배송가능 건수
+      @deliver_7 = Purchase.where(:menu_id => Mart.find(mart_number).menus.ids).where(:deliver_time => Time.zone.now.to_s.split[0] + + " " +  "7시").count #해당마트 당일 7시 주문된 건수
+      @deliver_5 = Purchase.where(:menu_id => Mart.find(mart_number).menus.ids).where(:deliver_time => Time.zone.now.to_s.split[0] + + " " +  "5시").count #해당마트 당일 5시 주문된 건수
+ 
+      @deliver_next_7 = Purchase.where(:menu_id => Mart.find(mart_number).menus.ids).where(:deliver_time => (Time.zone.now + 1.days).to_s.split[0] + + " " +  "7시").count  #해당마트 다음날 7시 주문된 건수
+      @deliver_next_5 = Purchase.where(:menu_id => Mart.find(mart_number).menus.ids).where(:deliver_time => (Time.zone.now + 1.days).to_s.split[0] + + " " +  "5시").count  #해당마트 다음날 5시 주문된 건수
+ 
   end
   
   def contact #연락_메일
@@ -54,19 +62,19 @@ class HomeController < ApplicationController
   def credit #결제하기 
     @consumer_final_address = current_user.address + current_user.sub_address #주문자 최종 주소
     @menu = Menu.find(params[:menu_id]) #주문 상품 id
-    basic_price = @menu.ingredients.sum(:ingredient_price) - @menu.ingredients.last.ingredient_price #상품 기본 가격
+
     
     if params[:bob] == "0" 
       if params[:source] == "0"
-        @final_total_price =  basic_price
+        @final_total_price =  @menu.menu_price
       else
-        @final_total_price = basic_price + params[:source].to_i
+        @final_total_price = @menu.menu_price + params[:source].to_i
       end
     else
       if params[:source] == "0"
-        @final_total_price = basic_price + 1400
+        @final_total_price = @menu.menu_price + @menu.bob_price
       else
-        @final_total_price = basic_price + 1400 + params[:source].to_i
+        @final_total_price = @menu.menu_price + @menu.bob_price + params[:source].to_i
       end
     end
       
@@ -161,6 +169,8 @@ class HomeController < ApplicationController
   
   def mart #선택 마트 정보보기 => 레시피 추가, 재료 추가
     @mart = Mart.find(params[:id])
+    @relax = Relax.where(:mart_id => @mart) #해당마트 휴무일 전체 
+    
     
   end
   
@@ -201,14 +211,13 @@ class HomeController < ApplicationController
     mart.mart_name = params[:mart_name]
     mart.mart_email = params[:mart_email]
     mart.mart_img = params[:mart_img]
+    mart.deliver_amount = params[:deliver_amount].to_i
     mart.mart_leader = params[:mart_leader]
     mart.mart_number = params[:mart_number]
     mart.agreement_day = params[:agreement_day]
     mart.mart_address = params[:mart_address]
     mart.mart_time = params[:mart_time]
     mart.mart_phone = params[:mart_phone]
-    mart.mart_img1 = params[:mart_img1]
-    mart.mart_img2 = params[:mart_img2]
     mart.save
     redirect_to :back
   end
@@ -228,12 +237,23 @@ class HomeController < ApplicationController
     menu.mart_id = params[:mart_id]
     menu.menu_name = params[:menu_name]
     menu.menu_say = params[:menu_say]
+    menu.bob_price = params[:bob_price]
+    menu.menu_price = params[:menu_price]
+    menu.source_box_price = params[:source_box_price]
     menu.menu_img1 = params[:menu_img1]
     menu.menu_img2 = params[:menu_img2]
     menu.menu_img3 = params[:menu_img3]
     menu.menu_img4 = params[:menu_img4]
     menu.menu_choice = params[:menu_choice]
     menu.save
+    redirect_to :back
+  end
+  
+  def relax_save #마트휴무 설정
+    relax = Relax.new
+    relax.mart_id = params[:mart_id]
+    relax.relax_date = params[:relax_date]
+    relax.save
     redirect_to :back
   end
   
@@ -258,7 +278,6 @@ class HomeController < ApplicationController
     ingredient = Ingredient.new
     ingredient.menu_id = params[:menu_id]
     ingredient.ingredient_name = params[:ingredient_name]
-    ingredient.ingredient_price = params[:ingredient_price]
     ingredient.ingredient_amount = params[:ingredient_amount]
     ingredient.ingredient_country = params[:ingredient_country]
     ingredient.save

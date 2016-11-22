@@ -3,7 +3,7 @@ class CreateProvides < ActiveRecord::Migration
     create_table :provides do |t|
       
       t.integer :menu_id
-      t.integer :recipe
+      t.integer :recipe #레시피카드&기본세트 몇개 공급 했는지
     
       
       t.timestamps null: false

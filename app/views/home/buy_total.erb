@@ -71,9 +71,9 @@
                       <th>배달날짜</th>
                       <th>주문자</th>
                       <th>주문메뉴</th>
-                      <th>결제금액<sup data-toggle="tooltip" data-placement="right" title="고객이 자취요리연구소에 결제한 총 금액입니다.(단, 즉석밥과 소스박스 선택 유무에 따라 가격이 달라질 수 있습니다.)"><span class="badge">?</span></sup></th>
-                      <th>주문대행수수료<sup data-toggle="tooltip" data-placement="right" title="카드수수료(3.2%) + 주문대행수수료(10%) + 카드결제부과과치세(0.32%) + 주문대행부과가치세(1%) = 14.52% "><span class="badge">?</span></sup></th>
-                      <th>입금금액<sup data-toggle="tooltip" data-placement="left" title="자취요리연구소가 사장님께 입금하여야 하는 금액입니다."><span class="badge">?</span></sup></th>
+                      <th>결제금액<sup data-toggle="tooltip" data-placement="right" title="고객이 자취요리연구소에 결제한 총 금액입니다.(단, 소스박스 선택 유무에 따라 가격이 달라질 수 있습니다.)"><span class="badge">?</span></sup></th>
+                      <th>주문대행수수료<sup data-toggle="tooltip" data-placement="right" title="주문대행수수료는 20%입니다."><span class="badge">?</span></sup></th>
+                      <th>입금금액<sup data-toggle="tooltip" data-placement="left" title="자취요리연구소가 사장님께 입금하여야 하는 금액입니다.(총 결제금액에 수수료 20%를 제외한 80%입니다.)"><span class="badge">?</span></sup></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -83,7 +83,7 @@
                           <th scope="row"><%= c.created_at.to_s.split[0] %></th>
                           <th><%= c.deliver_time %></th>
                           <td>
-                            <% unless User.where(:id => c.user_id).nil? %>
+                            <% if User.where(:id => c.user_id).nil? %>
                               탈퇴회원
                             <% else %>
                               <%= User.find(c.user_id).privacy.name.sub(User.find(2).privacy.name.split(//)[1], '*') %>
@@ -106,8 +106,8 @@
                       
                           </td>
                           <td><%= number_with_delimiter(c.total_price, :delimiter => ',')  %></td>
-                          <td><%= c.total_price.to_i * 0.1452 %></td>
-                          <td>4,000</td>
+                          <td><%= (c.total_price.to_i * 0.2).round %></td>
+                          <td><%= number_with_delimiter((c.total_price.to_i * 0.8).round, :delimiter => ',')  %></td>
                         </tr>
                       <% end %>
                       <% else %>
@@ -169,10 +169,43 @@
                         <% end %>
                       </div>
                     </div>
+                    <div class = "row" style = "margin-top:25px;">
+                      <div class = "col-md-5">
+                        <span class = "bold" style = "font-size:22px; ">수수료총액</span>
+                      </div>
+                      <div class = "col-md-7" style = "text-align: right; font-size:22px;">
+                        <% unless params[:start_date].nil? %>
+                          <span><%= number_with_delimiter((Purchase.where(:created_at => params[:start_date].to_datetime...params[:end_date].to_datetime+1.days).sum(:total_price) * 0.2).round, :delimiter => ',')   %>원</span>
+                        <% else %>
+                          <span>0원</span>
+                        <% end %>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class = "row" style = "margin-top:25px;">
+                      <div class = "col-md-5">
+                        <span class = "bold" style = "font-size:22px; ">입금총액</span>
+                      </div>
+                      <div class = "col-md-7" style = "text-align: right; font-size:22px;">
+                        <% unless params[:start_date].nil? %>
+                          <span><%= number_with_delimiter((Purchase.where(:created_at => params[:start_date].to_datetime...params[:end_date].to_datetime+1.days).sum(:total_price) * 0.8).round, :delimiter => ',')  %>원</span>
+                        <% else %>
+                          <span>0원</span>
+                        <% end %>
+                      </div>
+                    </div>
                     <hr>
                     <div class = "row"  style = "text-align:center; margin-top:30px;">
                       <h2 class = "bold">도와주셔서</h2>
                       <h2 class = "bold">항상 감사합니다.</h2>
+                      <br>
+                      <h5>
+                        혹여나 금액이 안맞으시거나
+                        문의사항 있으시면
+                        언제든지 연락주시면
+                        찾아뵙겠습니다
+                      </h5>
+                      <h5>010-8745-7983, 요리연구소</h5>
                     </div>
                   </div>
                 </div>

@@ -74,7 +74,7 @@
                       </div>
                       <div class="field form-group">
                           <label for="user_address" style = "color:black;">주소입력</label><br />
-                          <select class="js-example-basic-multiple-limit js-states form-control"  style = "width:100%;" name="user[address]" value="" id="user_address" multiple="multiple" required >
+                          <select class="js-example-basic-multiple-limit js-states form-control"  style = "width:100%;" name="user[address]" value="" id="user_address" multiple="multiple"  >
                               <% @address = Address.all %>
                               <% @address.each do |a| %>
                                 <option value= "<%= a.ok_address %>"><%= a.ok_address %> ---- <%= Mart.find(a.mart_id).mart_name %></option>

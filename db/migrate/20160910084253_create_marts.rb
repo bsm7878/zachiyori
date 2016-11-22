@@ -13,9 +13,7 @@ class CreateMarts < ActiveRecord::Migration
       t.string :mart_address #주소
       t.string :mart_time #운영시간
       t.string :mart_phone #전화번호
-      t.string :mart_img1 #마트 사진1  
-      t.string :mart_img2 #마트 사진2  
-
+      t.integer :deliver_amount #한타임당 배달가능 건수
       
       t.timestamps null: false
     end

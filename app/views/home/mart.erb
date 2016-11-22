@@ -19,7 +19,7 @@
             <!-- Button 레시피 modal -->
             <% if Access.where(:access_email => current_user.email).take.access_step <= 0 %>
             <button type="button" class="btn btn-primary" style = "width: 100%;" data-toggle="modal" data-target="#myModal_mart_<%= @mart.id %>">
-              레시피추가
+              메뉴추가
             </button>
             <% else %>
             
@@ -42,6 +42,18 @@
                           <div class="form-group">
                             <label for="exampleInputEmail_menu_say">한줄평</label>
                             <input type="text" class="form-control" id="exampleInputEmail_menu_say" name = "menu_say" placeholder="한줄평">
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail_menu_price">해당 메뉴의 가격은?</label>
+                            <input type="text" class="form-control" id="exampleInputEmail_menu_price" name = "menu_price" placeholder="ex_5000">
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail_bob_price">오뚜기밥 2개 가격은?</label>
+                            <input type="text" class="form-control" id="exampleInputEmail_bob_price" name = "bob_price" placeholder="ex_1400">
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail_source_box_price">해당 소스박스 가격은?</label>
+                            <input type="text" class="form-control" id="exampleInputEmail_source_box_price" name = "source_box_price" placeholder="ex_1000">
                           </div>
                           <div class="form-group">
                             <label for="exampleInputEmail_menu_choice">메뉴선택</label>
@@ -106,6 +118,53 @@
                 </div>
               </div>
             </div> 
+            <br><br>
+            
+            <button type="button" class="btn btn-success" style = "width: 100%;" data-toggle="modal" data-target="#myModal_relax_<%= @mart.id %>">
+              마트휴무추가
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal_relax_<%= @mart.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel3">레시피 추가</h4>
+                  </div>
+                  <div class="modal-body">
+                      <form action = "/home/relax_save"  method = "get">
+                          <input type= "hidden" name = "mart_id" value =" <%= @mart.id %>"> <!-- Mart 고유 id 넘기기 -->
+                          <div class="form-group">
+                            <label for="exampleInputEmail_relax">마트휴무</label>
+                            <input type="date" class="form-control" id="exampleInputEmail_relax" name = "relax_date">
+                          </div>
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">저장</button>
+                          </div>
+                      </form>
+                      
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>휴무일</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% @relax.each do |ab| %>
+                          <tr>
+                            <th scope="row"><%= ab.id %></th>
+                            <td><%= ab.relax_date %></td>
+                          </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                      
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
           
             
                
@@ -152,7 +211,6 @@
                                     <tr>
                                       <th>#</th>
                                       <th>재료 이름 </th>
-                                      <th>재료 가격 </th>
                                       <th>재료 용량</th>
                                       <th>원산지</th>
                                     </tr>
@@ -162,7 +220,6 @@
                                       <tr>
                                         <th scope="row"><%= y.id %></th>
                                         <td><%= y.ingredient_name %></td>
-                                        <td><%= y.ingredient_price %></td>
                                         <td><%= y.ingredient_amount %></td>
                                         <td><%= y.ingredient_country %></td>
                                       </tr>
@@ -195,7 +252,7 @@
                         <% if Access.where(:access_email => current_user.email).take.access_step <= 0 %>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary btn-xs"  data-toggle="modal" data-target="#myModal_ingredient_<%= x.id %>">
-                          재료 추가
+                          식자재 추가
                         </button>
                         <% end %>
                         <!-- Modal -->
@@ -212,19 +269,15 @@
                                       <input type= "hidden" name = "menu_id" value =" <%= x.id %>"> <!-- Menu 고유 id 넘기기 -->
                                       <div class="form-group">
                                         <label for="exampleInputEmail_ingredient_name">재료 이름</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail_ingredient_name" name = "ingredient_name" placeholder="재료 이름">
-                                      </div>
-                                      <div class="form-group">
-                                        <label for="exampleInputEmail_ingredient_price">가격</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail_ingredient_price" name = "ingredient_price" placeholder="가격">
+                                        <input type="text" class="form-control" id="exampleInputEmail_ingredient_name" name = "ingredient_name" placeholder="ex_양파">
                                       </div>
                                       <div class="form-group">
                                         <label for="exampleInputEmail_ingredient_amount">용량</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail_menu" name = "ingredient_amount" placeholder="용량">
+                                        <input type="text" class="form-control" id="exampleInputEmail_menu" name = "ingredient_amount" placeholder="ex_4개">
                                       </div>
                                       <div class="form-group">
                                         <label for="exampleInputEmail_ingredient_country">원산지</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail_menu" name = "ingredient_country" placeholder="원산지">
+                                        <input type="text" class="form-control" id="exampleInputEmail_menu" name = "ingredient_country" placeholder="ex_국내산">
                                       </div>
                                       <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary">저장</button>

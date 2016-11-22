@@ -43,16 +43,12 @@
                               <input type="email" class="form-control" id="mart_email" name = "mart_email" placeholder="마트 email을 입력해주세요" required>
                             </div>
                             <div class="form-group">
+                              <label for="deliver_amount">한타임에 몇건 배송 가능? </label>
+                              <input type="number" min="1" max="100" class="form-control" id="deliver_amount" name = "deliver_amount" placeholder="최대 100까지 " required>
+                            </div>
+                            <div class="form-group">
                               <label for="exampleInputFile">마트 대표 사진</label>
                               <input type="file" name = "mart_img" id="exampleInputFile">
-                            </div>
-                            <div class="form-group">
-                              <label for="exampleInputFile1">준비 사진_1</label>
-                              <input type="file" name = "mart_img1" id="exampleInputFile1">
-                            </div>
-                            <div class="form-group">
-                              <label for="exampleInputFile2">준비 사진_2</label>
-                              <input type="file" name = "mart_img2" id="exampleInputFile2">
                             </div>
                             <div class="form-group">
                               <label for="exampleInputPassword1">대표이름</label>
@@ -64,7 +60,7 @@
                             </div>
                             <div class="form-group">
                               <label for="exampleInput2">협약일</label>
-                              <input type="text" class="form-control" id="exampleInput2" name = "agreement_day" placeholder="ex_2016-9-1" required>
+                              <input type="date" class="form-control" id="exampleInput2" name = "agreement_day" required>
                             </div>
                             <div class="form-group">
                               <label for="exampleInputPassword3">주소</label>

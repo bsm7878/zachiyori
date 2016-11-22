@@ -37,7 +37,6 @@
     
 
     <div class = "container" style = "padding-top: 100px; padding-bottom: 10%;" >
-            
         <div class = "row" id = "top_row">
             <div class = "col-md-1"></div>
             <div class = "col-md-5">
@@ -66,44 +65,75 @@
                     <div style = "font-size:16px;"><span style = "margin-right:10px;">판매마트</span>|&nbsp;&nbsp;<%= Mart.find(Menu.find(params[:id]).mart_id).mart_name %></div>
                     <div style = "font-size:16px; margin-top:5px;"><span style = "margin-right:10px;">준비할것</span>|&nbsp;&nbsp;<% @need[0..-2].each do |z| %><%= z.ready %>, <% end %> <%= @need.last.ready %></div>
                     <div style = "font-size:16px; margin-top:5px;"><span style = "margin-right:39px;">인분</span>|&nbsp;&nbsp;2인분</div>
-                    <div style = "font-size:16px; margin-top:5px;"><span style = "margin-right:24px;">배송비</span>|&nbsp;&nbsp;무료</div>
+                    <div style = "font-size:16px; margin-top:5px;"><span style = "margin-right:39px;">배송</span>|&nbsp;&nbsp;마트자체 무료배송</div>
                     <hr>
                     <form action ="/home/credit" method = "post">
                         <input type = "hidden" name = "menu_id" value = "<%= params[:id] %>">
-                        <span style = "font-size: 16px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 밥이 없다면?</span>
+                        <span style = "font-size: 16px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 저녁에 먹을 밥이 없다면?</span>
                         <select class="form-control" id = "bob" name = "bob">
-                            <option value = "0">있어요 --- 0원</option>
-                            <option value = "1400">오뚜기즉석밥(200g) 2개 ---- 1,400원</option>
+                            <option selected value = "0">오픈기념 오뚜기즉석밥2개(<%= number_with_delimiter(@menu.bob_price, :delimiter => ',') %>원) 무료!(소진시까지)</option>
+                            <option disabled value = "0">있어요 --- 0원</option>
+                            <option disabled value = "<%= @menu.bob_price %>">오뚜기즉석밥(200g) 2개 ---- <%= number_with_delimiter(@menu.bob_price, :delimiter => ',') %>원</option>
                         </select>  
                         <br>
-                        <span style = "font-size: 16px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 필요한 양념이 없다면?<sup data-toggle="tooltip" data-placement="right" title="2인분 정량에 필요한 소포장된 양념 소스를 보내드립니다. 집에 필요한 양념이 있다면 구매안하셔도 무방합니다."><span class="badge">?</span></sup></span>
+                        <span style = "font-size: 16px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 필요한 양념이 없다면?<sup data-toggle="tooltip" data-placement="right" title="2인분 정량에 필요한 소포장된 양념 소스를 보내드립니다. 집에 해당메뉴를 만드는데 들어가는 양념이 구비되어 있다면 구매안하셔도 무방합니다. 해당 소스패키징은 자취요리연구소에서 자체적으로 판매하는 상품입니다."><span class="badge">?</span></sup></span>
                         <select class="form-control" id = "source" name = "source">
                             <option value = "0">있어요 --- 0원</option>
-                            <option value = "<%=@menu.ingredients.last.ingredient_price %>">2인 정량 소스박스 ---- <%= number_with_delimiter(@menu.ingredients.last.ingredient_price, :delimiter => ',') %>원</option>
+                            <option value = "<%= @menu.source_box_price %>">2인 정량 소스박스 ---- <%= number_with_delimiter(@menu.source_box_price, :delimiter => ',') %>원</option>
                         </select>  
                         <br>
                         <spanstyle = "font-size: 16px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 배송 희망 시간<sup data-toggle="tooltip" data-placement="right" title="배송희망 시작 시간의 30분 이전은 판매 마트의 포장 및 준비시간으로 주문에 제한이 있습니다. 배송희망시간이 지난 시간에는 다음날 주문이 가능합니다."> <span class="badge" >?</span></sup></span>
                         <% if Time.zone.now.between?(Time.zone.now.midnight, Time.zone.now.midnight + 16.hours + 30.minute) %> <!--오늘 자정 ~ 오후 4:30분 -->
                             <select class="form-control" id ="wanted_time" name = "wanted_time">
-                              <option value = "<%= @five_time %>" >오늘 오후 5시 - 오후 6시</option>
-                              <option value = "<%= @seven_time %>">오늘 오후 7시 - 오후 8시</option>
+                              <% if @deliver_5 < @deliver_amount &&  @deliver_7 < @deliver_amount %>
+                                  <option value = "<%= @five_time %>">오늘 오후 5시 - 오후 6시</option>
+                                  <option value = "<%= @seven_time %>">오늘 오후 7시 - 오후 8시</option>
+                              <% elsif @deliver_5 >= @deliver_amount &&  @deliver_7 < @deliver_amount %>
+                                  <option value = "<%= @five_time %>" disabled>오늘 오후 5시 - 오후 6시 (당일 해당시간에 주문가능한 수량이 모두 소진되었습니다. )</option>
+                                  <option value = "<%= @seven_time %>">오늘 오후 7시 - 오후 8시</option>
+                              <% elsif @deliver_5 < @deliver_amount &&  @deliver_7 >= @deliver_amount %>
+                                  <option value = "<%= @five_time %>">오늘 오후 5시 - 오후 6시</option>
+                                  <option value = "<%= @seven_time %>" disabled>오늘 오후 7시 - 오후 8시 (당일 해당시간에 주문가능한 수량이 모두 소진되었습니다. )</option>
+                              <% else %>
+                                  <optgroup label="오늘 준비한 물량이 모두 소진되어 다음날 예약주문만 가능합니다.">
+                                  <option value = "<%= @next_five_time %>">내일 오후 5시 - 오후 6시</option>
+                                  <option value = "<%= @next_seven_time %>">내일 오후 7시 - 오후 8시</option>      
+                              <% end %>
                             </select>
                         <% elsif Time.zone.now.between?(Time.zone.now.midnight + 16.hours + 30.minute, Time.zone.now.midnight + 18.hours + 30.minute) %> <!--오후 4:30분 ~ 오후 6:30분 -->
                             <select class="form-control" id ="wanted_time" name = "wanted_time">  
-                              <option value = "<%= @five_time %>" disabled>오늘 오후 5시 - 오후 6시</option>
-                              <option value = "<%= @seven_time %>">오늘 오후 7시 - 오후 8시</option>
+                              <% if @deliver_7 < @deliver_amount %>
+                                  <option value = "<%= @five_time %>" disabled>오늘 오후 5시 - 오후 6시 (주문 가능한 시간이 종료되었습니다.)</option>
+                                  <option value = "<%= @seven_time %>">오늘 오후 7시 - 오후 8시</option>
+                              <% else %>
+                                  <option value = "<%= @five_time %>" disabled>오늘 오후 5시 - 오후 6시 (주문 가능한 시간이 종료되었습니다.)</option>
+                                  <option value = "<%= @seven_time %>" disabled>오늘 오후 7시 - 오후 8시 (당일 해당시간에 주문 가능한 수량이 모두 소진되었습니다. )</option>
+                                  <optgroup label="오늘 준비한 물량이 모두 소진되어 다음날 예약주문만 가능합니다.">
+                                  <option value = "<%= @next_five_time %>">내일 오후 5시 - 오후 6시</option>
+                                  <option value = "<%= @next_seven_time %>">내일 오후 7시 - 오후 8시</option>   
+                              <% end %>
                             </select>
                         <% elsif Time.zone.now.between?(Time.zone.now.midnight + 18.hours + 30.minute, Time.zone.now.midnight + 24.hours) %> <!--오후 6:30분 ~ 오늘자정 -->
                              <select class="form-control" id ="wanted_time" name = "wanted_time">
-                              <option value = "<%= @next_five_time %>">내일 오후 5시 - 오후 6시</option>
-                              <option value = "<%= @next_seven_time %>">내일 오후 7시 - 오후 8시</option>
-                            </select>
+                              <% if @deliver_next_5 < @deliver_amount && @deliver_next_7 < @deliver_amount %>
+                                  <option value = "<%= @next_five_time %>">내일 오후 5시 - 오후 6시</option>
+                                  <option value = "<%= @next_seven_time %>">내일 오후 7시 - 오후 8시</option>
+                              <% elsif @deliver_next_5 < @deliver_amount && @deliver_next_7 >= @deliver_amount %>
+                                  <option value = "<%= @next_five_time %>">내일 오후 5시 - 오후 6시</option>
+                                  <option value = "<%= @next_seven_time %>" disabled>내일 오후 7시 - 오후 8시 (내일 해당시간에 주문 가능한 수량이 모두 소진되었습니다 ㅠㅠ)</option>
+                              <% elsif @deliver_next_5 >= @deliver_amount && @deliver_next_7 < @deliver_amount %>
+                                  <option value = "<%= @next_five_time %>" disabled>내일 오후 5시 - 오후 6시 (내일 해당시간에 주문 가능한 수량이 모두 소진되었습니다 ㅠㅠ)</option>
+                                  <option value = "<%= @next_seven_time %>">내일 오후 7시 - 오후 8시</option>
+                              <% else %>
+                                  
+                              <% end %>
+                             </select>
                         <% else %>
                         
                         <% end %>
                         <hr>
                             <div style = "text-align: right;">
-                                <span style = "font-size: 16px; color: black; margin-right: 13px;">총 상품금액</span> <span class = "price" style = "font-size: 33px; color:#FFCC33;"><%= number_with_delimiter(@price, :delimiter => ',') %></span><span style = "font-size: 16px; color:#FFCC33;"> 원</span>
+                                <span style = "font-size: 16px; color: black; margin-right: 13px;">총 상품금액</span> <span class = "price" style = "font-size: 33px; color:#FFCC33;"><%= number_with_delimiter(@menu.menu_price, :delimiter => ',') %></span><span style = "font-size: 16px; color:#FFCC33;"> 원</span>
                             </div>
                         <button type="submit" class="btn btn-warning" style = "width:100%; font-size:20px; margin-top:20px;">식재료주문</button>
                     </form>
@@ -159,7 +189,7 @@
 
          
 $(document).ready(function(){
-        var price = <%= @price %>; //전 페이지에서 넘어오는 상품 가격
+        var price = <%= @menu.menu_price %>; //전 페이지에서 넘어오는 상품 가격
         $("#bob").change(function() {
           var bob_value = parseInt($("#bob").val());
           var source_value = parseInt($("#source").val());

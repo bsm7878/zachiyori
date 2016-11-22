@@ -95,7 +95,7 @@
                                   <div class = "col-md-12">    
                                       <div class="form-group">
                                         <label class = "noto_regular" for="want_content" style = "color: black;">요구사항</label>
-                                        <textarea class="form-control" id="want_content" placeholder="ex)문고리에 걸어주시고 노크해주세요, 우유주머니에 넣어주세요 등" rows="3"></textarea>
+                                        <textarea class="form-control" id="want_content" placeholder="ex)문고리에 걸어주시고 노크해주세요, 우유주머니에 넣어주세요 등" rows="4"></textarea>
                                       </div>
                                   </div>
                               </div>
@@ -110,11 +110,13 @@
                                     <div style = "text-align:center; display: table-cell; vertical-align: middle; font-size:16px;  ">신용카드</div>
                                 </div>
                             </div>
+                            <!--
                             <div class = "col-md-4 col-xs-6 method_div">
                                 <div class = "credit kakao" value = "kakao" style = "cursor:pointer; background-color:#ecf0f1; border-radius:5px; border-style:solid; border-width:1px; display:inline-block; color:#9b9b9b; display: table; border-style: hidden; ">
                                     <div  style = "text-align:center; display: table-cell; vertical-align: middle; font-size:16px;  ">카카오페이(간편결제)</div>
                                 </div>
                             </div>
+                            -->
                             <div class = "col-md-4"></div>
                         </div>
                     </div>
@@ -146,14 +148,14 @@
                         </div>
                         <hr style = "margin-top:10px; margin-bottom:10px;">
                         
-                        <% @menu.ingredients[0..-2].each do |x| %>
+                        <% @menu.ingredients.each do |d| %>
                             <div class = "row bold" style = "margin-top:10px;">
                                     <div class = "col-md-1 col-xs-1"></div>
                                     <div class = "col-md-8 col-xs-8">
-                                        <i class="fa fa-check-square-o" style = "margin-right:4px;" aria-hidden="true"></i> <%= x.ingredient_name %>
+                                        <i class="fa fa-check-square-o" style = "margin-right:4px;" aria-hidden="true"></i> <%= d.ingredient_name %>
                                     </div>
                                     <div class = "col-md-2 col-xs-2">
-                                        <%= x.ingredient_amount %>
+                                        <%= d.ingredient_amount %>
                                     </div>
                                     <div class = "col-md-1 col-xs-1"></div>
                             </div>
@@ -174,7 +176,7 @@
                          <% end %> 
                         <% end %>
                         
-                         <% unless params[:bob] == "0" %> 
+                         <% if params[:bob] == "0" %> <!-- 원래는 if대신 unless --> 
                             <div class = "row bold" style = "margin-top:10px;">
                                     <div class = "col-md-1 col-xs-1"></div>
                                     <div class = "col-md-8 col-xs-8">
@@ -220,8 +222,27 @@
                             <div class = "col-md-1"></div>
                         </div>
                         <hr>
-                        <div style = "text-align:center; margin-bottom:15px;"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 본 제품 특성상 단순변심으로 인한<br>환불 및 교환은 불가함을 알려드립니다.</div>
-                        <div style = "text-align:center; margin-bottom:15px;"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 자취요리연구소는 통신판매중개자이며<br>통신판매의 당사자가 아닙니다.</div>
+                        <div class = "info_box" >
+                            <div style = "margin-bottom:20px;">
+                                <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 위 상품의 가격은 해당 판매마트가 정한 가격입니다.</p>
+                            </div>
+                            <div style = "margin-bottom:20px;">
+                                <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 위 상품은 해당마트의 특별상품이며 현장구매와</p>
+                                <p style = "text-align:center;">가격이 다소 차이가 날 수 있습니다.</p>
+                            </div>
+                            <div style = "margin-bottom:20px;">
+                                <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 본 제품 특성상 단순변심으로 인한 환불 및 교환은</p>
+                                <p style = "text-align:center;">불가함을 알려드립니다.</p>
+                            </div>
+                            <div style = "margin-bottom:20px;">
+                                <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 자취요리연구소는 통신판매중개자이며 통신판매의</p>
+                                <p style = "text-align:center;">당사자가 아닙니다.</p>
+                            </div>
+                            <div style = "margin-bottom:20px;">
+                                <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 소스패키징상품은 자취요리연구소에서 자체적으로</p>
+                                <p style = "text-align:center;">판매하는 제품입니다.</p>
+                            </div>
+                        </div>
                     </div>
                     <div class = "col-md-1"></div>
                 </div>

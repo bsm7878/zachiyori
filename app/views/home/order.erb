@@ -53,8 +53,8 @@
             	    <div class = "row">
             	      <div class = "col-md-12">
               	      <div style = "font-size:20px; text-align:right;">
-              	        <% if Time.zone.now.between?(Time.zone.now.midnight, Time.zone.now.midnight + 16.hours + 30.minute) %>
-              	          <span class="label label-danger">아직 주문 접수가 진행중입니다.(오후 4시 30분 이후 출력해주세요)</span>
+              	        <% if Time.zone.now.between?(Time.zone.now.midnight, Time.zone.now.midnight + 16.hours) %>
+              	          <span class="label label-danger">아직 주문 접수가 진행중입니다.(오후 4시 이후 출력해주세요)</span>
               	        <% else %>
               	          <span class="label label-success" style="cursor:pointer" onclick="PrintElem('#mydiv')" >해당 시간 주문접수가 완료되었습니다(클릭시 출력 됩니다.)</span>
               	        <% end %>
@@ -73,7 +73,7 @@
                                 <tr>
                                   <th>#</th>
                                   <th>
-                                    <% x.ingredients[0..-2].each do |a| %>
+                                    <% x.ingredients.each do |a| %>
                                       <%= a.ingredient_name %> <%= a.ingredient_amount %>,
                                     <% end %>
                                   </th>
@@ -132,8 +132,8 @@
             	    <div class = "row">
             	      <div class = "col-md-12">
               	      <div style = "font-size:20px; text-align:right;">
-              	        <% if Time.zone.now.between?(Time.zone.now.midnight, Time.zone.now.midnight + 18.hours + 30.minute) %>
-              	          <span class="label label-danger">아직 주문 접수가 진행중입니다.(오후 6시 30분 이후 출력해주세요)</span>
+              	        <% if Time.zone.now.between?(Time.zone.now.midnight, Time.zone.now.midnight + 18.hours) %>
+              	          <span class="label label-danger">아직 주문 접수가 진행중입니다.(오후 6시 이후 출력해주세요)</span>
               	        <% else %>
               	          <span class="label label-success" style="cursor:pointer" onclick="PrintElem('#seven')">해당 시간 주문접수가 완료되었습니다(클릭시 출력 됩니다.)</span>
               	        <% end %>
@@ -153,7 +153,7 @@
                                 <tr>
                                   <th>#</th>
                                   <th>
-                                    <% x.ingredients[0..-2].each do |a| %>
+                                    <% x.ingredients.each do |a| %>
                                       <%= a.ingredient_name %> <%= a.ingredient_amount %>,
                                     <% end %>
                                   </th>
