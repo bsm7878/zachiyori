@@ -6,6 +6,7 @@ class HomeController < ApplicationController
   
   
   def index
+
   end
   
   
@@ -120,7 +121,14 @@ class HomeController < ApplicationController
   def comming_soon #결제완료
     
     if Time.zone.now.between?(Purchase.where(:user_id => current_user.id).last.created_at - 1.minutes, Purchase.where(:user_id => current_user.id).last.created_at + 1.minutes )
-      @success = Purchase.where(:user_id => current_user.id).last
+      @success = Purchase.where(:user_id => current_user.id).last #로그인 유저가 가장최근에 주문한것
+      
+      
+      mart_email = Mart.find(Menu.find(@success.menu_id).mart_id).mart_email
+      title = "[" + "#{@success.created_at}" + "]"  + " "+"#{Menu.find(@success.menu_id).menu_name}" 
+      content = "주문자: #{current_user.privacy.name}" + <br> + "주문메뉴: #{Menu.find(@success.menu_id).menu_name}" + "(" + "양파 1개, 마늘 2개, 돼지고기 300g, 고추 2개" + "}"
+                + "옵션: "
+      Contact.order(mart_email, title, content).deliver_now #주문완료되면 알림가기
     else
       redirect_to '/home/my_list'
     end

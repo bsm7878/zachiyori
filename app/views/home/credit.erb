@@ -288,14 +288,15 @@
                         merchant_uid : 'merchant_' + new Date().getTime(),
                         name : '돼지고기짜글이',
                         amount : <%= @final_total_price %>,
-                        buyer_email : 'current_user.email %>',
+                        buyer_email : '<%= current_user.email %>',
                         buyer_name : name_form, 
                         buyer_tel : phone_form,
-                        buyer_addr : 'current_user.address + current_user.sub_address %>',
+                        buyer_addr : '<%= current_user.address + current_user.sub_address %>',
                         app_scheme : 'iamporttest' //in app browser결제에서만 사용 
                         
                     }, function(rsp) { 
                         if ( rsp.success ) {
+                            
                             // ajax 코드 시작
                             $.ajax({
                                 data: {
