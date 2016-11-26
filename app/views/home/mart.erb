@@ -12,7 +12,7 @@
             <span style = "color: black;">협약일</span><br>
             <%= @mart.agreement_day %><br><br>
             <span style = "color: black;">운영시간</span><br>
-            <%= @mart.mart_time %><br><br>
+            <%= @mart.start_time %>시 ~ <%= @mart.end_time %>시<br><br>
             <span style = "color: black;">전화번호</span><br>
             <%= @mart.mart_phone %><br><br>
             <hr>
@@ -45,15 +45,11 @@
                           </div>
                           <div class="form-group">
                             <label for="exampleInputEmail_menu_price">해당 메뉴의 가격은?</label>
-                            <input type="text" class="form-control" id="exampleInputEmail_menu_price" name = "menu_price" placeholder="ex_5000">
+                            <input type="number" class="form-control" id="exampleInputEmail_menu_price" name = "menu_price" placeholder="ex_5000">
                           </div>
                           <div class="form-group">
-                            <label for="exampleInputEmail_bob_price">오뚜기밥 2개 가격은?</label>
-                            <input type="text" class="form-control" id="exampleInputEmail_bob_price" name = "bob_price" placeholder="ex_1400">
-                          </div>
-                          <div class="form-group">
-                            <label for="exampleInputEmail_source_box_price">해당 소스박스 가격은?</label>
-                            <input type="text" class="form-control" id="exampleInputEmail_source_box_price" name = "source_box_price" placeholder="ex_1000">
+                            <label for="exampleInputEmail_menu_commission">해당 메뉴의 수수료는?</label>
+                            <input type="number" class="form-control" id="exampleInputEmail_menu_commission" name = "menu_commission" placeholder="ex_1300">
                           </div>
                           <div class="form-group">
                             <label for="exampleInputEmail_menu_choice">메뉴선택</label>
@@ -180,7 +176,6 @@
                   <th>재료추가</th>
                   <th>소스추가</th>
                   <th>공동물품</th>
-                  <th>소스박스공급</th>
                   <th>만드는방법</th>
                   <th>필요한거</th>
                   <th>판매유무</th>
@@ -216,13 +211,15 @@
                                     </tr>
                                   </thead>
                                   <tbody>
+                                    <% ingredient_num = 1 %>
                                     <% x.ingredients.each do |y| %>
                                       <tr>
-                                        <th scope="row"><%= y.id %></th>
+                                        <th scope="row"><%= ingredient_num  %></th>
                                         <td><%= y.ingredient_name %></td>
                                         <td><%= y.ingredient_amount %></td>
                                         <td><%= y.ingredient_country %></td>
                                       </tr>
+                                      <% ingredient_num = ingredient_num + 1 %>
                                     <% end %>
                                   </tbody>
                                 </table> 
@@ -232,15 +229,19 @@
                                     <tr>
                                       <th>#</th>
                                       <th>소스 이름</th>
+                                      <th>갯수</th>
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <% x.sources.each do |z| %>
-                                      <tr>
-                                        <th scope="row"><%= z.id %></th>
-                                        <td><%= z.source_name %></td>
-                                      </tr>
-                                    <% end %>
+                                   <% source_num = 1 %>
+                                   <% x.sources.each do |z| %>  
+                                    <tr>
+                                      <th><%= source_num %></th>
+                                      <td><%= z.source_name %></td>
+                                      <td><%= z.source_amount %></td>
+                                    </tr>
+                                    <% source_num = source_num + 1 %>
+                                   <% end %>
                                   </tbody>
                                 </table>
                               </div>
@@ -344,7 +345,7 @@
                                 <div class="modal-body">
                                     <form action = "/home/provide_save/<%= x.id %>" method = "get">
                                         <div class="form-group">
-                                          <label for="exampleInput_recipe">이번에 공동물품 몇개 공급함?</label>
+                                          <label for="exampleInput_recipe">이번에 공동물품 몇개 공급함?(크라프트지, 레시피, 소스박스)</label>
                                           <input type="text" class="form-control" id="exampleInput_recipe" name = "recipe" placeholder = "ex) 50">
                                         </div>
                                         <div class="modal-footer">
@@ -379,63 +380,6 @@
                               </div>
                             </div>
                           </div>  
-                      </td>
-                      <td>
-                        <% if Access.where(:access_email => current_user.email).take.access_step <= 0 %>
-                          <!-- 소스박스 공급 modal -->
-                          <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#box_<%= x.id %>">
-                            소스박스추가
-                          </button>
-                        <% end %>  
-                          <!-- Modal -->
-                          <div class="modal fade" id="box_<%= x.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_box" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                  <h4 class="modal-title" id="myModalLabel_box">소스박스 추가</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form action = "/home/box_save/<%= x.id %>" method = "get">
-                                        <div class="form-group">
-                                          <label for="exampleInput_box">이번에 소스박스 몇개 공급함?</label>
-                                          <input type="text" class="form-control" id="exampleInput_box" name = "source_box" placeholder = "ex) 50">
-                                        </div>
-                                        <div class="modal-footer">
-                                          <button type="submit" class="btn btn-primary">저장</button>
-                                        </div>
-                                    </form>    
-                                </div>
-                                <hr>
-                                <table class="table table-hover">
-                                  <thead>
-                                    <tr>
-                                      <th>#</th>
-                                      <th>언제?</th>
-                                      <th>몇개?</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <% Menu.find(x.id).boxes.each do |d| %>
-                                    <tr>
-                                      <th scope="row"><%= d.id %></th>
-                                      <td><%= d.created_at.to_s.split(/ /)[0] %></td>
-                                      <td><%= d.source_box %>개</td>
-                                    </tr>
-                                    <% end %>
-                                    <tr>
-                                      <th>총합</th>
-                                      <td></td>
-                                      <td><%= Box.where(:menu_id => x.id).sum(:source_box) %>개</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          
-                        
                       </td>
                       <td>
                         <% if Access.where(:access_email => current_user.email).take.access_step <= 0 %>
@@ -576,7 +520,6 @@
                   <th>#</th>
                   <th>레시피이름</th>
                   <th>남은 공동물품</th>
-                  <th>남은 소스박스</th>
                 </tr>
               </thead>
               <tbody>
@@ -585,7 +528,6 @@
                     <th scope="row"><%= c.id %></th>
                     <td><%= c.menu_name %></td>
                     <td><%= c.provides.sum(:recipe) - Purchase.where(:menu_id => c.id).count %>개</td>
-                    <td><%= c.boxes.sum(:source_box) - Purchase.where(:menu_id => c.id).where(:option_2 => true).count %>개</td>
                 </tr>
                 <% end %>
               </tbody>

@@ -47,6 +47,8 @@
                 </div>
             </div>
             
+        <!-- 운영시간 check 시작 -->
+        <% if Time.zone.now.between?(Time.zone.now.midnight + Mart.find(@mart_number).start_time.hours, Time.zone.now.midnight + Mart.find(@mart_number).end_time.hours) %>
             <!-- 휴무일 check 시작 -->
             <% if Relax.where(:mart_id => @mart_number).exists?(:relax_date => Time.zone.now.to_s.split[0]) %>
                 <div style = "text-align:center;">
@@ -91,9 +93,14 @@
                 <!-- menu 선택 끝 -->
             <% end %>
             <!-- 휴무일 check 끝 -->
-            
+        <% else %>
+            <div style = "text-align:center;">
+                <img src = "/order_time_2.png" style = "width:100%;" alt ="지금은 해당 판매마트의 주문 가능 시간이 아닙니다." />
+            </div>
+        <% end %> 
+           <!-- 운영시간 check 끝 -->
     </div>
-    
+    <hr>
     
     <!-- 판매자 정보 -->
     <div class = "container" style = "margin-top:30px; padding-top: 0px; padding-bottom: 10%;" >
@@ -117,7 +124,7 @@
                     <span >대표</span> | <%= Mart.find(@mart_number).mart_leader %><br><br>
                     사업자번호 | <%= Mart.find(@mart_number).mart_number %><br><br>
                     주소 | <%= Mart.find(@mart_number).mart_address %><br><br>
-                    운영시간 | <%= Mart.find(@mart_number).mart_time %><br><br>
+                    주문가능시간 | <%= Mart.find(@mart_number).start_time %>시 ~ <%= Mart.find(@mart_number).end_time %>시<br><br>
                     문의전화 | <%= Mart.find(@mart_number).mart_phone %>
                     </div>
                 </div>

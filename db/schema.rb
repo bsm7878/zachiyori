@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103020307) do
+ActiveRecord::Schema.define(version: 20161126044614) do
 
   create_table "accesses", force: :cascade do |t|
     t.string   "access_email"
@@ -26,13 +26,6 @@ ActiveRecord::Schema.define(version: 20161103020307) do
     t.integer  "together_zone"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-  end
-
-  create_table "boxes", force: :cascade do |t|
-    t.integer  "menu_id"
-    t.integer  "source_box"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "howtos", force: :cascade do |t|
@@ -59,9 +52,11 @@ ActiveRecord::Schema.define(version: 20161103020307) do
     t.string   "mart_number"
     t.string   "agreement_day"
     t.string   "mart_address"
-    t.string   "mart_time"
+    t.integer  "start_time"
+    t.integer  "end_time"
     t.string   "mart_phone"
-    t.integer  "deliver_amount"
+    t.integer  "bob_price"
+    t.integer  "bob_commission"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
@@ -71,15 +66,14 @@ ActiveRecord::Schema.define(version: 20161103020307) do
     t.string   "menu_name"
     t.string   "menu_say"
     t.integer  "menu_price"
-    t.integer  "bob_price"
-    t.integer  "source_box_price"
+    t.integer  "menu_commission"
     t.boolean  "menu_choice"
     t.string   "menu_img1"
     t.string   "menu_img2"
     t.string   "menu_img3"
     t.string   "menu_img4"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "privacies", force: :cascade do |t|
@@ -102,13 +96,11 @@ ActiveRecord::Schema.define(version: 20161103020307) do
     t.integer  "menu_id"
     t.integer  "user_id"
     t.string   "imp_uid"
-    t.string   "deliver_time"
     t.integer  "total_price"
     t.string   "want_content"
     t.string   "credit_method"
     t.integer  "together_zone"
     t.boolean  "option_1"
-    t.boolean  "option_2"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end

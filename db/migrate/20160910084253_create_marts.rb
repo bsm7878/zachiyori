@@ -11,9 +11,13 @@ class CreateMarts < ActiveRecord::Migration
       t.string :mart_number #사업자번호
       t.string :agreement_day #협약일
       t.string :mart_address #주소
-      t.string :mart_time #운영시간
+      t.integer :start_time #시작 시간
+      t.integer :end_time #종료 시간
+      #t.string :mart_time 운영시간
       t.string :mart_phone #전화번호
-      t.integer :deliver_amount #한타임당 배달가능 건수
+      t.integer :bob_price # 오뚜기밥 가격
+      t.integer :bob_commission # 오뚜기밥 수수료
+      # t.integer :deliver_amount 한타임당 배달가능 건수
       
       t.timestamps null: false
     end

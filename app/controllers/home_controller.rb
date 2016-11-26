@@ -6,7 +6,6 @@ class HomeController < ApplicationController
   
   
   def index
-
   end
   
   
@@ -35,25 +34,14 @@ class HomeController < ApplicationController
     
       mart_number = Address.where(:ok_address => current_user.address).take.mart_id #해당마트 id 
       @need = Ready.where(:menu_id => params[:id]) #그 메뉴에 '필요한것' 갖가져오기
+      @mart = Mart.find(mart_number) #해당 mart 정보 가져오기
       
-      if Mart.find(mart_number).menus.ids.include?(params[:id].to_i)
+      if @mart.menus.ids.include?(params[:id].to_i)
         @menu = Menu.find(params[:id])
-        @five_time = Time.zone.now.to_s.split[0] + " "  + "5시" #오늘 5시 주문 접수 들어감
-        @seven_time = Time.zone.now.to_s.split[0] + " "  + "7시" #오늘 7시 주문 접수 들어감
-        
-        @next_five_time = (Time.zone.now + 1.days).to_s.split[0] + " "  + "5시" #내일 5시 주문 접수 들어감
-        @next_seven_time = (Time.zone.now + 1.days).to_s.split[0] + " "  + "7시" #내일 7시 주문 접수 들어감
       else
         redirect_to '/'
       end
-      
-      @deliver_amount = Mart.where(:id => mart_number).take.deliver_amount #해당마트 타임당 배송가능 건수
-      @deliver_7 = Purchase.where(:menu_id => Mart.find(mart_number).menus.ids).where(:deliver_time => Time.zone.now.to_s.split[0] + + " " +  "7시").count #해당마트 당일 7시 주문된 건수
-      @deliver_5 = Purchase.where(:menu_id => Mart.find(mart_number).menus.ids).where(:deliver_time => Time.zone.now.to_s.split[0] + + " " +  "5시").count #해당마트 당일 5시 주문된 건수
- 
-      @deliver_next_7 = Purchase.where(:menu_id => Mart.find(mart_number).menus.ids).where(:deliver_time => (Time.zone.now + 1.days).to_s.split[0] + + " " +  "7시").count  #해당마트 다음날 7시 주문된 건수
-      @deliver_next_5 = Purchase.where(:menu_id => Mart.find(mart_number).menus.ids).where(:deliver_time => (Time.zone.now + 1.days).to_s.split[0] + + " " +  "5시").count  #해당마트 다음날 5시 주문된 건수
- 
+  
   end
   
   def contact #연락_메일
@@ -61,22 +49,13 @@ class HomeController < ApplicationController
   end
   
   def credit #결제하기 
-    @consumer_final_address = current_user.address + current_user.sub_address #주문자 최종 주소
-    @menu = Menu.find(params[:menu_id]) #주문 상품 id
+    @consumer_final_address = current_user.address + " " + current_user.sub_address #주문자 최종 주소
+    @menu = Menu.find(params[:menu_id]) #주문 상품 
 
-    
     if params[:bob] == "0" 
-      if params[:source] == "0"
-        @final_total_price =  @menu.menu_price
-      else
-        @final_total_price = @menu.menu_price + params[:source].to_i
-      end
+      @final_total_price =  @menu.menu_price
     else
-      if params[:source] == "0"
-        @final_total_price = @menu.menu_price + @menu.bob_price
-      else
-        @final_total_price = @menu.menu_price + @menu.bob_price + params[:source].to_i
-      end
+      @final_total_price = @menu.menu_price + @menu.mart.bob_price
     end
       
 
@@ -123,12 +102,34 @@ class HomeController < ApplicationController
     if Time.zone.now.between?(Purchase.where(:user_id => current_user.id).last.created_at - 1.minutes, Purchase.where(:user_id => current_user.id).last.created_at + 1.minutes )
       @success = Purchase.where(:user_id => current_user.id).last #로그인 유저가 가장최근에 주문한것
       
-      
+      if @success.option_1 == true
+        bob = "오뚜기밥 2개 + 소스박스 + 레시피"
+      else
+        bob = "소스박스 + 레시피"
+      end
       mart_email = Mart.find(Menu.find(@success.menu_id).mart_id).mart_email
-      title = "[" + "#{@success.created_at}" + "]"  + " "+"#{Menu.find(@success.menu_id).menu_name}" 
-      content = "주문자: #{current_user.privacy.name}" + <br> + "주문메뉴: #{Menu.find(@success.menu_id).menu_name}" + "(" + "양파 1개, 마늘 2개, 돼지고기 300g, 고추 2개" + "}"
-                + "옵션: "
-      Contact.order(mart_email, title, content).deliver_now #주문완료되면 알림가기
+      title = "[" + "#{@success.created_at.to_s.split[0] + " " + @success.created_at.to_s.split[1]}" + "]"  + " "+"#{Menu.find(@success.menu_id).menu_name}" 
+      
+       ingredient = Array.new
+       Menu.find(@success.menu_id).ingredients.each do |a|
+         ingredient.push(a.ingredient_name + " " + a.ingredient_amount)
+       end 
+                                    
+                 
+      
+      name = "주문자: #{current_user.privacy.name}"
+      menu = "주문메뉴: #{Menu.find(@success.menu_id).menu_name}"
+      menu_ingredient = "재료: #{ingredient}"
+      option = "옵션: #{bob}"
+      address = "주소: #{current_user.address + " " + current_user.sub_address}"
+      public_pw = "공동현관비번: #{current_user.privacy.public_pw}"
+      want_content =  "요구사항: #{@success.want_content}"
+      phone = "전화번호: #{current_user.privacy.phone}"
+      p1 = "- 개인정보 보호를 위해 완료되고 하루 이내에 해당 메시지를 삭제해주세요."
+      p2 = "- 삭제한 후에도 '자취요리연구소의 사장님페이지'에서 보실 수 있습니다."
+      p3 = "- 더 궁금한 사항이 있으시면 언제든 연락주시면 감사하겠습니다. 010-8745-7983"
+                 
+      Contact.order(mart_email, title, name, menu, menu_ingredient, option, address, public_pw, want_content, phone, p1, p2, p3).deliver_now #주문완료되면 알림가기
     else
       redirect_to '/home/my_list'
     end
@@ -184,27 +185,16 @@ class HomeController < ApplicationController
   
   def order #개요-관리자페이지
     @menu = Mart.find(params[:id]).menus #선택된 마트의 메뉴 정보
+    mart_menu = Mart.find(params[:id]).menus.ids
+    @today_time = Purchase.where(:menu_id => mart_menu).where("DATE(created_at) = DATE(?)", Time.now)
   end
   
-  def buy_five #당일 5시 배송내역-관리자페이지
-    @menu = Mart.find(params[:id]).menus #선택된 마트의 메뉴 정보
-    @mart_menu = Mart.find(params[:id]).menus.ids
-    @five_time = Purchase.where(:menu_id => @mart_menu).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 5시").order(:together_zone)
-    @seven_time = Purchase.where(:menu_id => @mart_menu).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 7시").order(:together_zone)
-  end
-  
-  def buy_seven #당일 7시 배송내역-관리자페이지
-    @menu = Mart.find(params[:id]).menus #선택된 마트의 메뉴 정보
-    @mart_menu = Mart.find(params[:id]).menus.ids
-    @five_time = Purchase.where(:menu_id => @mart_menu).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 5시").order(:together_zone)
-    @seven_time = Purchase.where(:menu_id => @mart_menu).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 7시").order(:together_zone)
-  end
+
   
   def buy_total #정산내역-관리자페이지
     @menu = Mart.find(params[:id]).menus #선택된 마트의 메뉴 정보
     @mart_menu = Mart.find(params[:id]).menus.ids
-    @five_time = Purchase.where(:menu_id => @mart_menu).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 5시").order(:together_zone)
-    @seven_time = Purchase.where(:menu_id => @mart_menu).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 7시").order(:together_zone)
+    
   end
   
   def who_are_you #서비스소개
@@ -219,13 +209,15 @@ class HomeController < ApplicationController
     mart.mart_name = params[:mart_name]
     mart.mart_email = params[:mart_email]
     mart.mart_img = params[:mart_img]
-    mart.deliver_amount = params[:deliver_amount].to_i
     mart.mart_leader = params[:mart_leader]
     mart.mart_number = params[:mart_number]
     mart.agreement_day = params[:agreement_day]
     mart.mart_address = params[:mart_address]
-    mart.mart_time = params[:mart_time]
+    mart.start_time = params[:start_time].to_i
+    mart.end_time = params[:end_time].to_i
     mart.mart_phone = params[:mart_phone]
+    mart.bob_price = params[:bob_price].to_i
+    mart.bob_commission = params[:bob_commission].to_i
     mart.save
     redirect_to :back
   end
@@ -245,9 +237,9 @@ class HomeController < ApplicationController
     menu.mart_id = params[:mart_id]
     menu.menu_name = params[:menu_name]
     menu.menu_say = params[:menu_say]
-    menu.bob_price = params[:bob_price]
-    menu.menu_price = params[:menu_price]
-    menu.source_box_price = params[:source_box_price]
+    menu.menu_price = params[:menu_price].to_i
+    menu.menu_commission = params[:menu_commission].to_i
+    
     menu.menu_img1 = params[:menu_img1]
     menu.menu_img2 = params[:menu_img2]
     menu.menu_img3 = params[:menu_img3]
@@ -324,6 +316,7 @@ class HomeController < ApplicationController
       pri = Privacy.where(:user_id => current_user).take
       pri.name = params[:name]
       pri.phone = params[:phone]
+      pri.public_pw = params[:public_pw]
       pri.save
     end
     
@@ -332,7 +325,6 @@ class HomeController < ApplicationController
       purchase.menu_id = params[:menu_id]
       purchase.imp_uid = params[:imp_uid]
       purchase.together_zone = params[:together_zone].to_i
-      purchase.deliver_time = params[:want_time]
       purchase.credit_method = params[:credit_method]
       purchase.total_price = params[:total_price]
       purchase.want_content = params[:want_content]
@@ -343,11 +335,6 @@ class HomeController < ApplicationController
         purchase.option_1 = 1 
       end
         
-      if params[:option_2] == "0"
-        purchase.option_2 = 0
-      else
-        purchase.option_2 = 1
-      end
 
       purchase.save
       

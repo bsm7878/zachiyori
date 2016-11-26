@@ -47,12 +47,8 @@
                   <hr>
                   <div class="caption" style = "text-align:center;">
                     <div style = "font-size:15px;"><span style = "color:black;">주문상품</span></div>
-                    <% if @success.option_1 == true && @success.option_2 == true %>
-                        <div style = "margin-bottom:8px;"><%= Menu.find(@success.menu_id).menu_name %> + 오뚜기밥 2개 + 소스박스</div>
-                    <% elsif @success.option_1 == true && @success.option_2 == false %>
+                    <% if @success.option_1 == true %>
                         <div style = "margin-bottom:8px;"><%= Menu.find(@success.menu_id).menu_name %> + 오뚜기밥 2개</div>
-                    <% elsif @success.option_1 == false && @success.option_2 == true %>
-                        <div style = "margin-bottom:8px;"><%= Menu.find(@success.menu_id).menu_name %> + 소스박스</div>
                     <% else %>
                         <div style = "margin-bottom:8px;"><%= Menu.find(@success.menu_id).menu_name %></div>
                     <% end %>
@@ -66,8 +62,6 @@
                     <div style = "margin-bottom:8px;"><%= current_user.address + " " + current_user.sub_address %></div>
                     <div style = "font-size:15px;"><span style = "color:black;">주문시간</span></div>
                     <div style = "margin-bottom:8px;"><%= @success.created_at %></div>
-                    <div style = "font-size:15px;"><span style = "color:black;">도착희망시간</span></div>
-                    <div style = "margin-bottom:17px;"><%= @success.deliver_time %></div>
                     <hr>
                     <div class = "info">해당마트로 주문접수가 완료되었습니다.</div>
                     <div class = "info">상품의 신선도를 위해 바로 수령하시는게 좋습니다.</div>

@@ -79,14 +79,10 @@
                                   <div class = "col-md-6">
                                       <div class="form-group">
                                         <label class = "noto_regular" for="InputPassword1" style = "color: black;">공동현관 비밀번호</label>
-                                        <% if current_user.privacy.nil? %>
-                                            <input type="text" class="form-control" id="public_pw" name = "public_pw"  placeholder="공동현관 비밀번호가 있을시 적어주세요">
+                                        <% unless current_user.privacy.nil? %>
+                                            <input type="text" class="form-control" id="public_pw"  value = "<%= current_user.privacy.public_pw %>" name = "public_pw"  placeholder="공동현관 비밀번호가 있을시 적어주세요">
                                         <% else %>
-                                            <% if current_user.privacy.public_pw.nil? %>
-                                                <div>없습니다</div>
-                                            <% else %>
-                                                <div><%= current_user.privacy.public_pw %></div>
-                                            <% end %>
+                                            <input type="text" class="form-control" id="public_pw" name = "public_pw"  placeholder="공동현관 비밀번호가 있을시 적어주세요">
                                         <% end %>
                                       </div>    
                                   </div>
@@ -161,7 +157,6 @@
                             </div>
                         <% end %>
                         
-                        <% unless params[:source] == "0" %>
                          <% @menu.sources.each do |a| %>
                             <div class = "row bold" style = "margin-top:10px;">
                                     <div class = "col-md-1 col-xs-1"></div>
@@ -174,16 +169,15 @@
                                     <div class = "col-md-1 col-xs-1"></div>
                             </div>
                          <% end %> 
-                        <% end %>
-                        
-                         <% if params[:bob] == "0" %> <!-- 원래는 if대신 unless --> 
+
+                         <% unless params[:bob] == "0" %> <!-- 원래는 if대신 unless --> 
                             <div class = "row bold" style = "margin-top:10px;">
                                     <div class = "col-md-1 col-xs-1"></div>
                                     <div class = "col-md-8 col-xs-8">
-                                        <i class="fa fa-check-square-o" style = "margin-right:4px;" aria-hidden="true"></i> 오뚜기밥(200g)-2개
+                                        <i class="fa fa-check-square-o" style = "margin-right:4px;" aria-hidden="true"></i> 오뚜기밥(200g)
                                     </div>
                                     <div class = "col-md-2 col-xs-2">
-                                        무료
+                                        2개
                                     </div>
                                     <div class = "col-md-1 col-xs-1"></div>
                             </div>
@@ -237,10 +231,6 @@
                             <div style = "margin-bottom:20px;">
                                 <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 자취요리연구소는 통신판매중개자이며 통신판매의</p>
                                 <p style = "text-align:center;">당사자가 아닙니다.</p>
-                            </div>
-                            <div style = "margin-bottom:20px;">
-                                <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 소스패키징상품은 자취요리연구소에서 자체적으로</p>
-                                <p style = "text-align:center;">판매하는 제품입니다.</p>
                             </div>
                         </div>
                     </div>
@@ -305,14 +295,12 @@
                                     public_pw: $("#public_pw").val(),
                                     menu_id: <%= params[:menu_id] %>,
                                     imp_uid: rsp.imp_uid,
-                                    want_time: "<%= params[:wanted_time] %>",
                                     credit_method: rsp.pg_provider,
                                     total_price: rsp.paid_amount,
                                     together_zone: <%= Address.where(:ok_address => current_user.address).take.together_zone %>,
                                     want_content: $("#want_content").val(),
                                     option_1: <%= params[:bob] %>,
-                                    option_2: <%= params[:source] %>
-                                    
+
                                 },
                                 url: "/home/purchase_save",
                                 success: function(data){

@@ -1,4 +1,4 @@
-
+    <meta http-equiv="refresh" content="90" /> <!-- 60초마다 리프레쉬 -->
 
     <!-- Main Navigation 
     ================================================== -->
@@ -29,184 +29,67 @@
         <div class = "col-md-8">
           <ul class="nav nav-pills">
             <li role="presentation" class="active"><a href="/home/order/<%= params[:id] %>">개요</a></li>
-            <li role="presentation"><a href="/home/buy_five/<%= params[:id] %>">5시 배송 내역</a></li>
-            <li role="presentation"><a href="/home/buy_seven/<%= params[:id] %>">7시 배송 내역</a></li>
             <li role="presentation"><a href="/home/buy_total/<%= params[:id] %>">정산내역</a></li>
           </ul>
         </div>
       </div>
     </div>
     
-<div class = "container" >
-    <div class = "row">
-     
-          <div id = "mydiv">
-        	   <!-- 5시 주문 배송 현황 start -->
-            	  <div class = "row" style = "margin-bottom:15px;">
-            	    <div class = "col-md-9">
-            	    </div>
-            	    <div class = "col-md-3 bold" style = "text-align:center;">
-            	      <p class="bg-primary" style = "padding:3px;">
-            	        <%= Time.zone.now.to_s.split[0] %>&nbsp;&nbsp;&nbsp;&nbsp;오후 5시 배송 주문현황
-            	      </p>
-            	    </div>
-            	    <div class = "row">
-            	      <div class = "col-md-12">
-              	      <div style = "font-size:20px; text-align:right;">
-              	        <% if Time.zone.now.between?(Time.zone.now.midnight, Time.zone.now.midnight + 16.hours) %>
-              	          <span class="label label-danger">아직 주문 접수가 진행중입니다.(오후 4시 이후 출력해주세요)</span>
-              	        <% else %>
-              	          <span class="label label-success" style="cursor:pointer" onclick="PrintElem('#mydiv')" >해당 시간 주문접수가 완료되었습니다(클릭시 출력 됩니다.)</span>
-              	        <% end %>
-              	      </div>
-            	      </div>
-            	    </div>
+    <div class = "container" >
+        <div class = "row">
+            <div class = "row" style = "margin-bottom:15px;">
+            	  <div class = "col-md-8">
                 </div>
-        	   <!-- 5시 시간별 주문 배송 현황 end -->
-        	  
-                <div class = "row">
-                  <!-- 5시 메뉴보기 start -->
-                  <% @menu.where(:menu_choice => true).all.each do |x| %>
-                    <div class = "col-md-6">
-                        <table class="table table-hover">
-                              <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>
-                                    <% x.ingredients.each do |a| %>
-                                      <%= a.ingredient_name %> <%= a.ingredient_amount %>,
-                                    <% end %>
-                                  </th>
-                                  <th>갯수</th>
-                                  <th>총합</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td><%= x.menu_name %></td>
-                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 5시").where(:option_1 => false).where(:option_2 => false).count %></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">2</th>
-                                  <td><%= x.menu_name %> + 오뚜기밥2개</td>
-                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 5시").where(:option_1 => true).where(:option_2 => false).count %></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">3</th>
-                                  <td><%= x.menu_name %> + 소스박스</td>
-                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 5시").where(:option_1 => false).where(:option_2 => true).count %></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">4</th>
-                                  <td><%= x.menu_name %> + 오뚜기밥2개 + 소스박스</td>
-                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 5시").where(:option_1 => true).where(:option_2 => true).count %></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">총합</th>
-                                  <td></td>
-                                  <td></td>
-                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 5시").count %></td>
-                                </tr>
-                              </tbody>
-                        </table>
-                    </div>
+                <div class = "col-md-4 bold" style = "text-align:center;">
+                  <% if Time.zone.now.between?(Time.zone.now.midnight + Mart.find(params[:id]).start_time.hours, Time.zone.now.midnight + Mart.find(params[:id]).end_time.hours) %>
+                    <p class="bg-primary" style = "padding:3px;">
+                      	<%= Time.zone.now.to_s.split[0] %>(오늘) - 주문접수진행중입니다.
+                    </p>
+                  <% else %>
+                    <p class="bg-info" style = "padding:3px;">
+                      	<%= Time.zone.now.to_s.split[0] %>(오늘) - 주문접수가 모두 완료되었습니다.
+                    </p>
                   <% end %>
-                  <!-- 5시 메뉴보기 end --> 
                 </div>
-              </div>
-              <!-- 5시 주문현황 전체 end -->
-             
-             <div id ="seven">
-                <!-- 7시 주문 배송 현황 start -->
-            	  <div class = "row" style = "margin-bottom:15px;">
-            	    <div class = "col-md-9"></div>
-            	    <div class = "col-md-3 bold" style = "text-align:center;">
-            	      <p class="bg-info" style = "padding:3px;">
-            	        <%= Time.zone.now.to_s.split[0] %>&nbsp;&nbsp;&nbsp;&nbsp;오후 7시 배송 주문현황
-            	      </p>
-            	    </div>
-            	    <div class = "row">
-            	      <div class = "col-md-12">
-              	      <div style = "font-size:20px; text-align:right;">
-              	        <% if Time.zone.now.between?(Time.zone.now.midnight, Time.zone.now.midnight + 18.hours) %>
-              	          <span class="label label-danger">아직 주문 접수가 진행중입니다.(오후 6시 이후 출력해주세요)</span>
-              	        <% else %>
-              	          <span class="label label-success" style="cursor:pointer" onclick="PrintElem('#seven')">해당 시간 주문접수가 완료되었습니다(클릭시 출력 됩니다.)</span>
-              	        <% end %>
-              	      </div>
-            	      </div>
-            	    </div>
-            	  </div>
-        	      <!-- 7시 시간별 주문 배송 현황 end -->
-        	      
-        	      
-        	      <div class = "row">
-                  <!-- 7시 메뉴보기 start -->
-                  <% @menu.where(:menu_choice => true).each do |x| %>
-                    <div class = "col-md-6">
-                        <table class="table table-hover">
-                              <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>
-                                    <% x.ingredients.each do |a| %>
-                                      <%= a.ingredient_name %> <%= a.ingredient_amount %>,
-                                    <% end %>
-                                  </th>
-                                  <th>갯수</th>
-                                  <th>총합</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td><%= x.menu_name %></td>
-                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 7시").where(:option_1 => false).where(:option_2 => false).count %></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">2</th>
-                                  <td><%= x.menu_name %> + 오뚜기밥2개</td>
-                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 7시").where(:option_1 => true).where(:option_2 => false).count %></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">3</th>
-                                  <td><%= x.menu_name %> + 소스박스</td>
-                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 7시").where(:option_1 => false).where(:option_2 => true).count %></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">4</th>
-                                  <td><%= x.menu_name %> + 오뚜기밥2개 + 소스박스</td>
-                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 7시").where(:option_1 => true).where(:option_2 => true).count %></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">총합</th>
-                                  <td></td>
-                                  <td></td>
-                                  <td><%= Purchase.where(:menu_id => x.id).where(:deliver_time => "#{Time.zone.now.to_s.split[0]} 7시").count %></td>
-                                </tr>
-                              </tbody>
-                              
-                        </table>
-                    </div>
-                  <% end %>
-                  <!-- 7시 메뉴보기 end --> 
-      
-                </div>
-              </div>
-              <!-- 7시 주문현황 전체 end -->
-
-
-
+            </div>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>주문시간</th>
+                  <th>이름</th>
+                  <th>주문메뉴</th>
+                  <th>주소</th>
+                  <th>공동현관</th>
+                  <th>핸드폰</th>
+                  <th>요구사항</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% num = 1 %>
+                <% @today_time.each do |a| %>
+                  <tr>
+                    <th scope="row"><%= num %></th>
+                    <th><%= a.created_at.to_s.split[0] + " " + a.created_at.to_s.split[1] %></th>
+                    <td><%= User.where(:id => a.user_id).take.privacy.name %></td>
+                    <td>
+                      <% if a.option_1 == true %>
+                        <%= Menu.find(a.menu_id).menu_name %> + 오뚜기밥 2개
+                      <% else %>
+                        <%= Menu.find(a.menu_id).menu_name %>
+                      <% end %>
+                    </td>
+                    <td><%= User.where(:id => a.user_id).take.address + User.where(:id => a.user_id).take.sub_address  %></td>
+                    <td><%= User.where(:id => a.user_id).take.privacy.public_pw %></td>
+                    <td><%= User.where(:id => a.user_id).take.privacy.phone %></td>
+                    <td><%= a.want_content %></td>
+                  </tr>
+                  <% num = num + 1 %>
+                <% end %>
+              </tbody>
+            </table>
+        </div>
     </div>
-
-</div>
 
    <div class = "row" style = "margin-top:300px;">
    <!-- Footer 
@@ -214,28 +97,3 @@
     <%= render :partial => "home/footer" %> 
 
 
-  <script>
-  function PrintElem(elem)
-    {
-        Popup($(elem).html());
-    }
-
-    function Popup(data) 
-    {
-        var mywindow = window.open('', 'my div', 'height=400,width=600');
-        mywindow.document.write('<html><head><title>my div</title>');
-        /*optional stylesheet*/ //mywindow.document.write('<link rel="stylesheet" href="main.css" type="text/css" />');
-        mywindow.document.write('</head><body >');
-        mywindow.document.write(data);
-        mywindow.document.write('</body></html>');
-
-        mywindow.document.close(); // necessary for IE >= 10
-        mywindow.focus(); // necessary for IE >= 10
-
-        mywindow.print();
-        mywindow.close();
-
-        return true;
-    }
-  
-  </script>

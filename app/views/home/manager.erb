@@ -43,10 +43,6 @@
                               <input type="email" class="form-control" id="mart_email" name = "mart_email" placeholder="마트 email을 입력해주세요" required>
                             </div>
                             <div class="form-group">
-                              <label for="deliver_amount">한타임에 몇건 배송 가능? </label>
-                              <input type="number" min="1" max="100" class="form-control" id="deliver_amount" name = "deliver_amount" placeholder="최대 100까지 " required>
-                            </div>
-                            <div class="form-group">
                               <label for="exampleInputFile">마트 대표 사진</label>
                               <input type="file" name = "mart_img" id="exampleInputFile">
                             </div>
@@ -67,12 +63,24 @@
                               <input type="text" class="form-control" id="exampleInputPassword3" name = "mart_address" placeholder="사업자주소" required>
                             </div>
                             <div class="form-group">
-                              <label for="exampleInputPassword4">운영시간</label>
-                              <input type="text" class="form-control" id="exampleInputPassword4" name = "mart_time" placeholder="운영시간" required>
+                              <label for="exampleInputPassword4">시작시간</label>
+                              <input type="number" class="form-control" id="exampleInputPassword4" name = "start_time" placeholder="ex_8" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputPassword4">종료시간</label>
+                              <input type="number" class="form-control" id="exampleInputPassword4" name = "end_time" placeholder="ex_20" required>
                             </div>
                             <div class="form-group">
                               <label for="exampleInputPassword5">전화번호</label>
                               <input type="text" class="form-control" id="exampleInputPassword2" name = "mart_phone" placeholder="마트전화번호" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputEmail_bob_price">오뚜기밥 2개 가격은?</label>
+                              <input type="number" class="form-control" id="exampleInputEmail_bob_price" name = "bob_price" placeholder="ex_1400">
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputEmail_bob_commission">오뚜기밥 2개 수수료는?</label>
+                              <input type="number" class="form-control" id="exampleInputEmail_bob_commission" name = "bob_commission" placeholder="ex_200">
                             </div>
                             <div class="modal-footer">
                               <button type="submit" class="btn btn-primary">저장</button>

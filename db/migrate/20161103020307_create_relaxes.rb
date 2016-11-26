@@ -3,7 +3,7 @@ class CreateRelaxes < ActiveRecord::Migration
     create_table :relaxes do |t|
 
       t.integer :mart_id 
-      t.string :relax_date
+      t.string :relax_date #mart 휴무일
 
       t.timestamps null: false
     end
