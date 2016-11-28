@@ -105,7 +105,7 @@ class HomeController < ApplicationController
       if @success.option_1 == true
         bob = "오뚜기밥 2개 + 소스박스 + 레시피"
       else
-        bob = "소스박스 + 레시피"
+        bob = "오뚜기밥 2개 + 소스박스 + 레시피" #행사기간에만 오뚜기밥2개!
       end
       mart_email = Mart.find(Menu.find(@success.menu_id).mart_id).mart_email
       title = "[" + "#{@success.created_at.to_s.split[0] + " " + @success.created_at.to_s.split[1]}" + "]"  + " "+"#{Menu.find(@success.menu_id).menu_name}" 
