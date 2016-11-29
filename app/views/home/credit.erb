@@ -282,6 +282,7 @@
                         var together_zone = <%= Address.where(:ok_address => current_user.address).take.together_zone %>;
                         var final_total_price = <%= @final_total_price %>;
                         var option_1 = <%= params[:bob] %>;
+                        var credit_method = 'card';
                         
                         IMP.request_pay({
                         pg : payment, // version 1.1.0부터 지원.
@@ -294,7 +295,7 @@
                         buyer_name : name_form, 
                         buyer_tel : phone_form,
                         buyer_addr : '<%= current_user.address + current_user.sub_address %>',
-                        m_redirect_url : 'http://www.zachiyori.com/home/purchase_save?name=' + name_form + '&&phone=' + phone_form + '&&public_pw=' + public_pw + '&&menu_id=' + menu_id + '&&together_zone=' + together_zone + '&&credit_method=card&&total_price=' + final_total_price + '&&want_content=' + want_content + '&&option_1=' + option_1,
+                        m_redirect_url : 'http://www.platolab3-bsm7878.c9users.io/home/mobile_save?name=' + name_form + '&&phone=' + phone_form + '&&public_pw=' + public_pw + '&&menu_id=' + menu_id + '&&together_zone=' + together_zone + '&&credit_method=' + credit_method  + '&&total_price=' + final_total_price + '&&want_content=' + want_content + '&&option_1=' + option_1,
                         app_scheme : 'iamporttest' //in app browser결제에서만 사용 
                         
                     }, function(rsp) { 
