@@ -216,20 +216,26 @@
                             <div class = "col-md-1"></div>
                         </div>
                         <hr>
-                        <div class = "info_box" >
+                        <div class = "info_box" style = "text-align:center;">
                             <div style = "margin-bottom:20px;">
-                                <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 위 상품의 가격은 해당 판매마트가 정한 가격입니다.</p>
+                                <p><i class="fa fa-exclamation-circle info_credit" aria-hidden="true"></i> 결제하기를 완료하시고 주문접수가 완료되었다는</p>
+                                <p style = "text-align:center;">페이지가 나타날때까지 기다리셔야합니다.</p>
+                                <p style = "font-size:12px;">(결제 중간 또는 완료 후 창을 닫으시면 정상적인)</p>
+                                <p style = "font-size:12px;">주문접수가 이루어지지 않을 수 있습니다.)</p>
                             </div>
                             <div style = "margin-bottom:20px;">
-                                <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 위 상품은 해당마트의 특별상품이며 현장구매와</p>
+                                <p><i class="fa fa-exclamation-circle info_credit" aria-hidden="true"></i> 위 상품의 가격은 해당 판매마트가 정한 가격입니다.</p>
+                            </div>
+                            <div style = "margin-bottom:20px;">
+                                <p><i class="fa fa-exclamation-circle info_credit" aria-hidden="true"></i> 위 상품은 해당마트의 특별상품이며 현장구매와</p>
                                 <p style = "text-align:center;">가격이 다소 차이가 날 수 있습니다.</p>
                             </div>
                             <div style = "margin-bottom:20px;">
-                                <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 본 제품 특성상 단순변심으로 인한 환불 및 교환은</p>
+                                <p><i class="fa fa-exclamation-circle info_credit" aria-hidden="true"></i> 본 제품 특성상 단순변심으로 인한 환불 및 교환은</p>
                                 <p style = "text-align:center;">불가함을 알려드립니다.</p>
                             </div>
                             <div style = "margin-bottom:20px;">
-                                <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 자취요리연구소는 통신판매중개자이며 통신판매의</p>
+                                <p><i class="fa fa-exclamation-circle info_credit" aria-hidden="true"></i> 자취요리연구소는 통신판매중개자이며 통신판매의</p>
                                 <p style = "text-align:center;">당사자가 아닙니다.</p>
                             </div>
                         </div>
@@ -253,7 +259,7 @@
     
     
                      var IMP = window.IMP;
-                     IMP.init('imp96245329'); //'iamport' 대신 부여받은 "가맹점 식별코드"를 사용. 
+                     IMP.init('<%= @imp %>'); //'iamport' 대신 부여받은 "가맹점 식별코드"를 사용. 
                     
                     $("#pay").click(function(){
                         if ($('#name_form').val() == '' && $('#phone_form').val() == ''){
@@ -270,18 +276,25 @@
                         var payment = $(".payment").attr("value"); //payment 방법
                         var name_form = $('#name_form').val();
                         var phone_form = $('#phone_form').val(); 
-
+                        var public_pw =  $("#public_pw").val();
+                        var want_content = $("#want_content").val();
+                        var menu_id = <%= params[:menu_id] %>;
+                        var together_zone = <%= Address.where(:ok_address => current_user.address).take.together_zone %>;
+                        var final_total_price = <%= @final_total_price %>;
+                        var option_1 = <%= params[:bob] %>;
+                        
                         IMP.request_pay({
                         pg : payment, // version 1.1.0부터 지원.
                                     
                         pay_method : 'card', // 'card' : 신용카드 | 'trans' : 실시간계좌이체 | 'vbank' : 가상계좌 | 'phone' : 휴대폰소액결제
                         merchant_uid : 'merchant_' + new Date().getTime(),
-                        name : '돼지고기짜글이',
+                        name : '<%= @menu.menu_name %>',
                         amount : <%= @final_total_price %>,
                         buyer_email : '<%= current_user.email %>',
                         buyer_name : name_form, 
                         buyer_tel : phone_form,
                         buyer_addr : '<%= current_user.address + current_user.sub_address %>',
+                        m_redirect_url : 'http://www.zachiyori.com/home/purchase_save?name=' + name_form + '&&phone=' + phone_form + '&&public_pw=' + public_pw + '&&menu_id=' + menu_id + '&&together_zone=' + together_zone + '&&credit_method=card&&total_price=' + final_total_price + '&&want_content=' + want_content + '&&option_1=' + option_1,
                         app_scheme : 'iamporttest' //in app browser결제에서만 사용 
                         
                     }, function(rsp) { 
@@ -299,7 +312,7 @@
                                     total_price: rsp.paid_amount,
                                     together_zone: <%= Address.where(:ok_address => current_user.address).take.together_zone %>,
                                     want_content: $("#want_content").val(),
-                                    option_1: <%= params[:bob] %>,
+                                    option_1: <%= params[:bob] %>
 
                                 },
                                 url: "/home/purchase_save",

@@ -75,19 +75,14 @@
                                 </div>
                                 <div class = "col-md-5 col-xs-12">
                                     <div style = "color:black; margin-bottom:10px;">
-                                        <% if x.option_1 == false && x.option_2 == false %>
+                                        <% if x.option_1 == false %>
                                             <span class = "bold"><%= Menu.find(x.menu_id).menu_name %></span><br>
-                                        <% elsif x.option_1 == true && x.option_2 == false  %>
-                                            <span class = "bold"><%= Menu.find(x.menu_id).menu_name %></span><br>(오뚜기밥2개)
-                                        <% elsif x.option_1 == false && x.option_2 == true%>
-                                            <span class = "bold"><%= Menu.find(x.menu_id).menu_name %></span><br>(소스박스)
                                         <% else %>
-                                           <span class = "bold"><%= Menu.find(x.menu_id).menu_name %></span><br>(오뚜기밥2개+소스박스)
+                                            <span class = "bold"><%= Menu.find(x.menu_id).menu_name %></span><br>(오뚜기밥2개)
                                         <% end %>
                                     </div>
                                     <div><span style = "margin-right:5px;">주문번호</span> <%= x.imp_uid %></div>
                                     <div><span style = "margin-right:5px;">구매일자</span> <%= x.created_at.to_s.split[0] %> <%= x.created_at.to_s.split[1] %></div>
-                                    <div><span style = "margin-right:5px;">배송희망</span> <%= x.deliver_time %></div>
                                     <div><span style = "margin-right:5px;">배송마트</span> <%= Menu.find(x.menu_id).mart.mart_name %></div>
                                     
                                 </div>

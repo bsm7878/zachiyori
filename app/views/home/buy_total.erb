@@ -73,10 +73,10 @@
                       <th>결제날짜</th>
                       <th>주문번호</th>
                       <th>주문메뉴</th>
-                      <th>식재료금액(A)</th>
+                      <th>상품금액(A)</th>
                       <th>즉석밥금액(B)</th>
                       <th>총결제금액(C=A+B)<sup data-toggle="tooltip" data-placement="right" title="고객이 자취요리연구소에 결제한 총 금액입니다."><span class="badge">?</span></sup></th>
-                      <th>식재료수수료(D)</th>
+                      <th>상품수수료(D)</th>
                       <th>즉석밥수수료(E)</th>
                       <th>주문대행수수료(F=D+E)<sup data-toggle="tooltip" data-placement="right" title="주문대행수수료는 메뉴별, 즉석밥 유/무에 따라 달리 적용됩니다."><span class="badge">?</span></sup></th>
                       <th>입금금액(C-F)<sup data-toggle="tooltip" data-placement="left" title="자취요리연구소가 사장님께 입금하여야 하는 금액입니다.(총 결제금액에 주문대행수수료를 제외한 금액입니다.)"><span class="badge">?</span></sup></th>
@@ -85,20 +85,20 @@
                   <tbody>
                     <% @total_commission = 0 %> <!-- 수수료 총합 변수 설정 -->
                     <% unless params[:start_date].nil? %>
-                      <% Purchase.where(:menu_id => @mart_menu).where(:created_at => params[:start_date].to_datetime...params[:end_date].to_datetime+1.days).each do |c| %>
+                      <% Purchase.where(:menu_id => @mart_menu).where(:save_time => params[:start_date].to_datetime...params[:end_date].to_datetime + 1.days).each do |c| %>
                         <tr>
                           <th scope="row"><%= c.created_at.to_s.split[0] %></th>
                           <td><%= c.imp_uid %></td>
                           <td><%= Menu.find(c.menu_id).menu_name %></td>
-                          <td><%= Menu.find(c.menu_id).menu_price %></td>
+                          <td><%= number_with_delimiter(Menu.find(c.menu_id).menu_price, :delimiter => ',') %></td>
                           <td>
                             <% if c.option_1 == false %>
                               0
                             <% else %>
-                              <%= Menu.find(c.menu_id).mart.bob_price %>
+                              <%= number_with_delimiter(Menu.find(c.menu_id).mart.bob_price, :delimiter => ',') %>
                             <% end %>
                           </td>
-                          <td><%= c.total_price %></td>
+                          <td><%= number_with_delimiter(c.total_price, :delimiter => ',') %></td>
                           <td><%= Menu.find(c.menu_id).menu_commission %></td>
                             <% if c.option_1 == false %>
                               <% @bob_commission = 0 %> 
@@ -106,9 +106,9 @@
                               <% @bob_commission = Menu.find(c.menu_id).mart.bob_commission %> 
                             <% end %>
                           <td><%= @bob_commission %></td>
-                          <td><%= Menu.find(c.menu_id).menu_commission + @bob_commission %></td>
+                          <td><%= number_with_delimiter(Menu.find(c.menu_id).menu_commission + @bob_commission, :delimiter => ',') %></td>
                           <% @total_commission = @total_commission + Menu.find(c.menu_id).menu_commission + @bob_commission %>
-                          <td><%= c.total_price - Menu.find(c.menu_id).menu_commission - @bob_commission %></td>
+                          <td><%= number_with_delimiter(c.total_price - Menu.find(c.menu_id).menu_commission - @bob_commission, :delimiter => ',') %></td>
                         </tr>
                       <% end %>
                         <tr class = "bold" style = "color:black;">

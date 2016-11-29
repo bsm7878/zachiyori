@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20161126044614) do
     t.integer  "menu_id"
     t.integer  "user_id"
     t.string   "imp_uid"
+    t.string   "save_time"
     t.integer  "total_price"
     t.string   "want_content"
     t.string   "credit_method"

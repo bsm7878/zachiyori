@@ -6,7 +6,7 @@ class CreatePurchases < ActiveRecord::Migration
       t.integer :user_id # current_user.id =>이름, 주소, 전화번호, 공동현관 비밀번호
       
       t.string :imp_uid #imp_uid
-      #t.string :deliver_time 배송예정시간
+      t.string :save_time #저장시간
       t.integer :total_price #총가격
       t.string :want_content #요구사항
       t.string :credit_method #결제방법
