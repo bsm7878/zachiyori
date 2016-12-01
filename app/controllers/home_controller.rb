@@ -215,7 +215,7 @@ class HomeController < ApplicationController
     mart.mart_name = params[:mart_name]
     mart.mart_email = params[:mart_email]
     mart.mart_img = params[:mart_img]
-    mart.mart_img = params[:mart_img2]
+    mart.mart_img2 = params[:mart_img2]
     mart.mart_leader = params[:mart_leader]
     mart.mart_number = params[:mart_number]
     mart.agreement_day = params[:agreement_day]
