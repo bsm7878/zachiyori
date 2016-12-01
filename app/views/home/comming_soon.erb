@@ -41,7 +41,7 @@
             <div class = "col-md-3"></div>
             <div class = "col-md-6">
                 <div class="thumbnail bold">
-                  <img src="/img/poster.PNG" alt="광고" />
+                  <img src="/credit_finish.png" alt="광고" />
                   <hr>
                   <div style = "font-size:35px; text-align: center;"><span style = "color:black;">주문접수완료</span></div>
                   <hr>
@@ -56,6 +56,8 @@
                     <div style = "margin-bottom:8px;"><%= @success.imp_uid %></div>
                     <div style = "font-size:15px;"><span style = "color:black;">판매자</span></div>
                     <div style = "margin-bottom:8px;"><%= Mart.find(Menu.find(@success.menu_id).mart_id).mart_name %></div>
+                    <div style = "font-size:15px;"><span style = "color:black;">배송</span></div>
+                    <div style = "margin-bottom:8px;">자체 무료 배송</div>
                     <div style = "font-size:15px;"><span style = "color:black;">구매자</span></div>
                     <div style = "margin-bottom:8px;"><%= current_user.privacy.name %></div>
                     <div style = "font-size:15px;"><span style = "color:black;">배송지</span></div>

@@ -6,6 +6,7 @@ class HomeController < ApplicationController
   
   
   def index
+
   end
   
   
@@ -103,7 +104,7 @@ class HomeController < ApplicationController
   
   def comming_soon #결제완료
     
-    if Time.zone.now.between?(Purchase.where(:user_id => current_user.id).last.created_at - 1.minutes, Purchase.where(:user_id => current_user.id).last.created_at + 1.minutes )
+    if Time.zone.now.between?(Purchase.where(:user_id => current_user.id).last.created_at - 1.minutes, Purchase.where(:user_id => current_user.id).last.created_at + 10.seconds )
       
       @success = Purchase.where(:user_id => current_user.id).last #로그인 유저가 가장최근에 주문한것
       if @success.option_1 == true
@@ -214,6 +215,7 @@ class HomeController < ApplicationController
     mart.mart_name = params[:mart_name]
     mart.mart_email = params[:mart_email]
     mart.mart_img = params[:mart_img]
+    mart.mart_img = params[:mart_img2]
     mart.mart_leader = params[:mart_leader]
     mart.mart_number = params[:mart_number]
     mart.agreement_day = params[:agreement_day]

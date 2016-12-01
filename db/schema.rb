@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161126044614) do
+ActiveRecord::Schema.define(version: 20161201033344) do
 
   create_table "accesses", force: :cascade do |t|
     t.string   "access_email"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20161126044614) do
     t.string   "mart_name"
     t.string   "mart_email"
     t.string   "mart_img"
+    t.string   "mart_img2"
     t.string   "mart_leader"
     t.string   "mart_number"
     t.string   "agreement_day"
@@ -118,6 +119,15 @@ ActiveRecord::Schema.define(version: 20161126044614) do
     t.string   "relax_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.integer  "menu_id"
+    t.integer  "user_id"
+    t.string   "reply_img"
+    t.string   "reply_content"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "sources", force: :cascade do |t|

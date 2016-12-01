@@ -20,6 +20,16 @@
             }
         }   
         
+        table {
+          border-collapse: collapse;
+          font-size:11px;
+          }
+          
+          table, td, th {
+              border: 1px solid black;
+              padding:10px;
+              text-align:center;
+          }
     
   </style>
     <!-- Main Navigation 
@@ -73,7 +83,7 @@
                         <input autofocus="autofocus" class="form-control" type="email" value="" name="user[email]" id="user_email" placeholder = "e-mail을 입력해주세요" required  />
                       </div>
                       <div class="field form-group">
-                          <label for="user_address" style = "color:black;">주소입력</label><br />
+                          <label for="user_address" style = "color:black;">주소입력</label><span style = "font-size:12px;">(주소 입력시 자동 <u><a href = "http://map.naver.com/index.nhn?pinTitle=%EC%A0%84%EB%82%A8%EB%8C%80%ED%95%99%EA%B5%90&pinType=site&pinId=11591626&mapMode=0" target="_blank">검색</a></u> ex_광주광역시 북구 용주로)</span><br />
                           <select class="js-example-basic-multiple-limit js-states form-control"  style = "width:100%;" name="user[address]" value="" id="user_address" multiple="multiple"  >
                               <% @address = Address.all %>
                               <% @address.each do |a| %>
@@ -88,12 +98,51 @@
                                 <div class="modal-content">
                                   <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="exampleModalLabel">배달 가능 지역 및 매칭 마트 정보</h4>
+                                    <h4 class="modal-title" id="exampleModalLabel">배달 가능 지역 및 판매 마트</h4>
                                   </div>
                                   <div class="modal-body">
-                                    마트정보
+                                    <table>
+                                       <tr style = "color:black;">
+                                        <th>지역</th>
+                                        <th>구</th>
+                                        <th>동</th>
+                                        <th>도로명 주소</th>
+                                        <th>구역</th>
+                                        <th>판매마트</th>
+                                      </tr>
+                                      
+                                      <tr>
+                                          <td rowspan ="4">광주광역시</td>
+                                          <td rowspan ="4">북구</td>
+                                          <td rowspan ="4">용봉동</td>
+                                          <td>자미로 66번길, 용봉로 90번길, 서양로 41번길, 신흥로 27번길, 서양로 49번길, 신흥로, 우치로 1번길, 서암대로223번길, 용봉로126번길, 우치로 27번길, 용봉로138번길, 우치로 </td>
+                                          <td>전남대(정문)</td>
+                                          <td>카카오마트</td>
+                                      </tr>
+                                      
+                                      <tr>
+                                          <td>문화소통로 108번길, 용주로, 용주로 30번길, 용주로 40번길, 용주로 34번길, 반룡로 41번길, 용주로 18번길, 반룡로 27번길, 반룡로 5번길, 용주로 8번길, 반룡로 17번길, 반룡로, 반룡로 6번길, 반룡로 18번길, 설죽로 214번길, 반룡로 42번길, 반룡로 28번길, 설죽로 202번길, 설죽로 196번길, 설죽로</td>
+                                          <td>전남대(상대)</td>
+                                          <td>카카오마트</td>
+                                      </tr>
+                                      
+                                      <tr>
+                                          <td>면앙로, 면앙로 6번, 호동로 79번길, 우치로 126번길, 호동로 15번길, 우치로 110번길, 호동로 73번길, 호동로 63번길, 우치로 100번길, 호동로 43번길, 우치로 90번길, 호동로, 서방로 9번길, 서방로 19번길, 중문로 9번길, 면앙로 32번길, 호동로 75번길, 면앙로 44번길, 호동로 34번길, 서방로 31번길, 서방로, 서방로 39번길, 중문로, 호동로 46번길</td>
+                                          <td>전남대(후문)</td>
+                                          <td>카카오마트</td>
+                                      </tr>
+                                      
+                                      <tr>
+                                          <td>용봉로, 설죽로, 설죽로 126번길, 서암대로, 서암대로119번길, 서암대로131번길, 용봉로 28번길, 서암대로143번길, 자미로39번길, 서양로, 용봉로42번길, 서암대로159번길, 자미로</td>
+                                          <td>전남대(치대)</td>
+                                          <td>카카오마트</td>
+                                      </tr>
+                                      
+  
+                                    </table>
                                     <hr>
-                                    ※식재료의 재료, 소분, 포장, 배달은 해당 마트에서 전적으로 관리감독합니다.
+                                    
+                                    ※상품들은 판매마트에서 자체적으로 파는 특별상품입니다.
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -106,7 +155,7 @@
                       </div>
                       <div class="field form-group">
                         <label for="sub_address" style = "color:black;">나머지주소</label><br />
-                        <input autofocus="autofocus" class="form-control" type="text" value="" name="user[sub_address]" placeholder = "나머지 주소를 입력해주세요" id="sub_address" required />
+                        <input autofocus="autofocus" class="form-control" type="text" value="" name="user[sub_address]" placeholder = "ex_11-11 자취요리연구소원룸 107호" id="sub_address" required />
                       </div>
                       
         

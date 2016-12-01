@@ -73,8 +73,8 @@
                         <span style = "font-size: 16px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> 지금 바로 먹을 밥이 없다면?</span>
                         <select class="form-control" id = "bob" name = "bob">
                             <option selected value = "0">오픈기념 오뚜기즉석밥2개(<%= number_with_delimiter(@mart.bob_price, :delimiter => ',') %>원) 무료!(소진시까지)</option>
-                            <option  value = "0">있어요 --- 0원</option>
-                            <option  value = "<%= @mart.bob_price %>">오뚜기즉석밥(200g) 2개 ---- <%= number_with_delimiter(@mart.bob_price, :delimiter => ',') %>원</option>
+                            <option  disabled value = "0">있어요 --- 0원</option>
+                            <option  disabled value = "<%= @mart.bob_price %>">오뚜기즉석밥(200g) 2개 ---- <%= number_with_delimiter(@mart.bob_price, :delimiter => ',') %>원</option>
                         </select>  
                         <br><br>
                         <hr>
@@ -98,18 +98,17 @@
             
             
             <div class = "col-md-12">
-                <img src = "/intro/1.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
-                <img src = "/intro/2.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
-                <img src = "/intro/3.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
-                <img src = "/intro/4.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
-                <img src = "/intro/5.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/all/1.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/all/2.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/all/3.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/all/4.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/all/5.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
                 <% Menu.find(params[:id]).howtos.each do |c| %>
                     <img src = "<%= c.howto_img %>" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
                 <% end %> 
-                <img src = "/intro/15.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
-                <img src = "/intro/16.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
-                <img src = "/intro/17.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
-                <img src = "/intro/18.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/all/6.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/all/7.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
+                <img src = "/all/8.png" style = "width: 100%; margin-bottom: 0px; margin-top: 0px;" />
             </div>
             
 

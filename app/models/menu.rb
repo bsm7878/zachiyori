@@ -7,6 +7,8 @@ class Menu < ActiveRecord::Base
     has_many :howtos
     has_many :readies
     
+    has_many :replies
+    
     has_many :purchases 
     has_many :users, :through => :purchases
     

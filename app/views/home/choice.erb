@@ -67,7 +67,7 @@
                                     <span class = "bold" style = "color: black; font-size:24px;"><%= x.menu_name %></span><br> <span class = "bold" style = "font-size:13px;">(식재료 SET)</span> 
                                     <hr>
                                     <h5 class = "bold"><%= x.menu_say %></h5>
-                                    <h6 class = "bold">총 판매 갯수: <%= Purchase.where(:menu_id => x.id).count %>개</h6>
+                                    <h6 class = "bold">총 판매 갯수: <%= Purchase.where(:menu_id => x.id).count + 2%>개</h6>
                                     <div style = "text-align: right;">
                                         <span class = "bold" style = "font-size:24px; color: #FFCC33;"><%= number_with_delimiter(x.menu_price, :delimiter => ',') %></span> <span class = "bold" style = "font-size:16px; color: #FFCC33;">원</span>
                                         <br>
@@ -86,10 +86,10 @@
                                   </div>
                                 </div>
                           <% end %>
-                            
                         </div>
                     <% end %>
                 </div>
+                
                 <!-- menu 선택 끝 -->
             <% end %>
             <!-- 휴무일 check 끝 -->
@@ -114,23 +114,14 @@
             </div>
             
             <div class = "row bold">
-                <div class = "col-md-4">
+                <div class = "col-md-6">
                     <img src = "<%= Mart.find(@mart_number).mart_img %>" style = "width:100%;" />
                 </div>
-                <div class = "col-md-4" >
-                    <div class = "mart_info">
-                    <br>
-                    <span >상호</span> | <%= Mart.find(@mart_number).mart_name %><br><br>
-                    <span >대표</span> | <%= Mart.find(@mart_number).mart_leader %><br><br>
-                    사업자번호 | <%= Mart.find(@mart_number).mart_number %><br><br>
-                    주소 | <%= Mart.find(@mart_number).mart_address %><br><br>
-                    주문가능시간 | <%= Mart.find(@mart_number).start_time %>시 ~ <%= Mart.find(@mart_number).end_time %>시<br><br>
-                    문의전화 | <%= Mart.find(@mart_number).mart_phone %>
-                    </div>
+                <br>
+                <div class = "col-md-6">
+                    <img src = "<%= Mart.find(@mart_number).mart_img2 %>" style = "width:100%;" />
                 </div>
-                <div class = "col-md-4">
-                    
-                </div>
+           
             </div>
     </div>
 

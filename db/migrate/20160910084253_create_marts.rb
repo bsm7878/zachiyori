@@ -7,6 +7,7 @@ class CreateMarts < ActiveRecord::Migration
       t.string :mart_name #마트이름
       t.string :mart_email #마트email
       t.string :mart_img #마트대표사진
+      t.string :mart_img2 #대표사사진2
       t.string :mart_leader #마트대표이름
       t.string :mart_number #사업자번호
       t.string :agreement_day #협약일
