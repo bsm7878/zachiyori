@@ -1,4 +1,14 @@
 Rails.application.configure do
+  
+  
+  
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+          api_key: 'key-58cb05535db9e0e2095709e152b00c77',
+          domain: 'sandbox46f0226b110045b4a455d9119d83c8e0.mailgun.org'
+  }
+  
+  config.action_mailer.default_url_options = { host: 'zachiyori.com', port: 80 }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
