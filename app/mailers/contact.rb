@@ -2,7 +2,7 @@ class Contact < ApplicationMailer
     
     def welcome flyer, content #고객 => 자취요리연구소
         email = mail from: flyer, 
-                to: 'contact@zachiyori.com', 
+                to: 'bsm7878@naver.com', 
                 subject: '자취요리연구소',
                 body: content
     end
