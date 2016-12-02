@@ -6,7 +6,42 @@ class HomeController < ApplicationController
   
   
   def index
-
+    if Time.zone.now.between?(Purchase.where(:user_id => current_user.id).last.created_at - 1.minutes, Purchase.where(:user_id => current_user.id).last.created_at + 1.minutes)
+      
+      @success = Purchase.where(:user_id => current_user.id).last #로그인 유저가 가장최근에 주문한것
+      if @success.option_1 == true
+        bob = "오뚜기밥 2개 + 소스박스 + 레시피"
+      else
+        bob = "오뚜기밥 2개 + 소스박스 + 레시피" #행사기간에만 오뚜기밥2개!
+      end
+      
+      mart_email = Mart.find(Menu.find(@success.menu_id).mart_id).mart_email
+      title = "[" + "#{@success.created_at.to_s.split[0] + " " + @success.created_at.to_s.split[1]}" + "]"  + " "+"#{Menu.find(@success.menu_id).menu_name}" 
+      
+       ingredient = Array.new
+       Menu.find(@success.menu_id).ingredients.each do |a|
+         ingredient.push(a.ingredient_name + " " + a.ingredient_amount)
+       end 
+                                    
+      name = "주문자: #{current_user.privacy.name}"
+      menu = "주문메뉴: #{Menu.find(@success.menu_id).menu_name}"
+      menu_ingredient = "재료: #{ingredient}"
+      option = "옵션: #{bob}"
+      address = "주소: #{current_user.address + " " + current_user.sub_address}"
+      public_pw = "공동현관비번: #{current_user.privacy.public_pw}"
+      want_content =  "요구사항: #{@success.want_content}"
+      phone = "전화번호: #{current_user.privacy.phone}"
+      p1 = "- 개인정보 보호를 위해 완료되고 하루 이내에 해당 메시지를 삭제해주세요."
+      p2 = "- 삭제한 후에도 '자취요리연구소의 사장님페이지'에서 보실 수 있습니다."
+      p3 = "- 더 궁금한 사항이 있으시면 언제든 연락주시면 감사하겠습니다. 010-8745-7983"
+                 
+      Contact.order(mart_email, title, name, menu, menu_ingredient, option, address, public_pw, want_content, phone, p1, p2, p3).deliver_now #주문완료되면 알림가기
+      
+      
+    else
+      redirect_to '/home/my_list'
+    end
+    
   end
   
   
