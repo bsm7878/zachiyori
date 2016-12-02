@@ -104,7 +104,7 @@ class HomeController < ApplicationController
   
   def comming_soon #결제완료
     
-    if Time.zone.now.between?(Purchase.where(:user_id => current_user.id).last.created_at - 1.minutes, Purchase.where(:user_id => current_user.id).last.created_at + 1.minutes )
+    if Time.zone.now.between?(Purchase.where(:user_id => current_user.id).last.created_at - 1.minutes, Purchase.where(:user_id => current_user.id).last.created_at + 1.minutes)
       
       @success = Purchase.where(:user_id => current_user.id).last #로그인 유저가 가장최근에 주문한것
       if @success.option_1 == true
