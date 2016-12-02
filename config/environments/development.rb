@@ -7,7 +7,7 @@ Rails.application.configure do
   }
   
   #config.action_mailer.default_url_options = { :host => 'platolab3-bsm7878.c9users.io', port: 80 }
-  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+  Rails.application.routes.default_url_options[:host] = 'localhost:80'
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
