@@ -8,7 +8,7 @@ Rails.application.configure do
           domain: 'sandbox46f0226b110045b4a455d9119d83c8e0.mailgun.org'
   }
   
-  config.action_mailer.default_url_options = { host: 'zachiyori.com'}
+  config.action_mailer.default_url_options = { :host => 'zachiyori.com'}
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
