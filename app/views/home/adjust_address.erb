@@ -73,8 +73,12 @@
                             <label for="sub_address">나머지 주소</label><br />
                             <input class="form-control" type="text" id="sub_address" name = "sub_address"  value = "<%= current_user.sub_address %>" />
                           </div>
+                          <div>
+                            <div class="alert alert-info" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;" id = "address_show" role="alert">주소를 입력해주세요.</div>
+                             <div class="alert alert-warning" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;" id = "sub_address_show" role="alert">나머지 주소를 입력해주세요.</div>
+                          </div>
                           <div style = "text-align:center;">
-                              <button type="submit" class="btn btn-default" data-dismiss="modal" style = "background-color:white; color:black;">저장하기</button>
+                              <button type="submit" id = "sign_up_button" class="btn btn-default" data-dismiss="modal" style = "background-color:white; color:black;">저장하기</button>
                           </div>
                         </form>
                         </div>
@@ -82,9 +86,9 @@
                     </div>
                     
                     <!-- content -->
-                    <div style = "margin-top:15px; height:80px;">
-                        <div class = "row">
-
+                    <div style = "margin-top:50px; height:80px;">
+                        <div class = "row" style = "text-align:center;">
+                            <a clas = "bold" href ="/home/choice"><u>주문하러 갈까요?</u></a>
                         </div>
                     </div>
 
@@ -109,3 +113,30 @@
             maximumSelectionLength: 1
         });
     </script>
+    
+     <script>
+            $(document).ready(function(){
+              $("#sign_up_button").click(function(){
+                
+                    if (!$('#address').val() && !$('#sub_address').val()){
+                       $("#address_show").show();
+                       $("#sub_address_show").show();
+                       return false;
+                    }
+                    else if($('#address').val() && !$('#sub_address').val()){
+                        $("#address_show").hide();
+                        $("#sub_address_show").show();
+                        return false;
+                    }
+                    else if(!$('#address').val() && $('#sub_address').val()){
+                        $("#address_show").show();
+                        $("#sub_address_show").hide();
+                        return false;
+                    }
+                    else{
+                     
+                    }
+    
+                  });
+              });
+           </script>
