@@ -64,7 +64,7 @@
                                 <div class="thumbnail thumbnail_<%= x.id %>" style="cursor:pointer">
                                   <img src = "<%= x.menu_img1 %>" id = "choice_menu_img" style = "width: 100%;">
                                   <div class="caption">
-                                    <span class = "bold" style = "color: black; font-size:24px;"><%= x.menu_name %></span><br> <span class = "bold" style = "font-size:13px;">(식재료 SET)</span> 
+                                    <span class = "bold" style = "color: black; font-size:24px;"><%= x.menu_name %></span><br> <span class = "bold" style = "font-size:13px;">(식재료 SET + 양념 BOX + 오뚜기밥2개)</span> 
                                     <hr>
                                     <h5 class = "bold"><%= x.menu_say %></h5>
                                     <h6 class = "bold">총 판매 갯수: <%= Purchase.where(:menu_id => x.id).count + 2%>개</h6>

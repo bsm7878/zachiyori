@@ -83,7 +83,7 @@
                         <input autofocus="autofocus" class="form-control" type="email" value="" name="user[email]" id="user_email" placeholder = "e-mail을 입력해주세요" required  />
                       </div>
                       <div class="field form-group">
-                          <label for="user_address" style = "color:black;">주소입력</label><span style = "font-size:12px;">(주소 입력시 자동 <u><a href = "http://map.naver.com/index.nhn?pinTitle=%EC%A0%84%EB%82%A8%EB%8C%80%ED%95%99%EA%B5%90&pinType=site&pinId=11591626&mapMode=0" target="_blank">검색</a></u> ex_광주광역시 북구 용주로)</span><br />
+                          <label for="user_address" style = "color:black;">주소입력</label><span style = "font-size:12px;">(도로명 입력시 자동 <u><a href = "http://map.naver.com/index.nhn?pinTitle=%EC%A0%84%EB%82%A8%EB%8C%80%ED%95%99%EA%B5%90&pinType=site&pinId=11591626&mapMode=0" target="_blank">검색</a></u> ex_용주로)</span><br />
                           <select class="js-example-basic-multiple-limit js-states form-control"  style = "width:100%;" name="user[address]" value="" id="user_address" multiple="multiple" required  >
                               <% @address = Address.all %>
                               <% @address.each do |a| %>
