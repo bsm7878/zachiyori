@@ -42,7 +42,7 @@
             <div class = "row" style = "padding-top:0px;">
                 <div class="section-header" style = "padding-bottom:0px;">
                     <h2 class = "bold">한끼 뚝딱<span class="highlight"> 메뉴</span></h2> 
-                    <span class = "sub_title">인기없는 메뉴는 사라지고 새로운 메뉴가 출시됩니다</span>
+                    <span class = "sub_title">2인분 기준입니다.</span>
                     <div class="fancy"><span><img src="/img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                                 <div class="thumbnail thumbnail_<%= x.id %>" style="cursor:pointer">
                                   <img src = "<%= x.menu_img1 %>" id = "choice_menu_img" style = "width: 100%;">
                                   <div class="caption">
-                                    <span class = "bold" style = "color: black; font-size:24px;"><%= x.menu_name %></span><br> <span class = "bold" style = "font-size:13px;">(식재료 SET + 양념 BOX + 오뚜기밥2개)</span> 
+                                    <span class = "bold" style = "color: black; font-size:24px;"><%= x.menu_name %></span><br> <span class = "bold" style = "font-size:13px;">(식재료 SET + 양념 BOX + 레시피 + 오뚜기밥2개)</span> 
                                     <hr>
                                     <h5 class = "bold"><%= x.menu_say %></h5>
                                     <h6 class = "bold">총 판매 갯수: <%= Purchase.where(:menu_id => x.id).count + 2%>개</h6>

@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   
-  before_action :authenticate_user!, :except => [:index, :contact, :info, :privacy, :agreement, :email_send, :who_are_you]  #로그인 하지 않으면 index 제외 다른 페이지로 이동 불가
+  before_action :authenticate_user!, :except => [:index, :contact, :info, :privacy, :agreement, :email_send, :who_are_you, :choice]  #로그인 하지 않으면 index 제외 다른 페이지로 이동 불가
   
   	
   
@@ -28,7 +28,7 @@ class HomeController < ApplicationController
   
   
   def choice #step2 => 메뉴선택
-    @mart_number = Address.where(:ok_address => current_user.address).take.mart_id
+    @mart_number = 1 #Address.where(:ok_address => current_user.address).take.mart_id
     @mart = Mart.where(:id => @mart_number).take
     
     Relax.where(:mart_id => @mart_number).exists?(:relax_date => Time.zone.now.to_s.split[0])
