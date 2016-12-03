@@ -173,9 +173,12 @@
                       <div class = "bold agree" style = "text-align:center; margin-bottom:20px;">
                         회원가입을 함으로써 자취요리연구소의 <br class="hidden-md hidden-lg"> <a href= "/home/agreement" style = "text-decoration:underline; color:#FFCC33;" target="_blank">이용약관</a>과 <a href = "/home/privacy" style = "text-decoration:underline; color:#FFCC33;" target="_blank">개인정보 취급방침</a>에 동의하시게 됩니다.
                       </div>
-
+                      <div>
+                        <div class="alert alert-info" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;" id = "address_show" role="alert">주소를 입력해주세요.</div>
+                         <div class="alert alert-warning" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;" id = "sub_address_show" role="alert">나머지 주소를 입력해주세요.</div>
+                      </div>
                       <div class="actions form-group">
-                        <input type="submit" class="btn btn-warning bold" style = "width:100%; font-size:20px;" name="commit" value="회원 가입" />
+                        <input type="submit" id = "sign_up_button" class="btn btn-warning bold" style = "width:100%; font-size:20px;" name="commit" value="회원 가입" />
                       </div>
                     </form>
                 </div>
@@ -215,6 +218,36 @@
                 })();
                   
                 }
+                
             </script>
+            <script>
+            $(document).ready(function(){
+              $("#sign_up_button").click(function(){
+                
+                    if (!$('#user_address').val() && !$('#sub_address').val()){
+                       $("#address_show").show();
+                       $("#sub_address_show").show();
+                       return false;
+                    }
+                    else if($('#user_address').val() && !$('#sub_address').val()){
+                        $("#address_show").hide();
+                        $("#sub_address_show").show();
+                        return false;
+                    }
+                    else if(!$('#user_address').val() && $('#sub_address').val()){
+                        $("#address_show").show();
+                        $("#sub_address_show").hide();
+                    }
+                    else{
+                     
+                    }
+    
+                  });
+              });
+          </script>
+            
+            
+
+
 
 
