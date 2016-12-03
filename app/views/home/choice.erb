@@ -47,8 +47,8 @@
                 </div>
             </div>
             
-        <!-- 운영시간 check 시작 -->
-        <% if Time.zone.now.between?(Time.zone.now.midnight + Mart.find(@mart_number).start_time.hours, Time.zone.now.midnight + Mart.find(@mart_number).end_time.hours) %>
+       
+        
             <!-- 휴무일 check 시작 -->
             <% if Relax.where(:mart_id => @mart_number).exists?(:relax_date => Time.zone.now.to_s.split[0]) %>
                 <div style = "text-align:center;">
@@ -59,23 +59,42 @@
                 <div class = "row">
                     <% @mart.menus.where(:menu_choice => true).all.each do |x| %>
                         <div class = "col-md-6"  >
-                          <% unless (x.provides.sum(:recipe) - Purchase.where(:menu_id => x.id).count) < 1 %>    
-                            <a href = "/home/option/<%= x.id %>">
-                                <div class="thumbnail thumbnail_<%= x.id %>" style="cursor:pointer">
-                                  <img src = "<%= x.menu_img1 %>" id = "choice_menu_img" style = "width: 100%;">
-                                  <div class="caption">
-                                    <span class = "bold" style = "color: black; font-size:24px;"><%= x.menu_name %></span><br> <span class = "bold" style = "font-size:13px;">(식재료 SET + 양념 BOX + 레시피 + 오뚜기밥2개)</span> 
-                                    <hr>
-                                    <h5 class = "bold"><%= x.menu_say %></h5>
-                                    <h6 class = "bold">총 판매 갯수: <%= Purchase.where(:menu_id => x.id).count + 2%>개</h6>
-                                    <div style = "text-align: right;">
-                                        <span class = "bold" style = "font-size:24px; color: #FFCC33;"><%= number_with_delimiter(x.menu_price, :delimiter => ',') %></span> <span class = "bold" style = "font-size:16px; color: #FFCC33;">원</span>
-                                        <br>
-                                        <span class = "bold" style = "font-size:12px;">(1인분-<%= number_with_delimiter(x.menu_price/2, :delimiter => ',') %>원)</span>
+                          <% unless (x.provides.sum(:recipe) - Purchase.where(:menu_id => x.id).count) < 1 %>
+                             <!-- 운영시간 check 시작 -->
+                            <% if Time.zone.now.between?(Time.zone.now.midnight + Mart.find(@mart_number).start_time.hours, Time.zone.now.midnight + Mart.find(@mart_number).end_time.hours) %>
+                                <a href = "/home/option/<%= x.id %>">
+                                    <div class="thumbnail thumbnail_<%= x.id %>" style="cursor:pointer">
+                                      <img src = "<%= x.menu_img1 %>" id = "choice_menu_img" style = "width: 100%;">
+                                      <div class="caption">
+                                        <span class = "bold" style = "color: black; font-size:24px;"><%= x.menu_name %></span><br> <span class = "bold" style = "font-size:13px;">(식재료 SET + 양념 BOX + 레시피 + 오뚜기밥2개)</span> 
+                                        <hr>
+                                        <h5 class = "bold"><%= x.menu_say %></h5>
+                                        <h6 class = "bold">총 판매 갯수: <%= Purchase.where(:menu_id => x.id).count + 2%>개</h6>
+                                        <div style = "text-align: right;">
+                                            <span class = "bold" style = "font-size:24px; color: #FFCC33;"><%= number_with_delimiter(x.menu_price, :delimiter => ',') %></span> <span class = "bold" style = "font-size:16px; color: #FFCC33;">원</span>
+                                            <br>
+                                            <span class = "bold" style = "font-size:12px;">(1인분-<%= number_with_delimiter(x.menu_price/2, :delimiter => ',') %>원)</span>
+                                        </div>
+                                      </div>
                                     </div>
-                                  </div>
-                                </div>
-                            </a>
+                                </a>
+                            <% else %>
+                                    <div class="time_out thumbnail thumbnail_<%= x.id %>" style="cursor:pointer">
+                                      <img src = "<%= x.menu_img1 %>" id = "choice_menu_img" style = "width: 100%;">
+                                      <div class="caption">
+                                        <span class = "bold" style = "color: black; font-size:24px;"><%= x.menu_name %></span><br> <span class = "bold" style = "font-size:13px;">(식재료 SET + 양념 BOX + 레시피 + 오뚜기밥2개)</span> 
+                                        <hr>
+                                        <h5 class = "bold"><%= x.menu_say %></h5>
+                                        <h6 class = "bold">총 판매 갯수: <%= Purchase.where(:menu_id => x.id).count + 2%>개</h6>
+                                        <div style = "text-align: right;">
+                                            <span class = "bold" style = "font-size:24px; color: #FFCC33;"><%= number_with_delimiter(x.menu_price, :delimiter => ',') %></span> <span class = "bold" style = "font-size:16px; color: #FFCC33;">원</span>
+                                            <br>
+                                            <span class = "bold" style = "font-size:12px;">(1인분-<%= number_with_delimiter(x.menu_price/2, :delimiter => ',') %>원)</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                            <% end %> 
+                            <!-- 운영시간 check 끝 -->
                           <% else %>
                                 <div class="thumbnail thumbnail_<%= x.id %>" style="cursor:pointer">
                                   <img src = "<%= x.menu_img1 %>" style = "width: 100%;" >
@@ -93,12 +112,8 @@
                 <!-- menu 선택 끝 -->
             <% end %>
             <!-- 휴무일 check 끝 -->
-        <% else %>
-            <div style = "text-align:center;">
-                <img src = "/order_time_2.png" style = "width:100%;" alt ="지금은 해당 판매마트의 주문 가능 시간이 아닙니다." />
-            </div>
-        <% end %> 
-           <!-- 운영시간 check 끝 -->
+        
+          
     </div>
     <hr>
     
@@ -131,4 +146,11 @@
          ================================================== -->
          <%= render :partial => "home/footer" %> 
         
+        <script>
+            $(document).ready(function(){
+                $(".time_out").click(function(){
+                    alert("판매마트의 주문가능시간이 아닙니다. (주문가능시간: 8시~20시)");
+                });
+            });
+        </script>
  

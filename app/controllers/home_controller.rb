@@ -37,6 +37,7 @@ class HomeController < ApplicationController
   
   def option #step3 => 옵션선택
     
+    if Time.zone.now.between?(Time.zone.now.midnight + Mart.find(1).start_time.hours, Time.zone.now.midnight + Mart.find(1).end_time.hours) 
       mart_number = Address.where(:ok_address => current_user.address).take.mart_id #해당마트 id 
       @need = Ready.where(:menu_id => params[:id]) #그 메뉴에 '필요한것' 갖가져오기
       @mart = Mart.find(mart_number) #해당 mart 정보 가져오기
@@ -46,6 +47,9 @@ class HomeController < ApplicationController
       else
         redirect_to '/'
       end
+    else
+       redirect_to '/'
+    end
   
   end
   
