@@ -87,7 +87,7 @@
                     <% unless params[:start_date].nil? %>
                       <% Purchase.where(:menu_id => @mart_menu).where(:save_time => params[:start_date].to_datetime...params[:end_date].to_datetime + 1.days).each do |c| %>
                         <tr>
-                          <th scope="row"><%= c.created_at.to_s.split[0] %></th>
+                          <th scope="row"><%= c.save_time.to_s.split[0] %></th>
                           <td><%= c.imp_uid %></td>
                           <td><%= Menu.find(c.menu_id).menu_name %></td>
                           <td><%= number_with_delimiter(Menu.find(c.menu_id).menu_price, :delimiter => ',') %></td>
@@ -112,16 +112,16 @@
                         </tr>
                       <% end %>
                         <tr class = "bold" style = "color:black;">
-                          <td>총합(<%= Purchase.where(:menu_id => @mart_menu).where(:created_at => params[:start_date].to_datetime...params[:end_date].to_datetime+1.days).all.count %>건)</td>
+                          <td>총합(<%= Purchase.where(:menu_id => @mart_menu).where(:save_time => params[:start_date].to_datetime...params[:end_date].to_datetime+1.days).all.count %>건)</td>
                           <td></td>
                           <td></td>
                           <td></td>
                           <td></td>
-                          <td><%= number_with_delimiter(Purchase.where(:created_at => params[:start_date].to_datetime...params[:end_date].to_datetime+1.days).sum(:total_price), :delimiter => ',') %></td>
+                          <td><%= number_with_delimiter(Purchase.where(:save_time => params[:start_date].to_datetime...params[:end_date].to_datetime+1.days).sum(:total_price), :delimiter => ',') %></td>
                           <td></td>
                           <td></td>
                           <td><%= number_with_delimiter(@total_commission, :delimiter => ',') %></td>
-                          <td><%= number_with_delimiter(Purchase.where(:created_at => params[:start_date].to_datetime...params[:end_date].to_datetime+1.days).sum(:total_price) - @total_commission, :delimiter => ',') %></td>
+                          <td><%= number_with_delimiter(Purchase.where(:save_time => params[:start_date].to_datetime...params[:end_date].to_datetime+1.days).sum(:total_price) - @total_commission, :delimiter => ',') %></td>
                         </tr>
                       <% else %>
                         <tr>
