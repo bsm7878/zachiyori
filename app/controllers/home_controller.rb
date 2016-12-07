@@ -6,8 +6,6 @@ class HomeController < ApplicationController
   
   
   def index
-  
-      
     
   end
   
@@ -110,37 +108,38 @@ class HomeController < ApplicationController
   
   def comming_soon #결제완료
     
-    if Time.zone.now.between?(Purchase.where(:user_id => current_user.id).last.created_at - 1.minutes, Purchase.where(:user_id => current_user.id).last.created_at + 1.minutes)
+    if Time.zone.now.between?(Purchase.where(:user_id => current_user.id).last.created_at - 1.minutes, Purchase.where(:user_id => current_user.id).last.created_at + 15.seconds)
       
       @success = Purchase.where(:user_id => current_user.id).last #로그인 유저가 가장최근에 주문한것
-      if @success.option_1 == true
-        bob = "오뚜기밥 2개 + 소스박스 + 레시피"
-      else
-        bob = "오뚜기밥 2개 + 소스박스 + 레시피" #행사기간에만 오뚜기밥2개!
-      end
-      
-      mart_email = Mart.find(Menu.find(@success.menu_id).mart_id).mart_email
-      title = "[" + "#{@success.created_at.to_s.split[0] + " " + @success.created_at.to_s.split[1]}" + "]"  + " "+"#{Menu.find(@success.menu_id).menu_name}" 
-      
-       ingredient = Array.new
-       Menu.find(@success.menu_id).ingredients.each do |a|
-         ingredient.push(a.ingredient_name + " " + a.ingredient_amount)
-       end 
-                                    
-      name = "주문자: #{current_user.privacy.name}"
-      menu = "주문메뉴: #{Menu.find(@success.menu_id).menu_name}"
-      menu_ingredient = "재료: #{ingredient}"
-      option = "옵션: #{bob}"
-      address = "주소: #{current_user.address + " " + current_user.sub_address}"
-      public_pw = "공동현관비번: #{current_user.privacy.public_pw}"
-      want_content =  "요구사항: #{@success.want_content}"
-      phone = "전화번호: #{current_user.privacy.phone}"
-      p1 = "- 개인정보 보호를 위해 완료되고 하루 이내에 해당 메시지를 삭제해주세요."
-      p2 = "- 삭제한 후에도 '자취요리연구소의 사장님페이지'에서 보실 수 있습니다."
-      p3 = "- 더 궁금한 사항이 있으시면 언제든 연락주시면 감사하겠습니다. 010-8745-7983"
-                 
-      Contact.order(mart_email, title, name, menu, menu_ingredient, option, address, public_pw, want_content, phone, p1, p2, p3).deliver_now #주문완료되면 알림가기
-      
+      @success = Purchase.where(:user_id => current_user.id).last #로그인 유저가 가장최근에 주문한것
+        if @success.option_1 == true
+          bob = "오뚜기밥 2개 + 소스박스 + 레시피"
+        else
+          bob = "오뚜기밥 2개 + 소스박스 + 레시피" #행사기간에만 오뚜기밥2개!
+        end
+        
+        mart_email = Mart.find(Menu.find(@success.menu_id).mart_id).mart_email
+        title = "[" + "#{@success.created_at.to_s.split[0] + " " + @success.created_at.to_s.split[1]}" + "]"  + " "+"#{Menu.find(@success.menu_id).menu_name}" 
+        
+         ingredient = Array.new
+         Menu.find(@success.menu_id).ingredients.each do |a|
+           ingredient.push(a.ingredient_name + " " + a.ingredient_amount)
+         end 
+                                      
+        name = "주문자: #{current_user.privacy.name}"
+        menu = "주문메뉴: #{Menu.find(@success.menu_id).menu_name}"
+        menu_ingredient = "재료: #{ingredient}"
+        option = "옵션: #{bob}"
+        address = "주소: #{current_user.address + " " + current_user.sub_address}"
+        public_pw = "공동현관비번: #{current_user.privacy.public_pw}"
+        want_content =  "요구사항: #{@success.want_content}"
+        phone = "전화번호: #{current_user.privacy.phone}"
+        p1 = "- 개인정보 보호를 위해 완료되고 하루 이내에 해당 메시지를 삭제해주세요."
+        p2 = "- 삭제한 후에도 '자취요리연구소의 사장님페이지'에서 보실 수 있습니다."
+        p3 = "- 더 궁금한 사항이 있으시면 언제든 연락주시면 감사하겠습니다. 010-8745-7983"
+                   
+        Contact.order(mart_email, title, name, menu, menu_ingredient, option, address, public_pw, want_content, phone, p1, p2, p3).deliver_now 
+        #주문완료되면 알림가기 완료
       
     else
       redirect_to '/home/my_list'
@@ -319,77 +318,147 @@ class HomeController < ApplicationController
   
   def purchase_save #credit 페이지에서 저장하기
   
-    if current_user.privacy.nil?
-      privacy = Privacy.new
-      privacy.user_id = current_user.id
-      privacy.name = params[:name]
-      privacy.phone = params[:phone]
-      privacy.public_pw = params[:public_pw]
-      privacy.save
-    else
-      pri = Privacy.where(:user_id => current_user).take
-      pri.name = params[:name]
-      pri.phone = params[:phone]
-      pri.public_pw = params[:public_pw]
-      pri.save
-    end
+    #token을 가져오자!
+    url = "https://api.iamport.kr/users/getToken"
+    body = {
+        imp_key: 3842921403225799,
+        imp_secret: "NVMlNEa8xzqvRAYSUg7q45o1KFskZIeND08rFjzdT0JKBHCvXKW1Pl3z0vT0e8NS9VjOfT18TLSvsv0p"
+    }
+
+    result = HTTParty.post url, body: body
+    toaken_number = result["response"]["access_token"]
     
-      purchase = Purchase.new
-      purchase.user_id = current_user.id
-      purchase.menu_id = params[:menu_id]
-      purchase.imp_uid = params[:imp_uid]
-      purchase.together_zone = params[:together_zone].to_i
-      purchase.credit_method = params[:credit_method]
-      purchase.total_price = params[:total_price]
-      purchase.want_content = params[:want_content]
-      purchase.save_time = Time.zone.now
-      if params[:option_1] == "0"
-        purchase.option_1 = 0
+ 
+    #우선 아임포트에서 결제됬는지 가져오자!
+    information_uri = "https://api.iamport.kr/payments/#{params[:imp_uid]}?_token=#{toaken_number}"
+    source2 = information_uri
+    resp2 = Net::HTTP.get_response(URI.parse(source2))
+    data3 = resp2.body
+    result3 = JSON.parse(data3)
+    
+    
+    if result3["response"]["status"] == "paid"
+      if current_user.privacy.nil?
+        privacy = Privacy.new
+        privacy.user_id = current_user.id
+        privacy.name = params[:name]
+        privacy.phone = params[:phone]
+        privacy.public_pw = params[:public_pw]
+        privacy.save
       else
-        purchase.option_1 = 1 
+        pri = Privacy.where(:user_id => current_user).take
+        pri.name = params[:name]
+        pri.phone = params[:phone]
+        pri.public_pw = params[:public_pw]
+        pri.save
       end
-      purchase.save
       
+        purchase = Purchase.new
+        purchase.user_id = current_user.id
+        purchase.menu_id = params[:menu_id]
+        purchase.imp_uid = params[:imp_uid]
+        purchase.together_zone = params[:together_zone].to_i
+        purchase.credit_method = params[:credit_method]
+        purchase.total_price = params[:total_price]
+        purchase.want_content = params[:want_content]
+        purchase.save_time = Time.zone.now
+        if params[:option_1] == "0"
+          purchase.option_1 = 0
+        else
+          purchase.option_1 = 1 
+        end
+        purchase.save
       
-      render :text => ""
-    
+        render :text => ""
+        else
+          redirect_to '/home/sorry_credit?imp=' + params[:imp_uid] #결제가 안되면!
+        end
   end
   
   def mobile_save
-    if current_user.privacy.nil?
-      privacy = Privacy.new
-      privacy.user_id = current_user.id
-      privacy.name = params[:name]
-      privacy.phone = params[:phone]
-      privacy.public_pw = params[:public_pw]
-      privacy.save
-    else
-      pri = Privacy.where(:user_id => current_user).take
-      pri.name = params[:name]
-      pri.phone = params[:phone]
-      pri.public_pw = params[:public_pw]
-      pri.save
-    end
     
-      purchase = Purchase.new
-      purchase.user_id = current_user.id
-      purchase.menu_id = params[:menu_id]
-      purchase.imp_uid = params[:imp_uid]
-      purchase.together_zone = params[:together_zone].to_i
-      purchase.credit_method = params[:credit_method]
-      purchase.total_price = params[:total_price]
-      purchase.want_content = params[:want_content]
-      purchase.save_time = Time.zone.now
-      if params[:option_1] == "0"
-        purchase.option_1 = 0
-      else
-        purchase.option_1 = 1 
-      end
-      purchase.save
-      #save
-      
-      redirect_to '/home/comming_soon'
+    #token을 가져오자!
+    url = "https://api.iamport.kr/users/getToken"
+    body = {
+        imp_key: 3842921403225799,
+        imp_secret: "NVMlNEa8xzqvRAYSUg7q45o1KFskZIeND08rFjzdT0JKBHCvXKW1Pl3z0vT0e8NS9VjOfT18TLSvsv0p"
+    }
 
+    result = HTTParty.post url, body: body
+    toaken_number = result["response"]["access_token"]
+    
+ 
+    #우선 아임포트에서 결제됬는지 가져오자!
+    information_uri = "https://api.iamport.kr/payments/#{params[:imp_uid]}?_token=#{toaken_number}"
+    source2 = information_uri
+    resp2 = Net::HTTP.get_response(URI.parse(source2))
+    data3 = resp2.body
+    result3 = JSON.parse(data3)
+    
+    
+    if result3["response"]["status"] == "paid"
+      if current_user.privacy.nil?
+        privacy = Privacy.new
+        privacy.user_id = current_user.id
+        privacy.name = params[:name]
+        privacy.phone = params[:phone]
+        privacy.public_pw = params[:public_pw]
+        privacy.save
+      else
+        pri = Privacy.where(:user_id => current_user).take
+        pri.name = params[:name]
+        pri.phone = params[:phone]
+        pri.public_pw = params[:public_pw]
+        pri.save
+      end
+      
+        purchase = Purchase.new
+        purchase.user_id = current_user.id
+        purchase.menu_id = params[:menu_id]
+        purchase.imp_uid = params[:imp_uid]
+        purchase.together_zone = params[:together_zone].to_i
+        purchase.credit_method = params[:credit_method]
+        purchase.total_price = params[:total_price]
+        purchase.want_content = params[:want_content]
+        purchase.save_time = Time.zone.now
+        if params[:option_1] == "0"
+          purchase.option_1 = 0
+        else
+          purchase.option_1 = 1 
+        end
+        purchase.save
+        #save
+        
+        
+        #privacy에 저장, 주문 메일간후 완료 페이지 가기!
+        redirect_to '/home/comming_soon'
+      else
+        redirect_to '/home/sorry_credit?imp=' + params[:imp_uid] #결제가 안되면!
+      end
+  end
+  
+  def sorry_credit #결제실패하면 뜨는 페이지!
+    #token을 가져오자!
+    url = "https://api.iamport.kr/users/getToken"
+    body = {
+        imp_key: 3842921403225799,
+        imp_secret: "NVMlNEa8xzqvRAYSUg7q45o1KFskZIeND08rFjzdT0JKBHCvXKW1Pl3z0vT0e8NS9VjOfT18TLSvsv0p"
+    }
+
+    result = HTTParty.post url, body: body
+    toaken_number = result["response"]["access_token"]
+    
+ 
+    #우선 아임포트에서 결제됬는지 가져오자!
+    information_uri = "https://api.iamport.kr/payments/#{params[:imp]}?_token=#{toaken_number}"
+    source2 = information_uri
+    resp2 = Net::HTTP.get_response(URI.parse(source2))
+    data3 = resp2.body
+    result3 = JSON.parse(data3)
+    
+    @error = result3["response"]["fail_reason"] 
+  
+    
   end
   
   def menu_modify #menu.db 수정 => 메뉴선택
