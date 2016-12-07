@@ -197,7 +197,7 @@ class HomeController < ApplicationController
   def order #개요-관리자페이지
     @menu = Mart.find(params[:id]).menus #선택된 마트의 메뉴 정보
     mart_menu = Mart.find(params[:id]).menus.ids
-    @today_time =  Purchase.where(:menu_id => mart_menu).where(:save_time => Time.zone.now.midnight...Time.zone.now.midnight + 1.days)
+    @today_time =  Purchase.where(:menu_id => mart_menu).where(:save_time => Time.zone.now.midnight..Time.zone.now.midnight + 23.hours)
     #@today_time = Purchase.where(:menu_id => mart_menu).where("DATE(created_at) = DATE(?)", Time.now)
   end
   
