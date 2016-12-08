@@ -402,28 +402,28 @@ class HomeController < ApplicationController
       if current_user.privacy.nil?
         privacy = Privacy.new
         privacy.user_id = current_user.id
-        privacy.name = params[:name]
-        privacy.phone = params[:phone]
+        privacy.name = result3["response"]["buyer_name"] #params[:name]
+        privacy.phone = result3["response"]["buyer_tel"] #params[:phone]
         privacy.public_pw = params[:public_pw]
         privacy.save
       else
         pri = Privacy.where(:user_id => current_user).take
-        pri.name = params[:name]
-        pri.phone = params[:phone]
+        pri.name = result3["response"]["buyer_name"] #params[:name]
+        pri.phone = result3["response"]["buyer_tel"] #params[:phone]
         pri.public_pw = params[:public_pw]
         pri.save
       end
       
         purchase = Purchase.new
         purchase.user_id = current_user.id
-        purchase.menu_id = params[:menu_id]
+        purchase.menu_id = Menu.where(:mart_id => Address.where(:ok_address => current_user.address).take.mart_id).where(:menu_name => result3["response"]["name"] ).take.id #params[:menu_id] error
         purchase.imp_uid = params[:imp_uid]
-        purchase.together_zone = params[:together_zone].to_i
-        purchase.credit_method = params[:credit_method]
-        purchase.total_price = params[:total_price]
-        purchase.want_content = params[:want_content]
+        purchase.together_zone = Address.where(:ok_address => current_user.address).take.together_zone #params[:together_zone].to_i 
+        purchase.credit_method = result3["response"]["pay_method"] #params[:credit_method] error
+        purchase.total_price = result3["response"]["amount"] #params[:total_price] error
+        purchase.want_content = params[:want_content] #error
         purchase.save_time = Time.zone.now
-        if params[:option_1] == "0"
+        if params[:option_1] == "0" #error
           purchase.option_1 = 0
         else
           purchase.option_1 = 1 
@@ -432,7 +432,6 @@ class HomeController < ApplicationController
         #save
         
         
-        #privacy에 저장, 주문 메일간후 완료 페이지 가기!
         redirect_to '/home/comming_soon'
       else
         redirect_to '/home/sorry_credit?imp=' + params[:imp_uid] #결제가 안되면!
