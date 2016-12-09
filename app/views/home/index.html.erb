@@ -2,6 +2,8 @@
     <!-- index css -->
     <link rel="stylesheet" type="text/css" href="css/index_style.css">
     <style>
+    
+    /* Mobile */
     @media (max-width: 768px) { 
         #bye_div{padding-left:0px; height: 60px; background-color:#00b050;}
         #close{margin-top:17px; padding-left:0px;}
@@ -14,8 +16,25 @@
         #order_button{text-align:center;}
         #bar_main{display: none;}
         #one{width:80%; }
+        #order {margin-top:55px;}
     }
     
+    @media (max-width: 414px) and (min-width: 410px) { 
+        #bye_div{padding-left:0px; height: 60px; background-color:#00b050;}
+        #close{margin-top:17px; padding-left:0px;}
+        #bye_button{font-size:20px; }
+        #pack{display: none;}
+        #index_main{padding:0px; background-color: #fa4b00; height: 750px; padding-top:50px;}
+        #three_list{text-align:center;}
+        #three_list img{width:90%; margin-top:15px;}
+        #first_row{margin-top:30px;}
+        #order_button{text-align:center;}
+        #bar_main{display: none;}
+        #order {margin-top:23px;}
+        #one{width:80%;}
+    }
+    
+     /* Pc */
     @media (min-width: 1200px) { 
         #bye_div{padding-left:0px; height: 70px; background-color:#00b050;}
         #close{margin-top:9px;}
@@ -29,6 +48,7 @@
         #order_button{margin-left:38px; text-align:center;}
         #one{height:70px;}
         #bar_mobile_main{display: none;}
+        #order {margin-top:55px;}
     }
 
     </style>
@@ -101,7 +121,7 @@
                 <div id = "three_list"><!-- 3가지 나열 --> 
                     <img src = "list.png" />
                 </div>
-                <div style = "margin-top:55px;"><!-- 주문하기 버튼 -->
+                <div id = "order"><!-- 주문하기 버튼 -->
                     <div id = "order_button">
                         <a href = "/home/choice"><img id = "one" src = "order_button_10_14.png"/></a>
                     </div>
