@@ -317,12 +317,15 @@
                         } else {
                         
                         var payment = $(".payment").attr("value"); //payment 방법
-                        var public_pw =  $("#public_pw").val();
-                        var want_content = $("#want_content").val();
+                        var public_pw_before =  $("#public_pw").val(); //url_endoce 이전
+                        var want_content_before = $("#want_content").val(); //url_endoce 이전
                         var option_1 = <%= params[:bob] %>;
                         var name_form = $('#name_form').val();
                         var phone_form = $('#phone_form').val(); 
-
+                        
+                        var public_pw = encodeURIComponent(public_pw_before);
+                        var want_content = encodeURIComponent(want_content_before);
+                        
                         IMP.request_pay({
                         pg : payment, // version 1.1.0부터 지원.
                                     
@@ -334,7 +337,7 @@
                         buyer_name : name_form, 
                         buyer_tel : phone_form,
                         buyer_addr : '<%= current_user.address + current_user.sub_address %>',
-                        m_redirect_url : 'http://www.zachiyori.com/home/mobile_save?option_1=' + option_1 + '&&public_pw=' + public_pw + '&&want_content=' + want_content,
+                        m_redirect_url : 'http://www.platolab3-bsm7878.c9users.io/home/mobile_save?option_1=' + option_1 + '&public_pw=' + public_pw + '&want_content=' + want_content,
                         app_scheme : 'iamporttest' //in app browser결제에서만 사용 
                        
                     }, function(rsp) { 

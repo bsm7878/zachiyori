@@ -43,9 +43,15 @@
                     <img src = "/error.png" style = "width:30%;">
                     <br>
                     <% if @error.nil? %>
-                        <span class="label label-warning" style = "width:100%; font-size:16px;">PG사 결제요청을 중단합니다.</span><br><br>
+                        <span class="label label-warning" style = " font-size:16px;">PG사 결제요청을 중단합니다.</span><br><br>
                     <% else %>
-                        <span class="label label-danger" style = "width:100%; font-size:16px;">PG사 결제요청에 실패하여 중단합니다. </span><br><br>
+                        <div class = "row">
+                            <div class = "col-md-4"></div>
+                            <div class = "col-md-4">
+                                <p style = "background-color: #d9534f; color:white;"><%= @error %></p><br><br>
+                            </div>
+                            <div class = "col-md-4"></div>
+                        </div>
                     <% end %>
                     <hr>
                     <div style = "font-size:20px;">원활한 결제를 위해</div> 

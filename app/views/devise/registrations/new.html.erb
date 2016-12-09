@@ -87,7 +87,7 @@
                           <select class="js-example-basic-multiple-limit js-states form-control"  style = "width:100%;" name="user[address]" value="" id="user_address" multiple="multiple" required  >
                               <% @address = Address.all %>
                               <% @address.each do |a| %>
-                                <option value= "<%= a.ok_address %>"><%= a.ok_address %>(<%= Mart.find(a.mart_id).mart_name %>)</option>
+                                <option value= "<%= a.ok_address %>"><%= a.ok_address %>_<%= Mart.find(a.mart_id).mart_name %></option>
                               <% end %>
                           </select>
 
