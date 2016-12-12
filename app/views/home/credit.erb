@@ -247,6 +247,9 @@
                                 <p style = "font-size:12px;">주문접수가 이루어지지 않을 수 있습니다.)</p>
                             </div>
                             <div style = "margin-bottom:20px;">
+                                <p><i class="fa fa-exclamation-circle info_credit" aria-hidden="true"></i> 몇몇 아이폰 결제에러 상황 <a data-toggle="modal" data-target=".bs-example1-modal-lg" style="cursor:pointer">[<u>보기</u>]</a></p>
+                            </div>
+                            <div style = "margin-bottom:20px;">
                                 <p><i class="fa fa-exclamation-circle info_credit" aria-hidden="true"></i> 위 상품의 가격은 해당 판매마트가 정한 가격입니다.</p>
                             </div>
                             <div style = "margin-bottom:20px;">
@@ -268,7 +271,7 @@
 
         </div>
         
-        <!-- modal start -->
+        <!-- 결제완료 페이지 modal start -->
         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -281,6 +284,33 @@
                 <br>
                 <div class = "bold">2)모바일 결제시 결제자 확인을 위해 로그인 화면이</div>
                 <div class = "bold">&nbsp;&nbsp;&nbsp;&nbsp;한번 더 나타날 수도 있습니다.</div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- modal end -->
+        
+        <!-- 아이폰 에러상황 modal start -->
+        <div class="modal fade bs-example1-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel12" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class = "bold" style = "text-align: center;">
+                    <p>
+                        <br><br>
+                        안녕하세요. 아이폰을 사용하시는 자취요리연구소 고객여러분.<br>
+                        간혹 아이폰으로 카드결제 시도시 비밀번호를 쓰는 패드가 나타나지 않는 현상이 발생하고 있습니다.<br>
+                        문의결과 아이폰 safari 보안정책이 원인이라고 하는데요.<br>
+                        해당 사용자의 사파리 설정에 들어가보시면 쿠키 허용이 막혀있는 상태라 패드가 나타나지 않는다고 합니다.<br>
+                        모든 카드사가 그러는 것은 아니며 일부 카드사(현대/NH 등)에서만 발생하고 있습니다.<br>
+                        해결방법은 쿠키 허용을 풀어도 되지만 그것보다 크롬브라우저에서 재결제를 시도하면 해결된다고 합니다.<br>
+                        불편을 드려 죄송합니다.<br>
+                        앞으로 더 편한 결제시스템(ex_카카오페이 등)을 구축하는 자취요리연구소가 되겠습니다.<br>
+                        맛있는 삼시세끼 되세요~♥
+                        <br><br>
+                    </p>
+                </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
