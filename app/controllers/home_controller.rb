@@ -214,6 +214,10 @@ class HomeController < ApplicationController
     
   end
   
+  def graph #판매 통계보여주는 곳
+    @menu = Mart.find(params[:id]).menus #선택된 마트의 메뉴 정보      
+  end
+  
   ##################### 저장하기 ##############################
   
   
@@ -484,5 +488,6 @@ class HomeController < ApplicationController
     box.save
     redirect_to :back
   end
+  
   
 end
