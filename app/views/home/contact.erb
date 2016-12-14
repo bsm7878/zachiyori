@@ -19,6 +19,9 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right" >
                 <li class = "bold"><a href="/home/choice" class="scroll">구매하기</a></li>
+                <% if user_signed_in? %>
+                  <li class = "bold"><a href="/users/sign_out" class="scroll">로그아웃</a></li>
+                <% end %>
               </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

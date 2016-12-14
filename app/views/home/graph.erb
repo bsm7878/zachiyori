@@ -25,7 +25,7 @@
         </div><!-- /.container-fluid -->
     </nav>
     
-    <div class = "container" style = "margin-top:80px;">
+    <div class = "container" style = "margin-top:80px; margin-bottom:50px;">
       <div class = "row">
         <div class = "col-md-8">
           <ul class="nav nav-pills">
@@ -37,47 +37,22 @@
       </div>
     </div>
     
-    <div class = "container bold" >
+    <div class = "container-fluid bold" >
         
-        <!-- 메뉴별 판매 갯수 그래프 -->
+        <!-- 메뉴별&일자별 판매 갯수 그래프 -->
         <div class = "row" style = "margin-top:20px;">
           <!-- title start -->
           <div class = "row">
-            <div class = "col-md-4">
+            <div class = "col-md-6">
                 <div class="alert alert-info" role="alert" style = "font-size:16px;"><i class="fa fa-check-square" aria-hidden="true"></i> 메뉴별 총 판매 갯수</div>
+                <div id="menu_sell" style="width: 900px; height: 500px;"></div>
             </div>
-            <div class = "col-md-8"></div>
+            <div class = "col-md-6">
+                <div class="alert alert-info" role="alert" style = "font-size:16px; margin-bottom:100px;"><i class="fa fa-check-square" aria-hidden="true"></i> 일자별 판매 갯수</div>
+                <div id="chart_div" style="height: 330px;"></div>
+            </div>
           </div>
           <!-- title end -->
-         
-          <!-- grpah start -->
-          <div class = "col-md-2"></div>
-          <div class = "col-md-8">
-            <div id="menu_sell" style="width: 900px; height: 500px;"></div>
-          </div>
-          <div class = "col-md-2"></div>
-          <!-- grpah end -->
-        </div>
-        <hr>
-        
-        <!-- 일자별 판매 갯수 그래프 -->
-        <div class = "row" style = "margin-top:20px;">
-          <!-- title start -->
-          <div class = "row">
-            <div class = "col-md-4">
-                <div class="alert alert-info" role="alert" style = "font-size:16px;"><i class="fa fa-check-square" aria-hidden="true"></i> 일자별 판매 갯수</div>
-            </div>
-            <div class = "col-md-8"></div>
-          </div>
-          <!-- title end -->
-         
-          <!-- grpah start -->
-          <div class = "col-md-2"></div>
-          <div class = "col-md-8">
-             <div id="chart_div"></div>
-          </div>
-          <div class = "col-md-2"></div>
-          <!-- grpah end -->
         </div>
         <hr>
         
@@ -86,16 +61,24 @@
           <!-- title start -->
           <div class = "row">
             <div class = "col-md-4">
-                <div class="alert alert-info" role="alert" style = "font-size:16px;"><i class="fa fa-check-square" aria-hidden="true"></i> 시간별 판매 갯수</div>
+                <div class="alert alert-info" role="alert" style = "font-size:16px;"><i class="fa fa-check-square" aria-hidden="true"></i> 시간별 판매 갯수(전체)</div>
+                <div id="chart_div1" style = "height:800px;"></div>
             </div>
-            <div class = "col-md-8"></div>
+            <div class = "col-md-4">
+                <div class="alert alert-info" role="alert" style = "font-size:16px;"><i class="fa fa-check-square" aria-hidden="true"></i> 시간별 판매 갯수(평일)</div>
+                <div id="chart_div2"></div>
+            </div>
+            <div class = "col-md-4">
+                <div class="alert alert-info" role="alert" style = "font-size:16px;"><i class="fa fa-check-square" aria-hidden="true"></i> 시간별 판매 갯수(주말)</div>
+                <div id="chart_div3"></div>
+            </div>
           </div>
           <!-- title end -->
          
           <!-- grpah start -->
           <div class = "col-md-2"></div>
           <div class = "col-md-8">
-            <div id="chart_div1"></div>
+            
             
           </div>
           <div class = "col-md-2"></div>
@@ -113,17 +96,20 @@
    <!-- Footer 
     ================================================== -->
     <%= render :partial => "home/footer" %> 
+    
 
+
+    <!-- 메뉴별 총 판매 갯수 -->
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-          ['돼지고기짜글이',     25],
-          ['고추장삼겹살',      18],
-          ['런천미트돈부리', 5],
-          ['고등어감자조림',    0]
+          ['<%= @menu_1_name%>', <%= @menu_1_count %> ],
+          ['<%= @menu_2_name %>', <%= @menu_2_count %>],
+          ['<%= @menu_3_name %>', <%= @menu_3_count %>],
+          ['<%= @menu_4_name %>', <%= @menu_4_count %>],
         ]);
 
         var options = {
@@ -136,6 +122,8 @@
       }
     </script>
     
+    
+    <!-- 일자별 판매 갯수 -->
     <script>
       google.charts.load('current', {packages: ['corechart', 'line']});
       google.charts.setOnLoadCallback(drawBackgroundColor);
@@ -148,16 +136,7 @@
             data.addRows([
               [0, 0],   [1, 10],  [2, 23],  [3, 17],  [4, 18],  [5, 9],
               [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35],
-              [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
-              [18, 52], [19, 54], [20, 42], [21, 55], [22, 56], [23, 57],
-              [24, 60], [25, 50], [26, 52], [27, 51], [28, 49], [29, 53],
-              [30, 55], [31, 60], [32, 61], [33, 59], [34, 62], [35, 65],
-              [36, 62], [37, 58], [38, 55], [39, 61], [40, 64], [41, 65],
-              [42, 63], [43, 66], [44, 67], [45, 69], [46, 69], [47, 70],
-              [48, 72], [49, 68], [50, 66], [51, 65], [52, 67], [53, 70],
-              [54, 71], [55, 72], [56, 73], [57, 75], [58, 70], [59, 68],
-              [60, 64], [61, 60], [62, 65], [63, 67], [64, 68], [65, 69],
-              [66, 70], [67, 72], [68, 75], [69, 80]
+              [12, 30], [13, 40], [14, 42], [15, 47], 
             ]);
       
             var options = {
@@ -167,7 +146,6 @@
               vAxis: {
                 title: 'Popularity'
               },
-              backgroundColor: '#f1f8e9'
             };
       
             var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
@@ -175,6 +153,59 @@
           }
     </script>
     
+    <!-- 시간별 판매 갯수(전체) -->
+    <script>
+      google.charts.load('current', {packages: ['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawBasic);
+      
+      function drawBasic() {
+      
+            var data = google.visualization.arrayToDataTable([
+              ['시간', '판매갯수',],
+              ['8시~', 1],
+              ['30분~', 0],
+              ['9시~', 20],
+              ['30분~', 3],
+              ['10시~', 5],
+              ['30분~', 5],
+              ['11시~', 5],
+              ['30분~', 5],
+              ['12시~', 5],
+              ['30분~', 5],
+              ['13시~', 5],
+              ['30분~', 5],
+              ['14시~', 5],
+              ['30분~', 5],
+              ['15시~', 5],
+              ['30분~', 5],
+              ['16시~', 5],
+              ['30분~', 5],
+              ['17시~', 5],
+              ['30분~', 5],
+              ['18시~', 5],
+              ['30분~', 5],
+              ['19시~', 5],
+              ['30분~', 5]
+              
+            ]);
+      
+            var options = {
+              title: '시간별 판매갯수(30분 단위)',
+              chartArea: {width: '75%'},
+              hAxis: {
+                title: '판매갯수',
+                minValue: 0
+              }
+            };
+      
+            var chart = new google.visualization.BarChart(document.getElementById('chart_div1'));
+      
+            chart.draw(data, options);
+          }
+    </script>
+    
+    
+    <!-- 시간별 판매 갯수(평일) -->
     <script>
       google.charts.load('current', {packages: ['corechart', 'bar']});
       google.charts.setOnLoadCallback(drawBasic);
@@ -192,17 +223,46 @@
       
             var options = {
               title: '시간별 판매갯수(30분 단위)',
-              chartArea: {width: '50%'},
+              chartArea: {width: '75%'},
               hAxis: {
                 title: '판매갯수',
                 minValue: 0
-              },
-              vAxis: {
-                title: '시간'
               }
             };
       
-            var chart = new google.visualization.BarChart(document.getElementById('chart_div1'));
+            var chart = new google.visualization.BarChart(document.getElementById('chart_div2'));
+      
+            chart.draw(data, options);
+          }
+    </script>
+    
+    
+    <!-- 시간별 판매 갯수(주말) -->
+    <script>
+      google.charts.load('current', {packages: ['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawBasic);
+      
+      function drawBasic() {
+      
+            var data = google.visualization.arrayToDataTable([
+              ['시간', '판매갯수',],
+              ['8시~', 1],
+              ['8시30분~', 0],
+              ['9시~', 20],
+              ['9시30분~', 3],
+              ['10시~', 5]
+            ]);
+      
+            var options = {
+              title: '시간별 판매갯수(30분 단위)',
+              chartArea: {width: '75%'},
+              hAxis: {
+                title: '판매갯수',
+                minValue: 0
+              }
+            };
+      
+            var chart = new google.visualization.BarChart(document.getElementById('chart_div3'));
       
             chart.draw(data, options);
           }

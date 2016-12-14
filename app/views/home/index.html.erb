@@ -133,7 +133,47 @@
         </div>
     </div>
     <!-- Index Main end -->
-    
+    <div id="tf-counter" class="text-center" style = "background-color: #F3F3F3;">
+        <div class="container">
+            <div class="row"> <!-- Row -->
+                <div class="counter"> 
+                
+                    <div class="col-xs-6 col-md-3 facts"><!-- counter #1 -->
+                        <div class="count-box"> 
+                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                            <h4 class="count"><%= @facebook_count %></h4>
+                            <p class="small bold">페이스북 좋아요</p>
+                        </div> 
+                    </div><!-- end counter #1 -->
+
+                    <div class="col-xs-6 col-md-3 facts"><!-- counter #2 -->
+                        <div class="count-box">
+                          <i class="fa fa-user"></i>
+                          <h4 class="count"><%= number_with_delimiter(@user_count, :delimiter => ',') %></h4>
+                          <p class="small bold">요리하는 자취생</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3 facts"> <!-- counter #3 -->
+                        <div class="count-box">
+                            <i class="fa fa-gift" aria-hidden="true"></i>
+                            <h4 class="count"><%= number_with_delimiter(@sell_count + 8, :delimiter => ',') %></h4>
+                            <p class="small bold">총 판매 갯수</p>
+                        </div>
+                    </div>
+                    
+                     <div class="col-xs-6 col-md-3 facts"> <!-- counter #4 -->
+                            <div class="count-box last">
+                            <i class="fa fa-desktop" aria-hidden="true"></i>
+                            <h4 class="count" >2068</h4>
+                            <p class="small bold">총 방문자수</p>
+                        </div>
+                    </div>
+
+                 </div>
+            </div> <!-- End Row -->
+        </div>
+    </div>
     <!-- Service 소개
     ================================================== -->
     <div id="tf-services">
@@ -225,6 +265,11 @@
          <%= render :partial => "home/footer" %> 
   
     
+         <!-- Javascripts
+         ================================================== -->
+         <script type="text/javascript" src="js/main.js"></script>   
+
+
 
         <script>
         

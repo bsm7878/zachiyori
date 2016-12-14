@@ -6,15 +6,17 @@ class HomeController < ApplicationController
   
   
   def index
-    
+     @user_count = User.all.count #총 회원가입 수
+     @sell_count = Purchase.all.count #총 판매갯수
+     
+     doc = Nokogiri::HTML(open("https://www.facebook.com/zachiyori/"))
+     @facebook_count = doc.css("._4cwn").inner_text[0] + doc.css("._4cwn").inner_text[2] + doc.css("._4cwn").inner_text[3] + doc.css("._4cwn").inner_text[4]
+
   end
   
   
   
   def practice #모의 결제 하기
-    wow = params[:name]
-    wow2 = params[:address]
-    
     
   end
   
@@ -191,6 +193,9 @@ class HomeController < ApplicationController
     @mart = Mart.find(params[:id])
     @relax = Relax.where(:mart_id => @mart) #해당마트 휴무일 전체 
     
+    menus = Mart.find(params[:id]).menu_ids #해당마트 메뉴 ids
+    @buy = Purchase.where(:menu_id => menus) #전체 구매내역 불러오기
+    
     
   end
   
@@ -215,7 +220,42 @@ class HomeController < ApplicationController
   end
   
   def graph #판매 통계보여주는 곳
-    @menu = Mart.find(params[:id]).menus #선택된 마트의 메뉴 정보      
+  
+    ######## 메뉴별 총 판매 갯수 ########
+    @menu_1_name = Menu.find(1).menu_name
+    @menu_2_name = Menu.find(2).menu_name
+    @menu_3_name = Menu.find(3).menu_name
+    @menu_4_name = Menu.find(4).menu_name
+    
+    @menu_1_count = Purchase.where(:menu_id => 1).count
+    @menu_2_count = Purchase.where(:menu_id => 2).count
+    @menu_3_count = Purchase.where(:menu_id => 3).count
+    @menu_4_count = Purchase.where(:menu_id => 4).count
+    
+    
+    ######## 일자별 판매 갯수 ########
+    mart = Mart.find(params[:id]).menus.ids
+    Purchase.where(:menu_id => mart).where()
+    
+    
+    ######## 시간별 판매 갯수(전체) ########
+    #save_hour = Purchase.where(:menu_id => mart).save_time.to_datetime.hour 
+    #save_minute = Purchase.where(:menu_id => mart).save_time.to_datetime.minute 
+
+    #save_hour == 8 && (1..15).include?(save_minute)
+    #(16..30).include?(number)
+    #(31..45).include?(number)
+    #(46..59).include?(number)
+    
+    
+    #Purchase.last.save_time.to_datetime.minute 
+
+
+    ######## 시간별 판매 갯수(평일) ########
+    
+    ######## 시간별 판매 갯수(주말) ########
+    
+    
   end
   
   ##################### 저장하기 ##############################

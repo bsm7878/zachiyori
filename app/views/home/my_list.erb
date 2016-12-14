@@ -29,6 +29,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right" >
                 <li class = "bold"><a href="/home/choice" class="scroll">구매하기</a></li>
+                <li class = "bold"><a href="/users/sign_out" class="scroll">로그아웃</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -81,9 +82,9 @@
                                             <span class = "bold"><%= Menu.find(x.menu_id).menu_name %></span><br>(오뚜기밥2개)
                                         <% end %>
                                     </div>
-                                    <div><span style = "margin-right:5px;">주문번호</span> <%= x.imp_uid %></div>
-                                    <div><span style = "margin-right:5px;">구매일자</span> <%= x.created_at.to_s.split[0] %> <%= x.created_at.to_s.split[1] %></div>
-                                    <div><span style = "margin-right:5px;">배송마트</span> <%= Menu.find(x.menu_id).mart.mart_name %></div>
+                                    <div><span style = "margin-right:5px; color: black;">주문번호</span> <%= x.imp_uid %></div>
+                                    <div><span style = "margin-right:5px; color: black;">구매일자</span> <%= x.created_at.to_s.split[0] %> <%= x.created_at.to_s.split[1] %></div>
+                                    <div><span style = "margin-right:5px; color: black;">판매마트</span> <%= Menu.find(x.menu_id).mart.mart_name %></div>
                                     
                                 </div>
                                 <div class = "col-md-2 col-xs-3">
@@ -108,16 +109,43 @@
                             <hr>
                         <% end %>
                        <% end %> 
-                        
                     </div>
-                    <p class = "bold">* 해당구매상품의 영수증은 e-mail을 통해 확인 하실 수 있습니다.</p>
+                    <!-- 구매내역 안뜨세요? start -->
+                    <div class = "col-md-12">
+                        <div class="thumbnail">
+                            <div class = "row">
+                                <div class = "col-md-12 bold" style = "text-align:center; margin-top:15px; margin-bottom:15px;">
+                                    결제 주문을 하셨는데 구매내역에 안뜨시나요?<br>
+                                    연락주시면 바로 확인해드리겠습니다.<br>
+                                    아래에서 원하시는 연락방법을 클릭해 주세요.<br>
+                                    <span>(월~일) 오전 10시 ~ 오후 8시 </span>
+                                </div>
+                            </div>
+                            <div class = "row">
+                                <div class = "col-md-4" style = "margin-bottom:15px;">
+                                    <a href ="http://plus.kakao.com/home/@자취요리연구소" target="_blank">
+                                        <img src = "/kakao_contact.png" style = "width:100%;" />    
+                                    </a>
+                                </div>
+                                <div class = "col-md-4" style = "margin-bottom:15px;">
+                                    <a href="tel:050714021732" >
+                                    <img src = "/phone_contact.png" style = "width:100%;" />
+                                </div>
+                                <div class = "col-md-4" style = "margin-bottom:15px;">
+                                    <a href = "/home/contact">
+                                        <img src = "/mail_contact.png" style = "width:100%;" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 구매내역 안뜨세요? end -->
+                    <p class = "bold" style = "text-align: center;">* 구매상품의 영수증은 e-mail을 통해 확인 하실 수 있습니다.</p>
                 </div>
             </div>
             <div class = "col-md-1"></div>
         </div>
     </div>
-    
-    
     <div style = "padding-top:230px;"></div>
     <!-- Footer 
     ================================================== -->

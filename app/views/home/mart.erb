@@ -532,6 +532,38 @@
                 <% end %>
               </tbody>
             </table>  
+            
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>구매고객</th>
+                  <th>가입시간</th>
+                  <th>구매시간</th>
+                  <th>차이</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% num = 1 %>
+                <% @buy.each do |x| %>
+                  <tr>
+                    <th scope="row"><%= num %></th>
+                    <td><%= User.find(x.user_id).privacy.name %></td>
+                    <td><%= User.find(x.user_id).created_at.to_s.split[0] + " " + User.find(x.user_id).created_at.to_s.split[1] %></td>
+                    <td><%= x.created_at.to_s.split[0] + " " + x.created_at.to_s.split[1] %></td>
+                    <td>
+                      <% if (x.created_at.to_datetime - User.find(x.user_id).created_at.to_datetime).to_i == 0 %>
+                        당일
+                      <% else %>
+                        <%= (x.created_at.to_datetime - User.find(x.user_id).created_at.to_datetime).to_i + 1 %>일
+                      <% end %>
+                    </td>
+                  </tr>
+                  <% num = num + 1 %>
+                <% end %>
+
+              </tbody>
+            </table>
               
         </div>
     </div>

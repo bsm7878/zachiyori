@@ -19,6 +19,9 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right" >
                 <li class = "bold"><a href="/home/choice" class="scroll">구매하기</a></li>
+                <% if user_signed_in? %>
+                  <li class = "bold"><a href="/users/sign_out" class="scroll">로그아웃</a></li>
+                <% end %>
               </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -55,11 +58,11 @@
                     </div>
                     <hr>
                     <!-- content -->
-                    <div style = "margin-top:15px; margin-bottom:1px; height:1530px;">
+                    <div style = "margin-top:15px; margin-bottom:1px; height:3000px;">
                         <div class = "row">
                             <div class = "col-md-1"></div>
                             <div class = "col-md-10">
-                                <img src = "/letter.png" style = "width:100%;"/>
+                                <img src = "/who.png" style = "width:100%;"/>
                                 <hr>
                                 <iframe src="https://player.vimeo.com/video/184481187" width="100%" height="469" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                            </div>

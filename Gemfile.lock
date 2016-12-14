@@ -336,6 +336,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mailgun_rails
+  nokogiri
   rails (= 4.2.5)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
