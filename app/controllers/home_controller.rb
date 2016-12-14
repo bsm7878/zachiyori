@@ -234,9 +234,15 @@ class HomeController < ApplicationController
     
     
     ######## 일자별 판매 갯수 ########
-    mart = Mart.find(params[:id]).menus.ids
-    Purchase.where(:menu_id => mart).where()
+    #mart = Mart.find(params[:id]).menus.ids
+    #Purchase.where(:menu_id => mart).where()
     
+    
+    ######## 주문장소 마커 ########
+    menu_marker = Mart.find(params[:id]).menus.ids
+    @a = Purchase.where(:menu_id => menu_marker)
+    
+    @maker = Maker.where(:mart_id => params[:id])
     
     ######## 시간별 판매 갯수(전체) ########
     #save_hour = Purchase.where(:menu_id => mart).save_time.to_datetime.hour 
@@ -526,6 +532,15 @@ class HomeController < ApplicationController
     box.menu_id = params[:id]
     box.source_box = params[:source_box]
     box.save
+    redirect_to :back
+  end
+  
+  def makers_save #마커 표시를 위한 위도 경도 저장
+    maker = Maker.new
+    maker.mart_id = params[:mart_id]
+    maker.latitude = params[:latitude]
+    maker.longitude =  params[:longitude]
+    maker.save
     redirect_to :back
   end
   

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201033344) do
+ActiveRecord::Schema.define(version: 20161214084010) do
 
   create_table "accesses", force: :cascade do |t|
     t.string   "access_email"
@@ -42,6 +42,14 @@ ActiveRecord::Schema.define(version: 20161201033344) do
     t.string   "ingredient_country"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+  end
+
+  create_table "makers", force: :cascade do |t|
+    t.integer  "mart_id"
+    t.string   "latitude"
+    t.string   "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "marts", force: :cascade do |t|

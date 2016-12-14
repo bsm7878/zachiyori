@@ -1,5 +1,9 @@
    
+    <!-- google chart -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <!-- daum map -->
+    <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=303f6c178172f2d15bfad0178991a110&libraries=services"></script>
 
     <!-- Main Navigation 
     ================================================== -->
@@ -42,7 +46,6 @@
         <!-- 메뉴별&일자별 판매 갯수 그래프 -->
         <div class = "row" style = "margin-top:20px;">
           <!-- title start -->
-          <div class = "row">
             <div class = "col-md-6">
                 <div class="alert alert-info" role="alert" style = "font-size:16px;"><i class="fa fa-check-square" aria-hidden="true"></i> 메뉴별 총 판매 갯수</div>
                 <div id="menu_sell" style="width: 900px; height: 500px;"></div>
@@ -51,10 +54,72 @@
                 <div class="alert alert-info" role="alert" style = "font-size:16px; margin-bottom:100px;"><i class="fa fa-check-square" aria-hidden="true"></i> 일자별 판매 갯수</div>
                 <div id="chart_div" style="height: 330px;"></div>
             </div>
-          </div>
           <!-- title end -->
         </div>
         <hr>
+        
+        <!-- 주문 장소 표시하기 그래프 -->
+        <div class = "row" style = "margin-top:20px;">
+          <div class = "row">
+            <div class = "col-md-12">
+              <div class="alert alert-info" role="alert" style = "font-size:16px; text-align:center;"><i class="fa fa-check-square" aria-hidden="true"></i> 주문 장소</div>
+            </div>
+            <div class = "col-md-12">
+              <div id="map" style="width:100%; height:450px;"></div>
+            </div>  
+          </div>
+          <div class = "row" style = "margin-top:15px;">
+            <div class = "col-md-5">
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-success">
+                  <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                      <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        주소보기
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                      <table class="table table-hover" style = "text-align: center;">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>구매일</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% num = 1 %>
+                          <% @a.each do |a| %>
+                            <tr>
+                              <th scope="row"><%= num %></th>
+                              <th><%= a.save_time.to_s.split[0] %></th>
+                              <td><%= User.find(a.user_id).address + " " + User.find(a.user_id).sub_address %></td>
+                            </tr>
+                            <% num = num + 1 %>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+            </div>
+            
+            <form action = "/home/makers_save" method = "GET">
+              <div class = "col-md-2">
+                <input type = "hidden" name = "mart_id" value = "<%= params[:id] %>">
+                <input type = "text"  name = "latitude" class="form-control" placeholder = "위도">  
+              </div>
+              <div class = "col-md-2">
+                <input type = "text" name = "longitude" class="form-control" placeholder = "경도">
+              </div>
+              <div class = "col-md-3">
+                <input type="submit" class="btn btn-success" style = "Width:100%;" value="저장">
+              </div>
+            </form>
+          </div>
+        </div>
         
         <!-- 시간별 판매 갯수 그래프 -->
         <div class = "row" style = "margin-top:20px;">
@@ -267,3 +332,47 @@
             chart.draw(data, options);
           }
     </script>
+    
+    <script>
+      
+      var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+                mapOption = { 
+                    center: new daum.maps.LatLng(35.1761918,126.90578830000004), // 지도의 중심좌표
+                    level: 5 // 지도의 확대 레벨
+                };
+            
+            var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+             
+            // 마커를 표시할 위치와 title 객체 배열입니다 
+            var positions = [
+                  {
+                      latlng: new daum.maps.LatLng(35.1761918,126.90578830000004)
+                  }
+            ];
+            
+            <% @maker.each do |maker| %>
+              positions.push({latlng: new daum.maps.LatLng(<%= maker.latitude.to_f %>, <%= maker.longitude.to_f %>)});
+            <% end %>
+            
+            
+            // 마커 이미지의 이미지 주소입니다
+            var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+                
+            for (var i = 0; i < positions.length; i ++) {
+                
+                // 마커 이미지의 이미지 크기 입니다
+                var imageSize = new daum.maps.Size(24, 35); 
+                
+                // 마커 이미지를 생성합니다    
+                var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
+                
+                // 마커를 생성합니다
+                var marker = new daum.maps.Marker({
+                    map: map, // 마커를 표시할 지도
+                    position: positions[i].latlng, // 마커를 표시할 위치
+                    image : markerImage // 마커 이미지 
+                });
+            }
+    </script>
+    
+
