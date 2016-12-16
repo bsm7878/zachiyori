@@ -1,4 +1,319 @@
+    
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> -->
+    <script src="/js/select2.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/select2.css">
+    
 
-<%= params[:name] %><br>
-<%= params[:address] %><br>
-<%= params[:wow] %>
+    <!-- Main Navigation 
+    ================================================== -->
+    <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class = "row">
+                <div class = "col-md-2">    
+                </div>
+                <!-- step by step 1,2,3 시작 -->
+                <div class = "col-md-10" style = "margin-top:13px; float:right;">
+
+                </div>
+                <!-- step by step 1,2,3 끝 -->
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+    
+
+
+        <div class = "container" style = "padding-top: 100px; padding-bottom: 10%;" >
+
+            <!-- 회원가입 form  시작-->
+            <div class = "row" style = "padding-top:0px;">
+                <div class="section-header" style = "padding-bottom:0px;">
+                    <h2 class = "bold"><span id="count">40</span>초<span class="highlight"> 가입</span></h2> 
+                    <h5 > 저희가 도와드리겠습니다.</h5>
+                    <div class="fancy"><span><img src="/img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
+                </div>
+                
+                <div class = "col-md-2"></div>
+                
+                <!-- 회원가입 form start -->
+                <div class = "col-md-8">
+                    <div class = "row" style = "margin-bottom:15px;">
+                        <div class = "col-md-12 bold" style = "font-size:18px; padding-left:0px;">
+                            <span style = "color: #FFC219;">필수</span> <span style = "color: black;">정보입력</span>
+                        </div>
+                    </div>
+                    <!-- email 주소 입력 -->
+                    <div class = "row" style = "border-top: 1px solid #e1e1e1">
+                        <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
+                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
+                                <span style = "color: #FFC219;">*</span> E-mail 주소
+                            </div>
+                        </div>
+                        <div class = "col-md-6">
+                            <div style = "margin-top:9px;">
+                                <div>
+                                    <input type = "email" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class = "col-md-3"></div>
+                    </div>
+                    
+                    <!-- 비밀번호 입력 -->
+                    <div class = "row" style = "border-top: 1px solid #e1e1e1">
+                        <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
+                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
+                                <span style = "color: #FFC219;">*</span> 비밀번호 입력
+                            </div>
+                        </div>
+                        <div class = "col-md-6">
+                            <div style = "margin-top:9px;">
+                                <input type = "password" class="form-control">
+                            </div>
+                        </div>
+                        <div class = "col-md-3 bold" style = "height:60px; padding-left:0px;">
+                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
+                                <span style = "color: #FFC219; font-size:12px;">최소 6자 이상</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 비밀번호 입력 확인-->
+                    <div class = "row" style = "border-top: 1px solid #e1e1e1;">
+                        <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
+                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
+                                <span style = "color: #FFC219;">*</span> 비밀번호 확인
+                            </div>
+                        </div>
+                        <div class = "col-md-6">
+                            <div style = "margin-top:9px;">
+                                <input type = "password" class="form-control">
+                            </div>
+                        </div>
+                        <div class = "col-md-3 bold" style = "height:60px; padding-left:0px;">
+                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
+                                <span style = "color: #FFC219; font-size:12px;">비밀번호 재입력</span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style = "border-color:black; coor: black;">
+                    <!-- 주소 입력 start -->
+                    <div class = "row" style = "margin-bottom:15px; margin-top:30px;">
+                        <div class = "col-md-12 bold" style = "font-size:18px; padding-left:0px;">
+                            <span style = "color: #FFC219;">주소</span> <span style = "color: black;">입력</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 기본 배송지 -->
+                    <div class = "row" style = "border-top: 1px solid #e1e1e1">
+                        <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
+                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
+                                <div>
+                                    <span style = "color: #FFC219;">*</span> 기본 배송지    
+                                </div>
+                                <!--<div style = "background-color: #FFC219; color: white; text-align:center; width:71px; height:24px; margin-left:13px; ">
+                                    <div style = "position: relative; top: 50%; transform: translateY(-50%);">주소 검색</div>
+                                </div> -->
+                            </div>
+                            <div>
+                                
+                            </div>
+                        </div>
+                        <div class = "col-md-6">
+                            <div style = "margin-top:9px;">
+                                <select class="js-example-basic-multiple-limit js-states form-control"  id = "address" style = "width:100%;"  multiple="multiple" required  >
+                                    <% @address = Address.all %>
+                                    <% @address.each do |a| %>
+                                        <option value= "<%= a.ok_address %>"><%= a.ok_address %></option>
+                                    <% end %>
+                                </select>
+                                <div class="modal fade bs-example123-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                          <h4 class="modal-title" id="gridSystemModalLabel">주소 검색</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                          <div class="container-fluid">
+                                            <div class="row">
+                                                <div class = "col-md-12">
+                                                  <div class="form-group">
+                                                    <label for="search">검색어(도로명,건물명,지번)를 입력해주세요.</label>
+                                                  </div>
+                                                </div>  
+                                            </div>
+                                            <div class = "row">
+                                                <div class = "col-md-12">
+                                                  <div class="form-group">
+                                                    <label for="search">나머지 주소를 입력해주세요.</label>
+                                                    <input type= "text" class="form-control" id="sub_address" placeholder="ex_11-11 자취요리연구소 원룸">
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            <hr style = "border-color:black; coor: black;">
+                                            <div class = "row">
+                                                <div class = "col-md-12">
+                                                  <div class="form-group">
+                                                    <label for="search2"><i class="fa fa-check-square" aria-hidden="true"></i> 기본주소</label>
+                                                    <div class = "address_text_id"></div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            <div class = "row">
+                                                <div class = "col-md-12">
+                                                  <div class="form-group">
+                                                    <label for="search2"><i class="fa fa-check-square" aria-hidden="true"></i> 최종주소</label>
+                                                    <div id = "real_final_address">
+                                                        <span class = "address_text_id"></span> <span id ="sub_address_text"></span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" id = "save_button" class="btn btn-default" data-dismiss="modal">주소입력</button>
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class = "col-md-3 bold" style = "height:60px; padding-left:0px;">
+                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
+                                <span style = "color: #FFC219; font-size:12px;">검색어(도로명,건물명)를 <br>입력해주세요.</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 나머지주소 입력 -->
+                    <div class = "row" style = "border-top: 1px solid #e1e1e1">
+                        <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
+                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
+                                <span style = "color: #FFC219;">*</span> 나머지주소
+                            </div>
+                        </div>
+                        <div class = "col-md-6">
+                            <div style = "margin-top:9px;">
+                                <input class="form-control" type="text" placeholder = "ex) 11-11 자취요리연구소원룸 303호" >
+                            </div>
+                        </div>
+                        <div class = "col-md-3 bold" style = "height:60px; padding-left:0px;">
+                        </div>
+                    </div>
+                    
+                    <div class = "show_address">
+                    <!-- 최종주소 -->
+                    <div class = "row" style = "border-top: 1px solid #e1e1e1">
+                        <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
+                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
+                                <span style = "color: #FFC219;"></span> &nbsp;&nbsp;&nbsp;최종주소
+                            </div>
+                        </div>
+                        <div class = "col-md-9" style = "height:60px;">
+                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
+                                광주광역시 서구 쌍촌동 호반리젠시빌 301-1301
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 판매 마트 -->
+                    <div class = "row" style = "border-top: 1px solid #e1e1e1">
+                        <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
+                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
+                                <span style = "color: #FFC219;"></span> &nbsp;&nbsp;&nbsp;판매마트
+                            </div>
+                        </div>
+                        <div class = "col-md-3">
+                            <div style = "margin-top:9px;">
+                                <input class="form-control" type="text" placeholder="" readonly>
+                            </div>
+                        </div>
+                        <div class = "col-md-6 bold" style = "height:60px; padding-left:0px;">
+                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
+                                <span style = "color: #FFC219; font-size:12px;">판매마트는 주소기반 자동 매칭됩니다.</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <hr style = "border-color:black; coor: black;">
+                    <!-- 이용약관 -->
+                    <div class ="row">
+                        <div class = "col-md-12" style = "color: black; text-align:center;">
+                            회원가입을 함으로써 자취요리연구소의 <a href= "/home/agreement" style = "text-decoration:underline; color:#FFCC33;" target="_blank"><b>이용약관</b></a>과 <a href = "/home/privacy" style = "text-decoration:underline; color:#FFCC33;" target="_blank"><b>개인정보 취급방침</b></a> 취급방침에 동의하시게 됩니다.
+                        </div>
+                    </div>
+                    
+                    <!-- submit button -->
+                    <div class = "row" style = "margin-top:40px;">
+                        <div class = "col-md-3"></div>
+                        <div class = "col-md-6">
+                            <input type="submit" class="btn btn-warning bold" style = "width:100%; font-size:20px;" value="회원 가입" />
+                        </div>
+                        <div class = "col-md-3"></div>
+                    </div>
+                    
+                    
+                    
+                </div>
+                <!-- 회원가입 form end -->
+                
+                
+                
+                <div class = "col-md-2"></div>
+            </div>
+            <!-- 회원가입 form  끝-->
+        </div>
+
+
+
+
+         <!-- Footer 
+         ================================================== -->
+         <%= render :partial => "home/footer" %> 
+
+
+        <script>
+            $(".js-example-basic-multiple-limit").select2({
+                  maximumSelectionLength: 1
+                });
+        </script>
+        
+        <script>
+            $( "#sub_address" )
+              .keyup(function() {
+                var value = $( this ).val();
+                $( "#sub_address_text" ).text( value );
+              })
+              .keyup();
+        </script>
+        
+        
+        <script>
+
+            function displayVals() {
+                  var address_text = $( "#address" ).val();
+                  $( ".address_text_id" ).html(address_text);
+                }
+                 
+                $( "select" ).change( displayVals );
+                displayVals();
+        </script>
+        
+        <script>
+        
+            $(document).ready(function(){
+               $( "#address" ).click(function() {
+                   
+                   
+                  $(".show_address").slideup( "slow", function() {
+                  });
+                  
+                  
+               });
+            });
+            
+       
+        </script>
