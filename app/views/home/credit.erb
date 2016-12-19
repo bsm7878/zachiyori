@@ -234,7 +234,11 @@
                             <div class = "col-md-10">
                                 <div class="alert alert-info" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;" id = "name_show" role="alert">이름을 입력해주세요..</div>
                                 <div class="alert alert-danger" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;"  id = "phone_show" role="alert">번호를 입력해주세요..</div>
-                                <button type="button" class="btn btn-default bold" id = "pay" style = "width:100%;  font-size:20px; margin-top:20px; margin-bottom:20px;">결제하기</button>
+                                <% if Address.where(:ok_address => current_user.address).take.together_zone == 2 %>
+                                    <button type="button" class="btn btn-default bold" id = "pay" style = "width:100%;  font-size:20px; margin-top:20px; margin-bottom:20px;">결제하기</button>
+                                <% else %>
+                                    <button type="button" class="btn btn-default bold" id = "alarm" style = "width:100%;  font-size:20px; margin-top:20px; margin-bottom:20px;">결제하기</button>
+                                <% end %>
                             </div>
                             <div class = "col-md-1"></div>
                         </div>
@@ -417,3 +421,8 @@
     <!-- credit_js --> 
     <script  src="/js/credit_js.js"></script>    
     
+    <script>
+        $("#alarm").click(function(){
+            alert("오늘(19일)은 사정상 상대만 배송가능합니다. 내일부터 전대지역 정상 배달 합니다. 불편을 드려 죄송합니다. - 마트는 정상영업합니다 -");
+        });
+    </script>

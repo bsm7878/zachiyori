@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   
-  before_action :authenticate_user!, :except => [:index, :contact, :info, :privacy, :agreement, :email_send, :who_are_you, :choice, :practice2]  #로그인 하지 않으면 index 제외 다른 페이지로 이동 불가
+  before_action :authenticate_user!, :except => [:index, :contact, :info, :privacy, :agreement, :email_send, :who_are_you, :choice, :practice]  #로그인 하지 않으면 index 제외 다른 페이지로 이동 불가
   
   	
   
@@ -17,7 +17,7 @@ class HomeController < ApplicationController
   
   
   def practice #모의 결제 하기
-    
+    @address = Address.all
   end
   
   

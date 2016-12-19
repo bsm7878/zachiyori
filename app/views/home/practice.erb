@@ -112,9 +112,6 @@
                                 <div>
                                     <span style = "color: #FFC219;">*</span> 기본 배송지    
                                 </div>
-                                <!--<div style = "background-color: #FFC219; color: white; text-align:center; width:71px; height:24px; margin-left:13px; ">
-                                    <div style = "position: relative; top: 50%; transform: translateY(-50%);">주소 검색</div>
-                                </div> -->
                             </div>
                             <div>
                                 
@@ -123,63 +120,12 @@
                         <div class = "col-md-6">
                             <div style = "margin-top:9px;">
                                 <select class="js-example-basic-multiple-limit js-states form-control"  id = "address" style = "width:100%;"  multiple="multiple" required  >
-                                    <% @address = Address.all %>
                                     <% @address.each do |a| %>
-                                        <option value= "<%= a.ok_address %>"><%= a.ok_address %></option>
+                                        <option value= "<%= a.ok_address %>"><%= a.ok_address %></option> 
                                     <% end %>
                                 </select>
-                                <div class="modal fade bs-example123-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                          <h4 class="modal-title" id="gridSystemModalLabel">주소 검색</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                          <div class="container-fluid">
-                                            <div class="row">
-                                                <div class = "col-md-12">
-                                                  <div class="form-group">
-                                                    <label for="search">검색어(도로명,건물명,지번)를 입력해주세요.</label>
-                                                  </div>
-                                                </div>  
-                                            </div>
-                                            <div class = "row">
-                                                <div class = "col-md-12">
-                                                  <div class="form-group">
-                                                    <label for="search">나머지 주소를 입력해주세요.</label>
-                                                    <input type= "text" class="form-control" id="sub_address" placeholder="ex_11-11 자취요리연구소 원룸">
-                                                  </div>
-                                                </div>
-                                            </div>
-                                            <hr style = "border-color:black; coor: black;">
-                                            <div class = "row">
-                                                <div class = "col-md-12">
-                                                  <div class="form-group">
-                                                    <label for="search2"><i class="fa fa-check-square" aria-hidden="true"></i> 기본주소</label>
-                                                    <div class = "address_text_id"></div>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                            <div class = "row">
-                                                <div class = "col-md-12">
-                                                  <div class="form-group">
-                                                    <label for="search2"><i class="fa fa-check-square" aria-hidden="true"></i> 최종주소</label>
-                                                    <div id = "real_final_address">
-                                                        <span class = "address_text_id"></span> <span id ="sub_address_text"></span>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                          <button type="button" id = "save_button" class="btn btn-default" data-dismiss="modal">주소입력</button>
-                                        </div>
-                                    </div>
-                                  </div>
-                                </div>
                             </div>
+                            
                         </div>
                         <div class = "col-md-3 bold" style = "height:60px; padding-left:0px;">
                             <div style = "position: relative; top: 50%; transform: translateY(-50%);">
@@ -197,14 +143,14 @@
                         </div>
                         <div class = "col-md-6">
                             <div style = "margin-top:9px;">
-                                <input class="form-control" type="text" placeholder = "ex) 11-11 자취요리연구소원룸 303호" >
+                                <input class="form-control" type="text"  id = "sub_address" placeholder = "ex) 11-11 자취요리연구소원룸 303호" >
                             </div>
                         </div>
                         <div class = "col-md-3 bold" style = "height:60px; padding-left:0px;">
                         </div>
                     </div>
                     
-                    <div class = "show_address">
+                    <div class = "show_address" style = "display: none;">
                     <!-- 최종주소 -->
                     <div class = "row" style = "border-top: 1px solid #e1e1e1">
                         <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
@@ -214,7 +160,7 @@
                         </div>
                         <div class = "col-md-9" style = "height:60px;">
                             <div style = "position: relative; top: 50%; transform: translateY(-50%);">
-                                광주광역시 서구 쌍촌동 호반리젠시빌 301-1301
+                                <span class = "address_text_id"></span> <span id = "sub_address_text"></span>
                             </div>
                         </div>
                     </div>
@@ -229,6 +175,7 @@
                         <div class = "col-md-3">
                             <div style = "margin-top:9px;">
                                 <input class="form-control" type="text" placeholder="" readonly>
+                                <p id = "mart_show"></p>
                             </div>
                         </div>
                         <div class = "col-md-6 bold" style = "height:60px; padding-left:0px;">
@@ -250,7 +197,7 @@
                     <div class = "row" style = "margin-top:40px;">
                         <div class = "col-md-3"></div>
                         <div class = "col-md-6">
-                            <input type="submit" class="btn btn-warning bold" style = "width:100%; font-size:20px;" value="회원 가입" />
+                            <input type="submit" id = "button" class="btn btn-warning bold" style = "width:100%; font-size:20px;" value="회원 가입" />
                         </div>
                         <div class = "col-md-3"></div>
                     </div>
@@ -281,6 +228,7 @@
                 });
         </script>
         
+        <!-- 나머지 주소 치면 바로바로 표시 하는거 -->
         <script>
             $( "#sub_address" )
               .keyup(function() {
@@ -291,8 +239,8 @@
         </script>
         
         
+        <!-- select에서 기본주소 클릭하면 주소 표시 -->
         <script>
-
             function displayVals() {
                   var address_text = $( "#address" ).val();
                   $( ".address_text_id" ).html(address_text);
@@ -303,17 +251,30 @@
         </script>
         
         <script>
-        
-            $(document).ready(function(){
-               $( "#address" ).click(function() {
-                   
-                   
-                  $(".show_address").slideup( "slow", function() {
-                  });
-                  
-                  
-               });
+            var address_text = $( "#sell_mart" ).text();
+            $("#button").click(function(){
+                alert(address_text);
             });
             
-       
         </script>
+        
+        <!-- select에서 기본주소 클릭하면 판매마트 표시 -->
+        <script>
+            function displayVals() {
+                  
+                  
+                    $( "#mart_show" ).html(address_text);
+                  }
+                 
+                $( "select" ).change( displayVals );
+                displayVals();
+        </script>
+        
+        <!-- 최종주소와 판매마트 보이기 -->
+        <script>
+
+            $( "#sub_address" ).click(function() {
+                $( "div" ).show( "slow" );
+            });
+        </script>
+        
