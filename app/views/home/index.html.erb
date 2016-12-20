@@ -19,6 +19,10 @@
         #order {margin-top:55px;}
     }
     
+    @media (min-width: 414px) { 
+           #order{margin-top:20px;}
+        }   
+    
     @media (max-width: 414px) and (min-width: 410px) { 
         #bye_div{padding-left:0px; height: 60px; background-color:#00b050;}
         #close{margin-top:17px; padding-left:0px;}
@@ -158,14 +162,14 @@
                         <div class="count-box">
                             <i class="fa fa-gift" aria-hidden="true"></i>
                             <h4 class="count"><%= number_with_delimiter(@sell_count + 8, :delimiter => ',') %></h4>
-                            <p class="small bold">총 판매 갯수</p>
+                            <p class="small bold">총 주문 건수</p>
                         </div>
                     </div>
                     
                      <div class="col-xs-6 col-md-3 facts"> <!-- counter #4 -->
                             <div class="count-box last">
                             <i class="fa fa-desktop" aria-hidden="true"></i>
-                            <h4 class="count" >2810</h4>
+                            <h4 class="count" >3231</h4>
                             <p class="small bold">총 방문자수</p>
                         </div>
                     </div>
@@ -275,16 +279,11 @@
 
 
         <script>
-        
-            $(document).ready(function(){
-               $( "#bye_button" ).click(function() {
-                   
-                   alert("a");
 
-                  
-               });
-            });
             
+            $("#bye_button").click(function(){
+                $( "#bye_div" ).slideUp();
+            });
        
         </script>
         

@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   
-  before_action :authenticate_user!, :except => [:index, :contact, :info, :privacy, :agreement, :email_send, :who_are_you, :choice, :practice]  #로그인 하지 않으면 index 제외 다른 페이지로 이동 불가
+  before_action :authenticate_user!, :except => [:index, :contact, :info, :privacy, :agreement, :email_send, :who_are_you, :choice, :practice, :practice2]  #로그인 하지 않으면 index 제외 다른 페이지로 이동 불가
   
   	
   
@@ -22,7 +22,17 @@ class HomeController < ApplicationController
   
   
   def practice2 #모의 결제 하기
-  
+    xlsx = Roo::Excelx.new(Rails.root.join('app', 'assets',  'abcd.xlsx'))
+    i = 1 #행
+    while i < 2924
+      address =Address.new
+      address.mart_id = 1
+      address.together_zone = xlsx.cell(i,1)
+      address.ok_address = xlsx.cell(i, 2)
+      address.save
+      i += 1
+    end
+    redirect_to '/'
   end
   
   

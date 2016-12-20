@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 #gem 'mechanize'
+gem 'roo', '~> 2.5.0'
 gem 'nokogiri'
 gem 'httparty'
 gem 'figaro'

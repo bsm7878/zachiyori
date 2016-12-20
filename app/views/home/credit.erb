@@ -2,6 +2,11 @@
     <link rel="stylesheet" type="text/css" href="/css/credit_style.css">
     <!-- I'm port js -->
     <script type="text/javascript" src="//service.iamport.kr/js/iamport.payment-1.1.1.js"></script>
+    <style>
+        @media (max-width: 350px) { 
+           #logo{width:140px;}
+        }   
+    </style>
     
     <!-- Main Navigation 
     ================================================== -->
@@ -10,7 +15,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class = "row">
                 <div class = "col-md-2">    
-                      <a class="navbar-brand" href="/"><img src="/logo.png" alt="..."></a>
+                      <a class="navbar-brand" href="/"><img src="/logo.png" id = "logo" alt="..."></a>
                 </div>
                 <!-- step by step 1,2,3 시작 -->
                 <div class = "col-md-10" style = "margin-top:13px; float:right;">
@@ -70,9 +75,9 @@
                                       <div class="form-group" >
                                         <label class = "noto_regular" for="phone_form" style = "color: black;">전화번호</label>
                                           <% unless current_user.privacy.nil? %>
-                                            <input type="text" class="form-control" id="phone_form" value = "<%= current_user.privacy.phone %>" name = "phone" placeholder="'-'는 빼고 적어주세요" >
+                                            <input type="tel" class="form-control" id="phone_form" value = "<%= current_user.privacy.phone %>" name = "phone" placeholder="'-'는 빼고 적어주세요" >
                                           <% else %>
-                                            <input type="text" class="form-control" id="phone_form" name = "phone" placeholder="'-'는 빼고 적어주세요">
+                                            <input type="tel" class="form-control" id="phone_form" name = "phone" placeholder="'-'는 빼고 적어주세요">
                                           <% end %>
                                       </div>
                                   </div>
@@ -80,9 +85,9 @@
                                       <div class="form-group">
                                         <label class = "noto_regular" for="InputPassword1" style = "color: black;">공동현관 비밀번호</label>
                                         <% unless current_user.privacy.nil? %>
-                                            <input type="text" class="form-control" id="public_pw"  value = "<%= current_user.privacy.public_pw %>" name = "public_pw"  placeholder="공동현관 비밀번호가 있을시 적어주세요">
+                                            <input type="tel" class="form-control" id="public_pw"  value = "<%= current_user.privacy.public_pw %>" name = "public_pw"  placeholder="공동현관 비밀번호가 있을시 적어주세요">
                                         <% else %>
-                                            <input type="text" class="form-control" id="public_pw" name = "public_pw"  placeholder="공동현관 비밀번호가 있을시 적어주세요">
+                                            <input type="tel" class="form-control" id="public_pw" name = "public_pw"  placeholder="공동현관 비밀번호가 있을시 적어주세요">
                                         <% end %>
                                       </div>    
                                   </div>
@@ -234,11 +239,7 @@
                             <div class = "col-md-10">
                                 <div class="alert alert-info" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;" id = "name_show" role="alert">이름을 입력해주세요..</div>
                                 <div class="alert alert-danger" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;"  id = "phone_show" role="alert">번호를 입력해주세요..</div>
-                                <% if Address.where(:ok_address => current_user.address).take.together_zone == 2 %>
-                                    <button type="button" class="btn btn-default bold" id = "pay" style = "width:100%;  font-size:20px; margin-top:20px; margin-bottom:20px;">결제하기</button>
-                                <% else %>
-                                    <button type="button" class="btn btn-default bold" id = "alarm" style = "width:100%;  font-size:20px; margin-top:20px; margin-bottom:20px;">결제하기</button>
-                                <% end %>
+                                <button type="button" class="btn btn-default bold" id = "pay" style = "width:100%;  font-size:20px; margin-top:20px; margin-bottom:20px;">결제하기</button>
                             </div>
                             <div class = "col-md-1"></div>
                         </div>
@@ -421,8 +422,3 @@
     <!-- credit_js --> 
     <script  src="/js/credit_js.js"></script>    
     
-    <script>
-        $("#alarm").click(function(){
-            alert("오늘(19일)은 사정상 상대만 배송가능합니다. 내일부터 전대지역 정상 배달 합니다. 불편을 드려 죄송합니다. - 마트는 정상영업합니다 -");
-        });
-    </script>
