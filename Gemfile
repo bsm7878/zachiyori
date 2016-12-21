@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 #gem 'mechanize'
+gem 'will_paginate', '~> 3.1.0'
 gem 'roo', '~> 2.5.0'
 gem 'nokogiri'
 gem 'httparty'

@@ -17,14 +17,26 @@ class HomeController < ApplicationController
   
   
   def practice #모의 결제 하기
-    @address = Address.all
+     
+     abc = params[:address]
+     if params[:address].nil?
+     
+     else
+       @address = Address.where("ok_address like ?", "%" + abc + "%").paginate(:page => params[:page], :per_page => 15)
+     end
+     
+    
+
+   
+
+    
   end
   
   
   def practice2 #모의 결제 하기
     xlsx = Roo::Excelx.new(Rails.root.join('app', 'assets',  'abcd.xlsx'))
     i = 1 #행
-    while i < 2924
+    while i < 1000
       address =Address.new
       address.mart_id = 1
       address.together_zone = xlsx.cell(i,1)

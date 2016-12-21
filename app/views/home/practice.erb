@@ -1,362 +1,40 @@
-    
-    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script> -->
-    <script src="/js/select2.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/select2.css">
-    <link rel="stylesheet" type="text/css" href="/css/step_style.css">
-    <style>
-    
-    
-        @media (max-width: 768px) { 
-            .sub_content_mobile{float:right;}
-            .sub_content_pc{display: none;}
-            .main_title{margin-left:10px;}
-            .input_bottom{margin-bottom:10px;}
-            #promise{font-size:12px;}
-        }
-    
-        @media (min-width: 1200px) { 
-            .sub_content_mobile{display: none;}
-            .input_bottom{height:60px; padding-left:0px;}
-            #address_br{display: none;}
-        }
-        
-        @media (max-width: 350px) { 
-           #logo{width:140px;}
-        }   
-        
-        
-        table {
-          border-collapse: collapse;
-          font-size:11px;
-          }
-          
-          table, td, th {
-              border: 1px solid black;
-              padding:10px;
-              text-align:center;
-          }
-    </style>
-
-    <!-- Main Navigation 
-    ================================================== -->
-    <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class = "row">
-                <div class = "col-md-2">    
-                      <a class="navbar-brand" href="/"><img src="/logo.png" id ="logo"  alt="자취요리연구소"></a>
-                </div>
-                <!-- step by step 1,2,3 시작 -->
-                <div class = "col-md-10" style = "margin-top:13px; float:right;">
-                <ul class = "up_step" style = "list-style:none;" >
-                    <li class = "one">
-                        <span class = "circle">1</span> <span class = "bold num_1" style = "font-size:20px; color: #FFCC33;" >회원가입</span> 
-                    </li>
-                    
-                    <li>
-                        <span class = "line"></span> <span class = "circle" style = "background-color: #6F6F6F;">2</span> <span class = "bold num_2" style = "font-size:20px;" >메뉴선택</span>
-                    </li>
-                    
-                    <li>
-                        <span class = "line"></span> <span class = "circle" style = "background-color: #6F6F6F;">3</span> <span class = "bold num_3" style = "font-size:20px;" >결제</span>
-                    </li>
-                </ul>
-                </div>
-                <!-- step by step 1,2,3 끝 -->
-            </div>
-        </div><!-- /.container-fluid -->
-    </nav>
-    
-
-
-        <div class = "container" style = "padding-top: 100px; padding-bottom: 10%;" >
-            <form class="new_user noto" id="new_user" action="/users" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="1aAtd8w00MXIsWTx2SQReWQ8gmrD3bI5JTUuPKy3imwB5yBFHVEbQ8ujm6BkSL4ox2O6z3R23EKq7UViZ04wOQ==" />
-            <!-- 회원가입 form  시작-->
-            <div class = "row" style = "padding-top:0px;">
-                <div class="section-header" style = "padding-bottom:0px;">
-                    <h2 class = "bold"><span id="count">40</span>초<span class="highlight"> 가입</span></h2> 
-                    <h5 > 저희가 도와드리겠습니다.</h5>
-                    <div class="fancy"><span><img src="/img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
-                </div>
-                
-                <div class = "col-md-2"></div>
-                <!-- 회원가입 form start -->
-                <div class = "col-md-8">
-                    <div class = "row" style = "margin-bottom:15px;">
-                        <div class = "col-md-12 bold main_title" style = "font-size:18px; padding-left:0px;">
-                            <span style = "color: #FFC219;">필수</span> <span style = "color: black;">정보입력</span>
-                        </div>
-                    </div>
-                    <!-- email 주소 입력 -->
-                    <div class = "row" style = "border-top: 1px solid #e1e1e1">
-                        <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
-                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
-                                <span style = "color: #FFC219;">*</span> E-mail 주소
-                            </div>
-                        </div>
-                        <div class = "col-md-6">
-                            <div style = "margin-top:9px;">
-                                <div>
-                                    <input autofocus="autofocus" class="form-control" type="email" value="" name="user[email]" id="user_email"  required  />
-                                </div>
-                            </div>
-                        </div>
-                        <div class = "col-md-3 input_bottom"></div>
-                    </div>
-                    
-                    <!-- 비밀번호 입력 -->
-                    <div class = "row" style = "border-top: 1px solid #e1e1e1">
-                        <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
-                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
-                                <span style = "color: #FFC219;">*</span> 비밀번호 입력 <span class = "sub_content_mobile" style = "color: #FFC219; font-size:12px;">최소 6자 이상</span>
-                            </div>
-                        </div>
-                        <div class = "col-md-6 ">
-                            <div style = "margin-top:9px;">
-                                <input  autocomplete="off" class="form-control" type="password" name="user[password]" id="user_password" />
-                            </div>
-                        </div>
-                        <div class = "col-md-3 input_bottom bold" style = "">
-                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
-                                <span class = "sub_content_pc" style = "color: #FFC219; font-size:12px;">최소 6자 이상</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 비밀번호 입력 확인-->
-                    <div class = "row" style = "border-top: 1px solid #e1e1e1;">
-                        <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
-                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
-                                <span style = "color: #FFC219;">*</span> 비밀번호 확인 <span class = "sub_content_mobile" style = "color: #FFC219; font-size:12px;">비밀번호 재입력</span>
-                            </div>
-                        </div>
-                        <div class = "col-md-6">
-                            <div style = "margin-top:9px;">
-                                <input autocomplete="off" class="form-control" type="password" name="user[password_confirmation]" id="user_password_confirmation" />
-                            </div>
-                        </div>
-                        <div class = "col-md-3 input_bottom bold">
-                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
-                                <span class = "sub_content_pc" style = "color: #FFC219; font-size:12px;">비밀번호 재입력</span>
-                            </div>
-                        </div>
-                    </div>
-                    <hr style = "border-color:black; coor: black;">
-                    <!-- 주소 입력 start -->
-                    <div class = "row" style = "margin-bottom:15px; margin-top:30px;">
-                        <div class = "col-md-12 main_title bold" style = "font-size:18px; padding-left:0px;">
-                            <span style = "color: #FFC219;">주소</span> <span style = "color: black;">입력</span>
-                        </div>
-                    </div>
-                    
-                    <!-- 기본 배송지 -->
-                    <div class = "row" style = "border-top: 1px solid #e1e1e1">
-                        <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
-                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
-                                <div>
-                                    <span style = "color: #FFC219;">*</span> 기본 배송지 <span class = "sub_content_mobile"style = "color: #FFC219; font-size:12px;">검색어(도로명,지번)를 <br>입력해주세요.</span>    
-                                </div>
-                            </div>
-                            <div>
-                                
-                            </div>
-                        </div>
-                        <div class = "col-md-6">
-                            <div style = "margin-top:9px;">
-                                <select class="js-example-basic-multiple-limit js-states form-control address"  style = "width:100%;" name="user[address]" value="" id="user_address" multiple="multiple" required  >    
-                                    <% @address = Address.all %>
-                                    <% @address.each do |a| %>
-                                        <option value= "<%= a.ok_address %>"><%= a.ok_address %></option> 
-                                    <% end %>
-                                </select>
-                            </div>
-                        </div>
-                        <div class = "col-md-3 input_bottom bold">
-                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
-                                <span class = "sub_content_pc" style = "color: #FFC219; font-size:12px;">검색어(도로명,지번)를 <br>입력해주세요.</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 나머지주소 입력 -->
-                    <div class = "row" style = "border-top: 1px solid #e1e1e1">
-                        <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
-                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
-                                <span style = "color: #FFC219;">*</span> 나머지주소
-                            </div>
-                        </div>
-                        <div class = "col-md-6">
-                            <div style = "margin-top:9px;">
-                                <input autofocus="autofocus" class="form-control" type="text" value="" name="user[sub_address]" placeholder = "ex_11-11 자취요리연구소원룸 107호" id="sub_address" required />
-                            </div>
-                        </div>
-                        <div class = "col-md-3 input_bottom bold">
-                        </div>
-                    </div>
-                    
-                    <div class = "show_address" style = "display: none;">
-                    <!-- 최종주소 -->
-                    <div class = "row" style = "border-top: 1px solid #e1e1e1">
-                        <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
-                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
-                                <span style = "color: #FFC219;"></span> &nbsp;&nbsp;&nbsp;최종주소
-                            </div>
-                        </div>
-                        <div class = "col-md-9" style = "height:60px;">
-                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
-                                <span class = "address_text_id"></span> <span id = "sub_address_text"></span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 판매 마트 -->
-                    <div class = "row" style = "border-top: 1px solid #e1e1e1">
-                        <div class = "col-md-3 bold" style = "background-color: #F6F6F6; color: black; font-size:15px; height:60px;">
-                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
-                                <span style = "color: #FFC219;"></span> &nbsp;&nbsp;&nbsp;판매마트 <span class = "sub_content_mobile" style = "color: #FFC219; font-size:12px;">판매마트는 주소기반 자동 매칭됩니다.</span>
-                            </div>
-                        </div>
-                        <div class = "col-md-3">
-                            <div style = "margin-top:9px;">
-                                <input class="form-control" type="text" placeholder="카카오마트" readonly>
-                            </div>
-                        </div>
-                        <div class = "col-md-6 input_bottom bold">
-                            <div style = "position: relative; top: 50%; transform: translateY(-50%);">
-                                <span class = "sub_content_pc"style = "color: #FFC219; font-size:12px;">판매마트는 주소기반 자동 매칭됩니다.</span>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    <hr style = "border-color:black; coor: black;">
-                    <!-- 이용약관 -->
-                    <div class ="row">
-                        <div class = "col-md-12" id = "promise" style = "color: black; text-align:center;">
-                            회원가입을 함으로써 자취요리연구소의 <a href= "/home/agreement" style = "text-decoration:underline; color:#FFCC33;" target="_blank"><b>이용약관</b></a>과<br id = "address_br"> <a href = "/home/privacy" style = "text-decoration:underline; color:#FFCC33;" target="_blank"><b>개인정보 취급방침</b></a> 취급방침에 동의하시게 됩니다.
-                        </div>
-                    </div>
-                    <!-- submit button -->
-                    <div class = "row" style = "margin-top:40px;">
-                        <div class = "col-md-3"></div>
-                        <div class = "col-md-6">
-                             <div>
-                                <div class="alert alert-info" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;" id = "address_show" role="alert">주소를 입력해주세요.</div>
-                                <div class="alert alert-warning" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;" id = "sub_address_show" role="alert">나머지 주소를 입력해주세요.</div>
-                             </div>
-                             <input type="submit" id = "sign_up_button" class="btn btn-warning bold" style = "width:100%; font-size:20px;" name="commit" value="회원 가입" />
-                        </div>
-                        <div class = "col-md-3"></div>
-                    </div>
-                    
-
-                    
-                </div>
-                <!-- 회원가입 form end -->
-                
-                
-                
-                <div class = "col-md-2"></div>
-            </div>
-            <!-- 회원가입 form  끝-->
-            </form>
-        </div>
+<form action = "/home/practice" method = "get">
+    <input type = "text" name = "address">
+    <input type = "submit">
+</form>
 
 
 
 
-         <!-- Footer 
-         ================================================== -->
-         <%= render :partial => "home/footer" %> 
+  <br><br>
+  <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>검색주소</th>
+          <th>판매마트</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if params[:address].nil? %>
+            주소를 검색해주세요!
+        <% else %>
+            <% @address.each do |x| %>
+            <tr>
+              <th scope="row">1</th>
+              <td><%= x.ok_address %></td>
+              <td><%= Mart.where(:id => x.mart_id).take.mart_name %></td>
+            </tr>
+            <% end %>
+        <% end %>  
+      </tbody>
+    </table>
+    <%= will_paginate @address %>
+ 
+ 
+ 
+ 
+ 
 
 
-        <script>
-            $(".js-example-basic-multiple-limit").select2({
-                  maximumSelectionLength: 1
-                });
-        </script>
-        
-        <!-- 나머지 주소 치면 바로바로 표시 하는거 -->
-        <script>
-            $( "#sub_address" )
-              .keyup(function() {
-                var value = $( this ).val();
-                $( "#sub_address_text" ).text( value );
-              })
-              .keyup();
-        </script>
-        
-        
-        <!-- select에서 기본주소 클릭하면 주소 표시 -->
-        <script>
-            function displayVals() {
-                  var address_text = $( ".address" ).val();
-                  $( ".address_text_id" ).html(address_text);
-                }
-                 
-                $( "select" ).change( displayVals );
-                displayVals();
-        </script>
-        
-        
-        <!-- 최종주소와 판매마트 보이기 -->
-        <script>
 
-            $( "#sub_address" ).click(function() {
-                $( ".show_address" ).show( "slow" );
-            });
-        </script>
-        
-        <script>
-                $(".js-example-basic-multiple-limit").select2({
-                  maximumSelectionLength: 1
-                });
-                
-                window.onload = function(){
-                (function(){
-                  var counter = 40;
-                
-                  setInterval(function() {
-                    counter--;
-                    if (counter >= 0) {
-                      span = document.getElementById("count");
-                      span.innerHTML = counter;
-                    }
-                    // Display 'counter' wherever you want to display it.
-                    if (counter === 0) {
-                        clearInterval(counter);
-                    }
-                    
-                  }, 1000);
-                    
-                })();
-                  
-                }
-                
-            </script>
-            <script>
-            $(document).ready(function(){
-              $("#sign_up_button").click(function(){
-                
-                    if (!$('#user_address').val() && !$('#sub_address').val()){
-                       $("#address_show").show();
-                       $("#sub_address_show").show();
-                       return false;
-                    }
-                    else if($('#user_address').val() && !$('#sub_address').val()){
-                        $("#address_show").hide();
-                        $("#sub_address_show").show();
-                        return false;
-                    }
-                    else if(!$('#user_address').val() && $('#sub_address').val()){
-                        $("#address_show").show();
-                        $("#sub_address_show").hide();
-                        return false;
-                    }
-                    else{
-                     
-                    }
-    
-                  });
-              });
-           </script>

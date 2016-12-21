@@ -86,7 +86,11 @@
                             <div style = "text-align: right;">
                                 <span style = "font-size: 16px; color: black; margin-right: 13px;">총 상품금액</span> <span class = "price" style = "font-size: 33px; color:#FFCC33;"><%= number_with_delimiter(@menu.menu_price, :delimiter => ',') %></span><span style = "font-size: 16px; color:#FFCC33;"> 원</span>
                             </div>
-                        <button type="submit" class="btn btn-warning" style = "width:100%; font-size:20px; margin-top:20px;">주문접수하기</button>
+                        <% if Time.zone.now.saturday? || Time.zone.now.sunday? %>   
+                            <button type="button" class="btn btn-warning" id = "weekend" style = "width:100%; font-size:20px; margin-top:20px;">주문가능시간이아닙니다.</button>
+                        <% else %>
+                            <button type="submit" class="btn btn-warning" style = "width:100%; font-size:20px; margin-top:20px;">주문접수하기</button>
+                        <% end %>
                     </form>
                 </div>
             </div>
@@ -124,7 +128,6 @@
         
         
 
-        
 
     </div>
 
@@ -173,4 +176,11 @@ $(document).ready(function(){
         })
     });
 
+    </script>
+    
+    <script>
+        $("#weekend").click(function(){
+            alert("해당마트의 주문가능시간: (평일) 오전 11시~오후 8시, (주말) 미운영, ※ 단, 마트는 정상영업합니다.(카카오마트 문의전화_062-531-4982) ");
+        });
+        
     </script>

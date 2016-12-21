@@ -64,7 +64,7 @@
                       </div>
                     
                       <div class="actions form-group">
-                        <input type="submit" class="btn btn-warning bold" name="commit" style = "width:100%; font-size:20px;" value="로그인" />
+                        <input type="submit" class="btn btn-warning bold" name="commit" id = "login" style = "width:100%; font-size:20px;" value="로그인" />
                       </div>
                     </form>
                     <hr>
@@ -86,7 +86,27 @@
          <!-- Footer 
          ================================================== -->
          <%= render :partial => "home/footer" %> 
-    
+         
+
+         <script>
+            $(document).ready(function(){
+              $("#login").click(function(){
+                    var email = $("#user_email").val();
+                    if (email = ""){
+                        
+                    }
+                    else if(){
+
+                    }
+                    else if(){
+
+                    }
+                    else{
+                     
+                
+                  });
+              });
+           </script>
 
 
     
