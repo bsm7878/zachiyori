@@ -26,10 +26,11 @@
               <td><%= Mart.where(:id => x.mart_id).take.mart_name %></td>
             </tr>
             <% end %>
+            <%= will_paginate @address %>
         <% end %>  
       </tbody>
     </table>
-    <%= will_paginate @address %>
+    
  
  
  
