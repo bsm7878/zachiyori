@@ -1,0 +1,75 @@
+        <link rel="stylesheet" href="/css/bootstrap-material-datetimepicker.css" />
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material.min.css" />
+		<link href='//fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+		<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js"></script>
+		<script type="text/javascript" src="//momentjs.com/downloads/moment-with-locales.min.js"></script>
+		<script type="text/javascript" src="/js/bootstrap-material-datetimepicker.js"></script>
+
+
+		
+		<div class="container well">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-control-wrapper">
+						<input type="text" id="min-date" class="form-control floating-label" placeholder="Start Date">
+					</div>
+				</div>
+				<div class = "col-md-3">
+				   <div id = "reservation_ok">check</div>
+				</div>
+				<div class = "col-md-3">
+				    예약주문접수 가능합니다.
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+
+		$(document).ready(function()
+		{
+            Date.prototype.addDays = function(days)
+            {
+                var dat = new Date(this.valueOf());
+                dat.setDate(dat.getDate() + days);
+                return dat;
+            }
+            var dat = new Date();
+                       
+			$('#min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date(), maxDate : dat.addDays(3) });
+			$.material.init()
+		
+		    $("#min-date").val();
+		    
+		    var clicks = 0;
+			$(".dtp-btn-ok").click(function(){
+                 if(clicks == 2){ 
+                           /*ajax 시작*/
+                           $.ajax({
+                                data: {
+                                    name: $("#min-date").val()
+
+                                },
+                                url: "/home/reservation",
+                                success: function(data){
+                                    alert("<%= @a %>");
+                                }
+                            });
+                            /*ajax 끝*/
+                     
+                     clicks = 0;
+                 }
+                 else{
+                     clicks++;
+                 }
+            });
+            
+            
+     
+	
+            
+            
+            
+            
+            
+		});
+		</script>

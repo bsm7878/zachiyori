@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   
-  before_action :authenticate_user!, :except => [:index, :contact, :info, :privacy, :agreement, :email_send, :who_are_you, :choice, :practice, :practice2]  #로그인 하지 않으면 index 제외 다른 페이지로 이동 불가
+  before_action :authenticate_user!, :except => [:index, :contact, :info, :privacy, :agreement, :email_send, :who_are_you, :choice, :practice, :practice2, :practice3, :practice4, :reservation]  #로그인 하지 않으면 index 제외 다른 페이지로 이동 불가
   
   	
   
@@ -16,7 +16,7 @@ class HomeController < ApplicationController
   
   
   
-  def practice #모의 결제 하기
+  def practice #회원가입 주소 
      
      abc = params[:address]
      if params[:address].nil?
@@ -26,14 +26,10 @@ class HomeController < ApplicationController
      end
      
     
-
-   
-
-    
   end
   
   
-  def practice2 #모의 결제 하기
+  def practice2 #엑셀 파싱
     xlsx = Roo::Excelx.new(Rails.root.join('app', 'assets',  'abcd.xlsx'))
     i = 1 #행
     while i < 1000
@@ -47,6 +43,23 @@ class HomeController < ApplicationController
     redirect_to '/'
   end
   
+  def practice3 #예약된 날짜에 보내기
+    Contact.reservation.deliver_now 
+    redirect_to '/home/index'
+  end
+  
+  def practice4 #날짜 및 시간 선택하기
+    
+  end
+  
+  def reservation
+    if "23/12/2016 19:00" == params[:name]
+      @a = "일치!"
+    else
+      @a = "불일치!"
+    end
+    render :text => " "
+  end
   
   
   def info # 자세한 정보 보기
