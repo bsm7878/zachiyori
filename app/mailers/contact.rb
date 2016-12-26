@@ -16,6 +16,7 @@ class Contact < ApplicationMailer
         "@api.mailgun.net/v3/sandbox46f0226b110045b4a455d9119d83c8e0.mailgun.org/messages",
         :from => "bsm7878@naver.com",
         :to => mart_email,
+        :cc => "contact@zachiyori.com",
         :subject => title,
         :html => name + "<br>" + menu + "<br>" + menu_ingredient + "<br>" + option + "<br>" + "주소:" + "<a href = #{naver}>#{address}</a>" + "<br>" + public_pw + "<br>" + want_content + "<br>" + "<a href=tel:#{phone}><u>전화걸기</u></a>" + "<br>" + "<br>" + p1 + "<br>" + p2 + "<br>" + p3
     end
