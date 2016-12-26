@@ -9,8 +9,8 @@ class HomeController < ApplicationController
      @user_count = User.all.count #총 회원가입 수
      @sell_count = Purchase.all.count #총 판매갯수
      
-     doc = Nokogiri::HTML(open("https://www.facebook.com/zachiyori/"))
-     @facebook_count = doc.css("._4cwn").inner_text[0] + doc.css("._4cwn").inner_text[2] + doc.css("._4cwn").inner_text[3] + doc.css("._4cwn").inner_text[4]
+     #doc = Nokogiri::HTML(open("https://www.facebook.com/zachiyori/"))
+     #@facebook_count = doc.css("._4cwn").inner_text[0] + doc.css("._4cwn").inner_text[2] + doc.css("._4cwn").inner_text[3] + doc.css("._4cwn").inner_text[4]
 
   end
   
