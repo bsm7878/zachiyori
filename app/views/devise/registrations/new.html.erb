@@ -246,9 +246,18 @@
                     <hr style = "border-color:black; coor: black;">
                     <!-- 이용약관 -->
                     <div class ="row">
-                        <div class = "col-md-12" id = "promise" style = "color: black; text-align:center;">
-                            회원가입을 함으로써 자취요리연구소의 <a href= "/home/agreement" style = "text-decoration:underline; color:#FFCC33;" target="_blank"><b>이용약관</b></a>과<br id = "address_br"> <a href = "/home/privacy" style = "text-decoration:underline; color:#FFCC33;" target="_blank"><b>개인정보 취급방침</b></a> 취급방침에 동의하시게 됩니다.
+                        <div class = "col-md-12" id = "promise" style = "color: black; text-align:center; margin-bottom:15px;">
+                            <input type="checkbox" id = "agree_1" > 자취요리연구소 이용 약관에 동의합니다. (필수) <a href= "/home/agreement" style = "color:#FFCC33;" target="_blank"><b>내용 보기</b></a>
                         </div>
+                        <div class = "col-md-12" id = "promise" style = "color: black; text-align:center;">
+                            <input type="checkbox" id = "agree_2"> 개인정보 수집 및 이용에 동의합니다. (필수) <a href = "/home/privacy" style = "color:#FFCC33;" target="_blank"><b>내용 보기</b></a>
+                        </div>
+                        <frame src="/sample.html" frameborder="0" marginheight="100" marginwidth="0" name="menu_frame" noresize scrolling="auto">
+                        <frame src="sample.html" frameborder="0" marginheight="100" marginwidth="0" name="menu_frame" noresize scrolling="auto">
+                        <frameset cols="50%,50%">
+                          <frame src="https://developer.mozilla.org/en/HTML/Element/iframe" />
+                          <frame src="https://developer.mozilla.org/en/HTML/Element/frame" />
+                        </frameset>
                     </div>
                     <!-- submit button -->
                     <div class = "row" style = "margin-top:40px;">
@@ -257,6 +266,7 @@
                              <div>
                                 <div class="alert alert-info" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;" id = "address_show" role="alert">주소를 입력해주세요.</div>
                                 <div class="alert alert-warning" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;" id = "sub_address_show" role="alert">나머지 주소를 입력해주세요.</div>
+                                <div class="alert alert-success" style = "display:none; padding-top:5px; padding-botom:5px; height:30px;" id = "aree_show" role="alert">필수 약관에 동의해주세요.</div>
                              </div>
                              <input type="submit" id = "sign_up_button" class="btn btn-warning bold" style = "width:100%; font-size:20px;" name="commit" value="회원 가입" />
                         </div>
@@ -352,25 +362,42 @@
             $(document).ready(function(){
               $("#sign_up_button").click(function(){
                 
+                
+                
+                if($("#agree_1").is(':checked') == false || $("#agree_2").is(':checked') == false){
+                    $("#aree_show").show();
+                } else{
                     if (!$('#user_address').val() && !$('#sub_address').val()){
                        $("#address_show").show();
                        $("#sub_address_show").show();
+                       $("#aree_show").hide();
                        return false;
                     }
                     else if($('#user_address').val() && !$('#sub_address').val()){
                         $("#address_show").hide();
                         $("#sub_address_show").show();
+                        $("#aree_show").hide();
                         return false;
                     }
                     else if(!$('#user_address').val() && $('#sub_address').val()){
                         $("#address_show").show();
                         $("#sub_address_show").hide();
+                        $("#aree_show").hide();
                         return false;
                     }
                     else{
                      
                     }
+                    
+                }
+                
+                
+                    
+    
+    
+    
     
                   });
               });
            </script>
+           

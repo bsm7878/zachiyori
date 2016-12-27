@@ -137,6 +137,28 @@
         </div>
     </div>
     <!-- Index Main end -->
+    
+    <!-- popup start -->
+    <button type="button" id = "popup_button" style = "display: none;" class="btn btn-primary" data-toggle="modal" data-target=".gridSystemModalLabel">Small modal</button>
+    <div class="modal fade gridSystemModalLabel" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style = "padding:0px;">
+          <div class="container-fluid" style = "padding:0px;">
+            <img src = "/popup.png" style = "width:100%;"/>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class = "bold" style = "text-align: center;">
+              <button type="button" id = "popup_bye" class="btn btn-link" style = "color:black;" data-dismiss="modal" aria-label="Close"><u>다시 보지 않기</u></button>
+          </div>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+    <!-- popup end -->    
+    
     <div id="tf-counter" class="text-center" style = "background-color: #F3F3F3;">
         <div class="container">
             <div class="row"> <!-- Row -->
@@ -145,7 +167,7 @@
                     <div class="col-xs-6 col-md-3 facts"><!-- counter #1 -->
                         <div class="count-box"> 
                             <i class="fa fa-facebook" aria-hidden="true"></i>
-                            <h4 class="count">6743</h4>
+                            <h4 class="count">6748</h4>
                             <p class="small bold">페이스북 좋아요</p>
                         </div> 
                     </div><!-- end counter #1 -->
@@ -169,7 +191,7 @@
                      <div class="col-xs-6 col-md-3 facts"> <!-- counter #4 -->
                             <div class="count-box last">
                             <i class="fa fa-desktop" aria-hidden="true"></i>
-                            <h4 class="count" >3231</h4>
+                            <h4 class="count" >3440</h4>
                             <p class="small bold">총 방문자수</p>
                         </div>
                     </div>
@@ -288,3 +310,31 @@
        
         </script>
         
+        
+        <script type="text/javascript">
+         
+        </script>
+        
+        
+
+        <script>
+        
+        
+        
+        if ( localStorage.getItem("popup") == "1") {
+            
+            
+            } else {
+                document.getElementById("popup_button").click();
+            }
+            
+         $("#popup_bye").click(function(){
+               var storedValue = "0"
+               localStorage.setItem("popup", "1");
+         });
+
+  
+ 
+            
+
+        </script>
