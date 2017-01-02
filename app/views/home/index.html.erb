@@ -1,340 +1,854 @@
 
-    <!-- index css -->
-    <link rel="stylesheet" type="text/css" href="css/index_style.css">
+<!DOCTYPE html>
+<html>
+  <head>    
+    <meta charset="UTF-8">
+   <title>CodePassenger - Web Site Design, Web Development and Software Development Agency</title>
+    <meta name="description" content="Creative Web and Software Development Agency. Cutting Edge Technology and Creative Team.">
+    <meta name="author" content="CodePassenger">
     <style>
-    
-    /* Mobile */
-    @media (max-width: 768px) { 
-        #bye_div{padding-left:0px; height: 60px; background-color:#00b050;}
-        #close{margin-top:17px; padding-left:0px;}
-        #bye_button{font-size:20px; }
-        #pack{display: none;}
-        #index_main{padding:0px; background-color: #fa4b00; height: 750px; padding-top:50px;}
-        #three_list{text-align:center;}
-        #three_list img{width:90%; margin-top:15px;}
-        #first_row{margin-top:30px;}
-        #order_button{text-align:center;}
-        #bar_main{display: none;}
-        #one{width:80%; }
-        #order {margin-top:55px;}
-    }
-    
-    @media (min-width: 414px) { 
-           #order{margin-top:20px;}
-        }   
-    
-    @media (max-width: 414px) and (min-width: 410px) { 
-        #bye_div{padding-left:0px; height: 60px; background-color:#00b050;}
-        #close{margin-top:17px; padding-left:0px;}
-        #bye_button{font-size:20px; }
-        #pack{display: none;}
-        #index_main{padding:0px; background-color: #fa4b00; height: 750px; padding-top:50px;}
-        #three_list{text-align:center;}
-        #three_list img{width:90%; margin-top:15px;}
-        #first_row{margin-top:30px;}
-        #order_button{text-align:center;}
-        #bar_main{display: none;}
-        #order {margin-top:23px;}
-        #one{width:80%;}
-    }
-    
-     /* Pc */
-    @media (min-width: 1200px) { 
-        #bye_div{padding-left:0px; height: 70px; background-color:#00b050;}
-        #close{margin-top:9px;}
-        #bye_button{font-size:30px; cursor:pointer;}
-        #one{margin-right:10px;}
-        #three{margin-right:10px;}
-        #only_mobile{display: none;}
-        #index_main{padding:0px; background-color: #fa4b00;}
-        #three_list img{width:95%; margin-left:32px; margin-top:20px;}
-        #first_row{margin-top:100px; margin-bottom:100px;}
-        #order_button{margin-left:38px; text-align:center;}
-        #one{height:70px;}
-        #bar_mobile_main{display: none;}
-        #order {margin-top:55px;}
-    }
+        
+/*
+========================================================================
+This css file will over write bootstarp css
+------------------------------------------------------------------------
+# Template Name: Patience
+# Template URI: http://codepassenger.com/
+# Author: codepassenger
+# Author URI: http://codepassenger.com/
+# Description: Patinece Responsive Comming Soon HTML5 CSS3 template
+# Version: 1.0
+# License: MIT
+# Tags: comming soon, html5 comming soon
+---------------------------------------------------------------------- 
+========================================================================
+*/
 
+/*
+========================================================================
+Index
+------------------------------------------------------------------------
+
+# - 1.0 - General styles
+# -   1.1 - Background image styles
+# - 2.0 - Menu style
+# - 3.0 - left-block style start here
+# - 4.0 - Countdown section style
+# - 5.0 - Right-block style
+# - 5.1 - Right content style
+# - 6.0 - Social-icon style
+# - 7.0 - Color-style2 style
+# - 8.0 - Color-style3 style
+# - 9.0 - About style
+# - 10.0 - Contact style
+
+
+*/
+
+/*
+========================================================================
+# 1.0 - General styles
+------------------------------------------------------------------------
+*/
+body, html {
+  font-family: 'Lato', sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  background: #f8faeb;
+  color: #3a3a3a;
+  height: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+	padding-bottom: 5px;
+	color: #3d5054;
+	line-height: 1em;
+	font-weight: normal;
+	margin: 0 0 10px;
+}
+h1 {
+	font-family: 'Lobster', cursive;
+	text-transform: capitalize;
+	color: #ffd57a;
+	margin-bottom: 65px;
+}
+h2 {
+	font-family: 'Roboto Slab', serif;
+	font-weight: 700;
+	color: #feff96;
+	text-transform: uppercase;
+}
+h3 {
+	font-family: 'Roboto Slab', serif;
+	font-weight: 400;
+	color: #fff;
+}
+
+h1 { font-size: 45px;}
+h2 { font-size: 36px;}
+h3 { font-size: 20px;}
+h4 { font-size: 18px;}
+h5 { font-size: 16px;}
+h6 { font-size: 14px;}
+
+p {	
+	font-weight: normal;
+}
+
+a {color: #1b727b}
+a:hover {color: #416467; text-decoration: none;}
+a:active {color: #416467;}
+
+.form-horizontal:after,
+.form-horizontal:before {
+	content: "";
+	display: table;
+}
+.form-horizontal:after,
+.form-horizontal:before
+ {
+	clear: both;
+}
+
+/*--------targetting the opera----------*/
+
+  x:-o-prefocus, .left-content {
+    top: 30%;
+    transform: translateY(-30%);
+  }
+  x:-o-prefocus, .right-content {
+    top: 30%;
+    transform: translateY(-30%);
+  }
+
+/*------targetting the IE10 and above------*/
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
+   /* IE10+ specific styles go here */ 
+   .left-content, .right-content {
+        top: 10%;
+        transform: translateY(0%);
+     }
+	 .right-content form {
+		 margin-bottom: 20px;
+	 }
+}
+
+/*--------------------------------------
+# - 1.1 - Background image styles
+----------------------------------------*/
+
+.default-bg {
+	background: url(../images/default-bg.png)  no-repeat center center;
+    -webkit-background-size: cover;
+       -moz-background-size: cover;
+         -o-background-size: cover;
+            background-size: cover;
+    height: 100%;
+}
+.color2-bg {
+	background: url(../images/color2-bg.png) no-repeat center center;
+	-webkit-background-size: cover;
+       -moz-background-size: cover;
+         -o-background-size: cover;
+            background-size: cover;    
+    height: 100%;
+}
+.color3-bg {
+	background: url(../images/color3-bg.png)  no-repeat center center;
+    -webkit-background-size: cover;
+       -moz-background-size: cover;
+         -o-background-size: cover;
+            background-size: cover;
+    height: 100%;
+}
+
+.default-bg .default-style .left-block
+ {
+	background-color: rgba(65, 115, 120, .9);
+}
+.default-bg .default-style .right-block {
+	background-color: rgba(248, 250, 235, .9);
+}
+.color2-bg .color-style2 .left-block {
+    background-color: rgba(88, 81, 72, .9);
+}
+.color2-bg .color-style2 .right-block {
+    background-color: rgba(248, 250, 235, .9);
+}
+.color3-bg .color-style3 .left-block {
+    background-color: rgba(56, 61, 68, .9);
+}
+.color3-bg .color-style3 .right-block {
+    background-color: rgba(248, 250, 235, .9);
+}
+
+
+/*
+------------------------------------------------------
+# - 2.0          Menu style
+------------------------------------------------------
+*/
+
+.menu > a {
+	display: inline-block;
+	margin-bottom: 30px;
+	font-size: 45px;
+}
+.menu.m-control {
+	position:absolute;
+	top:10px;
+	right:10px;
+	width: 40px;
+	height: 35px;
+	margin-left:-28.5px;
+	z-index: 400;
+}
+.menu.m-control a {
+	position:relative;
+	margin: 0px;
+	padding: 5px;
+	width:40px;
+	height:35px;
+}
+.menu.m-control > a span {
+	position:absolute;
+	height:5px;
+	width: 30px;
+	display:block;
+	background: rgb(78, 155, 146);
+	transition: 0.6s ease;
+	-webkit-transition: 0.6s ease;
+	-moz-transition: 0.6s ease;
+	-o-transition: 0.6s ease;
+	-ms-transition: 0.6s ease;
+  	transition-timing-function: cubic-bezier(.75, 0, .29, 1.01);	
+}
+.top-menu {
+	top:5px;
+}
+.mid-menu {
+	top: 15px;
+}
+.bottom-menu {
+	top: 25px;
+}
+.top-animate {
+  top: 16px !important;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+} 
+.mid-animate { opacity: 0;} 
+.bottom-animate {
+  top: 16px !important;
+  -webkit-transform: rotate(-225deg);
+  transform: rotate(-225deg);
+}
+section ul,
+section ul li {
+	font-family: 'Lobster', cursive;
+	list-style:none;
+	margin:0;
+	padding:0;
+	font-size:30px;
+	text-transform:capitalize;
+}
+nav {
+	text-align:center;
+	background: rgba(255,255,255,.9);
+	position:fixed;
+	top:0px;
+	left:0px;
+	right: 0px;
+	bottom: 0px;
+	display:none;
+	z-index: 300;
+}
+nav section {
+	margin-top: 15%;
+}
+
+/*--------------------------------------
+# - 3.0 left-block style start here
+----------------------------------------*/
+ 
+.default-style .left-block
+{
+	background: #417378;
+}
+.left-content {
+	text-align:center;
+	padding: 0px 40px 0;
+}
+.left-content img {
+	margin-bottom: 30px;
+}
+
+/*--------------------------------------
+# - 4.0 Countdown section style start here
+----------------------------------------*/
+
+.timing {
+	margin-top: 30px;
+}
+.time_circles > div > h4 {
+	color: #fff;
+}
+.time_circles > div > span {
+	color: #fff;
+}
+
+
+/*--------------------------------------
+# 5.0  Right-block style start here
+----------------------------------------*/
+
+.right-block {
+	 background: #f8faeb;
+}
+.right-content {
+	text-align: center;
+	padding: 0px 40px;
+}
+.right-content h2 {
+	color: #3a3a3a;
+	margin-bottom: 70px;
+	text-transform: inherit;
+}
+.right-content .para {
+	margin-bottom: 70px;
+}
+.right-content .para span {
+	font-weight: bold;
+	color: #1b727b;
+}
+.color-style2 .right-content .para span {
+	font-weight: bold;
+	color: #585148;
+}
+.color-style3 .right-content .para span {
+	font-weight: bold;
+	color: #404b5a;
+}
+
+/*----------------------------------------
+# - 5.1 Right content style
+------------------------------------------
+*/ 
+
+.right-content .label {
+	display: inline-block;
+	color: #3a3a3a;
+	margin-bottom: 25px;
+	font-size: 16px;
+}
+.right-content .input-group {
+ margin-bottom: 20px;
+}
+.right-content form {
+	margin-bottom: 10px;
+}
+.content .form-control,
+.right-content .form-control {
+	width: 95%;
+	height: 42px;
+	padding: 10px 12px;
+	border-radius: 4px;
+}
+.right-content .form-control:focus {
+	border-color: #417378;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(65, 115, 120, .6);
+	-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(65, 115, 120, .6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(65, 115, 120, .6);
+}
+.default-style .right-content .form-horizontal .form-control,
+.color-style2 .right-content .form-horizontal .form-control,
+.color-style3 .right-content .form-horizontal .form-control {
+	width: 100%;
+}
+.right-content .input-group-btn {
+	border-radius: 4px;
+}
+
+.form-control::-moz-placeholder {
+  color: #3a3a3a;
+  opacity: 1;
+  font-size: 16px;
+  line-height: 1;
+}
+.form-control:-ms-input-placeholder {
+  color: #3a3a3a;
+  font-size: 16px;
+  line-height: 1;
+}
+.form-control::-webkit-input-placeholder {
+  color: #3a3a3a;
+  font-size: 16px;
+  line-height: 1;
+}
+.right-content .btn-submit,
+.color-style2 .right-content .btn-submit {
+	color: #fff;
+	padding: 10px 20px;
+}
+.right-content .btn-submit {
+	background: #417378;	
+}
+.right-content .btn-submit:hover {
+    background: #416467;
+    color: #fff;
+}
+.right-content .input-group-btn:last-child>.btn-submit,
+.right-content .input-group .form-control:first-child {
+	border-radius: 4px;
+}
+.content .alert {
+	display:none;
+	margin: 5px 0;
+	padding: 9px 0;
+}
+.content .alert-success {	
+	border-color:#AACD8D;
+}
+.content .alert-warning {
+	border-color:#EFD7A6;
+}
+.newsletter-success {
+  color: #1b727b;
+  text-align: center;
+ 
+}
+.newsletter-error {
+  color: #ff0000;
+  text-align: center;
+} 
+.followus {
+    font-family: 'Roboto Slab', serif;
+    font-size: 18px;   
+}
+
+/*---------------------------------------------------
+# 6.0        Social-icon style
+-----------------------------------------------------*/
+
+.social-icon {
+	list-style: none;
+	padding:0;
+}
+.social-icon li {
+    display: inline-block;
+    margin: 0 5px;
+    font-size: 42px;
+}
+.social-icon li a{
+    color: #53544f;	
+}
+.social-icon li a:hover {
+	color: #2D2D2A;
+}
+
+/*
+-----------------------------------------------
+# - 7.0    Color-style2 style
+-----------------------------------------------
+*/
+
+.color-style2 a.sub, .color-style2 a.sub {color: #585148;}
+.color-style2 a.sub:hover, .color-style2 a.sub:hover { text-decoration: none; color: #2D2D2A;}
+.color-style2 a.sub:active, .color-style2 a.sub:active {color: #2D2D2A;}
+
+.color-style2 .right-content .btn-submit {
+	background: #585148;
+}
+.color-style2 .right-content .btn-submit:hover {
+	background: #2D2D2A;
+}
+.color-style2 .right-content .form-control:focus {
+	border-color: #585148;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(88, 81, 72, .6);
+	-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(88, 81, 72, .6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(88, 81, 72, .6);
+}
+.color-style2 .left-block {
+	background: #585148;
+}
+
+/*
+------------------------------------------------------
+# - 8.0          Color-style3 style
+------------------------------------------------------
+*/
+
+.color-style3 a.sub, .color-style3 a.sub {color: #404b5a;}
+.color-style3 a.sub:hover, .color-style3 a.sub:hover { text-decoration: none; color: #383D44;}
+.color-style3 a.sub:active, .color-style3 a.sub:active {color: #383D44;}
+
+.color-style3 .right-content .btn-submit {
+	background: #404b5a;
+}
+.color-style3 .right-content .btn-submit:hover {
+	background: #383D44;
+}
+.color-style3 .right-content .form-control:focus{
+	border-color: #404b5a;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(64, 75, 90, .6);
+	-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(64, 75, 90, .6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(64, 75, 90, .6);
+}
+.color-style3 .left-block {
+	background: #404b5a;
+}
+
+/*
+------------------------------------------------------
+# - 9.0          About style
+------------------------------------------------------
+*/
+
+.right-content ul {
+	list-style:none;
+	margin-bottom: 40px;
+}
+.right-content ul li {
+	margin-bottom: 10px;
+}
+.right-content ul li span {
+	margin-right: 5px;
+	display: inline-block;
+	width: 26px;
+	text-align: center;
+}
+.right-content ul li span i {
+	font-size:16px;
+	color: #F8AD08;
+}
+.left-content .thumbnail-block {
+	position: relative;
+	overflow: hidden;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	
+}
+.left-content .thumbnail-block:hover .thumb-hover{
+	-webkit-transform: scale(1);  /* Chrome, Opera 15+, Safari 3.1+ 8?*/ 
+      -ms-transform: scale(1);  /* IE 9 */
+          transform: scale(1);  /* Firefox 16+, IE 10+, Opera */
+}
+.thumb-hover {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, .8);
+	height: 100%;
+	width: 100%;
+	padding: 30px 0;
+	-webkit-transform: scale(0);  /* Chrome, Opera 15+, Safari 3.1+ 8?*/ 
+      -ms-transform: scale(0);  /* IE 9 */
+          transform: scale(0);  /* Firefox 16+, IE 10+, Opera */    
+    -webkit-transition: .3s ease;
+       -moz-transition: .3s ease;
+        -ms-transition: .3s ease;
+         -o-transition: .3s ease;
+            transition: .3s ease;
+}
+
+.left-content .img-circle {
+	max-width: 100%;
+	margin-bottom: 0 !important;
+}
+
+/*
+------------------------------------------------------
+# - 10.0          contact style
+------------------------------------------------------
+*/
+
+.left-content i {
+	font-size: 120px;
+	color:#ffd57a;
+	margin-bottom:30px;
+}
+.left-content .dl-horizontal {
+	margin-top: 20px;
+}
+.left-content .dl-horizontal i {
+	font-size: 20px;
+	margin:0;
+}
+.left-content .dl-horizontal dt,
+.left-content .dl-horizontal dd {
+	text-align:left;
+	color:#fff;
+	margin-bottom: 5px;
+}
+.left-content .dl-horizontal dt span {
+	display:inline-block;
+	text-align:center;
+	width: 20px;
+	margin-right: 10px;
+}
+.contact .right-content label {
+	text-align:left;
+}
+.contact .right-content {
+	text-align:inherit
+}
+.content.contact .form-control, .content.contact .right-content .form-control {
+	width:100%;
+}
+.contact .social-icon, .contact p, .right-content h2 {
+	text-align:center;
+}
+.contact textarea.form-control {
+	height: 70px;
+}
+
+/* 
+=======================================================================
+--------------------TO MAKE RESPONSIVE----------------------------------
+---------------------------------------------------------------------- /
+
+---------------------------------------------------------------------- */
+
+@media screen and (min-width: 1400px) and (max-width: 2000px) {
+	.thumb-hover {
+		left: 20px;
+		width: 80%;
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 1180px) {
+  .thumb-hover h5, .thumb-hover span {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+  }
+  .thumb-hover {
+    padding: 15px 0;
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .content,
+  .content .row,
+  .content .row .left-block,
+  .content .row .right-block
+  {
+    height: 100%;
+  }
+  .left-content, .right-content {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+       -moz-transform: translateY(-50%);
+        -ms-transform: translateY(0%);
+         -o-transform: translateY(0%);
+            transform: translateY(-50%);
+  }
+}
+
+@media screen and (max-width: 768px) {
+	body, html {
+		height:auto;
+	}
+  .left-block, .right-block {
+    overflow: hidden;
+  }
+  .right-content, .left-content {
+    margin-top: 40px;
+  }
+  h1 {
+	  margin-bottom: 30px;
+  }
+  .left-content {
+	  padding-bottom: 40px;
+  }
+  .right-content .col-sm-6:first-child .form-control {
+    margin-bottom: 15px;
+  }
+  .menu.m-control a {
+	  border-radius:0;
+	  border:none;
+	  background:none;
+  }
+  .left-content .thumbnail-block {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+  }
+}
+@media screen and (max-width: 480px) {
+  h2 {
+    font-size: 28px;
+  }
+  .right-content {
+	  padding: 0;
+  }
+  .right-content h2 {
+    margin-bottom: 30px;
+  }
+  .right-content .para {
+    margin-bottom: 40px;
+  }
+  .right-content form {
+    margin-bottom: 50px;
+  }
+  .right-content .form-control {
+    line-height: 1;
+  }
+  .dl-horizontal br {
+	  display: none;
+  }
+  .form-control::-moz-placeholder {
+    font-size: 10px;
+    line-height: 2;
+  }
+.form-control:-ms-input-placeholder {
+    font-size: 10px;
+    line-height: 2;
+  }
+.form-control::-webkit-input-placeholder {
+    font-size: 10px;
+    line-height: 2;
+  }
+  .left-content h1 {
+    margin-bottom:20px;
+  }
+  .timing {
+    margin-top: 22px;
+  }
+  .social-icon li {
+    font-size: 30px;
+  }
+}
+    </style>
+    <!-- Mobile Specific Meta -->   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+    <!-- Bootstrap -->
+    <link href="asset/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="asset/css/style.css">
+    <!-- <link rel="stylesheet" href="asset/css/responsive.css"> -->
+    <link rel="stylesheet" href="asset/css/TimeCircles.css">
+
+    <!-- Font Awesome -->
+    <link href="asset/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Added google font -->
+    <link href='//fonts.googleapis.com/css?family=Lato:400,700|Lobster|Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+    <!-- 한글 FONT -->
+    <link href='//fonts.googleapis.com/earlyaccess/notosanskr.css' rel='stylesheet' type='text/css'>
+    <script src="//use.fontawesome.com/0283ff1492.js"></script>
+
+    
+    <!--Fav and touch icons-->
+    <link rel="shortcut icon" href="asset/images/favicon.ico">
+    <link rel="apple-touch-icon" href="asset/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="asset/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="asset/images/apple-touch-icon-114x114.png">
+    
+    <style>
+      .bold{
+        font-family: 'Noto Sans KR', sans-serif;
+        }
     </style>
     
+	<!--[if IE 9]> 
+    	<link rel="stylesheet" href="asset/css/ie9.css">
+    <![endif]-->
 
-    
-    
-
-    <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="/"><img src="logo.png" alt="자취요리연구소"></a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right" >
-                <li class = "bold"><a href="/home/choice" class="scroll">주문하기</a></li>
-                <% if user_signed_in? %>
-                <li class = "bold"><a href="/home/my_list" class="scroll">내정보</a></li>
-                <li class = "bold"><a href="/users/sign_out" class="scroll">로그아웃</a></li>
-                <% else %>
-                <li class = "bold"><a href="/home/contact" class="scroll">연락하기</a></li>
-                <% end %>
-              </ul>
-            </div>
-        </div>
-    </nav>
-    
-    <!-- Event Bar start -->
-    <div class = "container-fluid" id = "bye_div" style = "margin-top:70px;">
-        <div class = "row">
-            <div class = "col-md-1"></div>
-            <div class = "col-md-10 col-xs-11" id = "bar_main" style = "text-align:center; margin-top:4px;" >
-                <a href= "/home/choice">
-                    <img src = "bar_1.png" style = "width:4%; margin-right:10px;" /> 
-                    <img src = "bar_4.png" style = "width:35%; margin-top:10px; margin-right:10px;" /> 
-                    <img src = "bar_5.png" style = "width:35%; margin-top:10px;" /> 
-                </a>
-            </div>
-            <div class = "col-md-10 col-xs-11" id = "bar_mobile_main" style = "text-align:right; margin-top:4px;" >
-                <a href= "/home/choice">
-                    <img src = "bar_10.png" style = "width:90%; margin-top:5px;" /> 
-                </a>
-            </div>
-            <div class = "col-md-1 col-xs-1" id = "close">
-                <span id = "bye_button"><i class="fa fa-times" style = "color:white;" aria-hidden="true"></i></span>
-            </div>
-        </div>
-    </div>
-    <!-- Event Bar end -->
-
-    <!-- Index Main start -->
-    <div class = "container-fluid" id = "index_main">
-        <div class = "row" id = "first_row">
-            <div class = "col-md-2"></div>
-            <div class = "col-md-4" style = "padding-right:0px;">
-                <div style = "text-align:center;"><!-- 제목 -->
-                    <img src = "title_12_1.png" style = "width:85%;" />
-                </div>
-                <div id = "only_mobile" style = "text-align:center; margin-top:15px;"><!-- only mobile pack -->
-                    <img src= "image_10_17.png" style = "width:80%;">
-                </div>
-                <div id = "three_list"><!-- 3가지 나열 --> 
-                    <img src = "list.png" />
-                </div>
-                <div id = "order"><!-- 주문하기 버튼 -->
-                    <div id = "order_button">
-                        <a href = "/home/choice"><img id = "one" src = "order_button_10_14.png"/></a>
-                    </div>
-                </div>
-            </div>
-            <div class = "col-md-4" id = "pack" style = "margin-left: 60px; padding-left:0px; text-align:center;"> <!-- 패키징 이미지 -->
-                <img src = "image_10_17.png" style = "width:90%;" />
-            </div>
-            <div class = "col-md-2"> </div>
-        </div>
-    </div>
-    <!-- Index Main end -->
-    
-    <!-- popup start -->
-    <button type="button" id = "popup_button" style = "display: none;" class="btn btn-primary" data-toggle="modal" data-target=".gridSystemModalLabel">Small modal</button>
-    <div class="modal fade gridSystemModalLabel" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body" style = "padding:0px;">
-          <div class="container-fluid" style = "padding:0px;">
-            <img src = "/popup.png" style = "width:100%;"/>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class = "bold" style = "text-align: center;">
-              <button type="button" id = "popup_bye" class="btn btn-link" style = "color:black;" data-dismiss="modal" aria-label="Close"><u>다시 보지 않기</u></button>
-          </div>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-
-    <!-- popup end -->    
-    
-    <div id="tf-counter" class="text-center" style = "background-color: #F3F3F3;">
-        <div class="container">
-            <div class="row"> <!-- Row -->
-                <div class="counter"> 
-                
-                    <div class="col-xs-6 col-md-3 facts"><!-- counter #1 -->
-                        <div class="count-box"> 
-                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                            <h4 class="count">6748</h4>
-                            <p class="small bold">페이스북 좋아요</p>
-                        </div> 
-                    </div><!-- end counter #1 -->
-
-                    <div class="col-xs-6 col-md-3 facts"><!-- counter #2 -->
-                        <div class="count-box">
-                          <i class="fa fa-user"></i>
-                          <h4 class="count"><%= number_with_delimiter(@user_count, :delimiter => ',') %></h4>
-                          <p class="small bold">요리하는 자취생</p>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+ <body>
+    <div class="container-fluid content">
+        <!--/.menu-->
+        <!--navigation-->
+        <div class="row default-style">
+            <div id="left-block" class="col-md-6 col-sm-12 left-block">
+                <div class="left-content">
+                    <!--<h1>patience  자취요리연구소</h1> -->
+                    <img src="asset/images/logo.png"  style = "width: 40%;" alt="patience"><br>
+                    <!-- <img src="asset/images/rocket.png" alt="patience"> -->
+                    <img src="asset/images/flask.png" style = "width: 20%;" alt="patience">
+                    <!-- <h3>we are almost ready to</h3> -->
+                    <h3 class = "bold">리뉴얼중입니다.</h3>
+                    <h2>launch our website</h2>
+                    <div class="timing">
+                        <div id="count-down" data-date="2017-01-16 11:00:00">
+                            
                         </div>
                     </div>
+                    <!-- /.timing --> 
+                </div>
+                <!-- /.left-content -->                
+            </div>
+            <!-- /.left-block -->
 
-                    <div class="col-xs-6 col-md-3 facts"> <!-- counter #3 -->
-                        <div class="count-box">
-                            <i class="fa fa-gift" aria-hidden="true"></i>
-                            <h4 class="count"><%= number_with_delimiter(@sell_count + 8, :delimiter => ',') %></h4>
-                            <p class="small bold">총 주문 건수</p>
-                        </div>
-                    </div>
-                    
-                     <div class="col-xs-6 col-md-3 facts"> <!-- counter #4 -->
-                            <div class="count-box last">
-                            <i class="fa fa-desktop" aria-hidden="true"></i>
-                            <h4 class="count" >3440</h4>
-                            <p class="small bold">총 방문자수</p>
-                        </div>
-                    </div>
-
-                 </div>
-            </div> <!-- End Row -->
+            <div id="right-block" class="col-md-6 col-sm-12 right-block">
+                <div class="right-content">
+                    <h2 class = "bold">2017. 01. 16</h2>
+                    <p class="para bold">안녕하세요. 자취요리연구소입니다. <br>
+                                         16년 12월 2일 전남대 지역에서 베타서비스를 시작하면서 많은 분들이 <br>
+                                         응원해주셨습니다. 다시 한번 이 자리를 통해 감사하다는 인사 드리고 싶습니다. <br>
+                                         응원해주시는 고객님들이 늘어날수록 피드백 역시 늘어났습니다. 그래서 리뉴얼 기간을 통해 <br>
+                                         더 나은 서비스를 제공하려 합니다. 딱! 15일의 준비기간을 가지고 <br>
+                                         2017년 1월 16일, 한층 성장한 모습으로 서비스를 제공하겠습니다. <br>
+                                         감사합니다.     
+                    </p>
+                    <ul class="social-icon">
+                        <br><br>
+                        <li><a href="https://www.instagram.com/zachiyori/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        <li><a href="https://www.facebook.com/zachiyori/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="https://vimeo.com/184481187" target="_blank"><i class="fa fa-youtube-square"></i></a></li>
+                        <li><a href="/"><i class="fa fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+                <!-- /.contact-blcok -->              
+            </div>
+            <!-- ./left-content -->
         </div>
     </div>
-   
-
+    <!-- .container end here -->
     
-    <!-- Service 소개
-    ================================================== -->
-    <div id="tf-services">
-        <div class="container"> <!-- container -->
-            <div class="section-header" style = "padding-top:0px;">
-                <h2 class = "bold">주문방법은<span class="highlight"> 간단합니다</span></h2> 
-                <h6>여러분 대신 저희가 인근 중형마트에 주문해드립니다.</h6>
-                <div class="fancy"><span><img src="img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
-            </div>
-            <!-- 어떤 요리를 해야할지 몰라요 -->
-            <div class = "row " style = "text-align:center;">
-                  <div class = "col-md-4">
-                        <img src = "screen.png" style = "width: 160px; height: 160px; "/>    
-                        <h3 class = "bold mobile_font" style = "margin-bottom:10px;"><span class="highlight"> <strong>Step 01.</strong></span> 웹에서 요리를 주문</h3>
-                        <p class = "bold sub_mobile_font" >회원가입 후 요리를 선택하고 결제를 합니다.</p>
-                        <p class = "bold sub_mobile_font" >주문 판매마트 영업시간 이내  언제든 가능합니다.</p>   
-                        <p class = "bold sub_mobile_font" ><a href= "/home/choice">여기를 클릭하시면 지금 바로도 가능합니다.</a></p>  
-                  </div>
-                  
-                  <div class = "col-md-4">
-                        <img src = "truck2.png" class = "mobile_grid" style = "width: 160px; height: 160px; "/>    
-                        <h3 class = "bold mobile_font" style = "margin-bottom:10px;"><span class="highlight"> <strong>Step 02.</strong></span> 마트에서 식재료 배달</h3> 
-                        <p class = "bold sub_mobile_font" >저희와 협약한 중형마트로 대신 주문접수해드립니다.</p>
-                        <p class = "bold sub_mobile_font" >선택하신 요리를 만들어 먹을 수 있는 정량의 식재료와</p>
-                        <p class = "bold sub_mobile_font" >레시피 카드가 주문즉시 인근마트에서 배달됩니다.</p> 
-                        <!-- <p class = "bold sub_mobile_font" >(주문가능시간 보기)-[보기]</p> -->
-                  </div>
-                  
-                  <div class = "col-md-4">
-                       <img src = "frying-pan.png" class = "mobile_grid" style = "width: 160px; height: 160px; "/>      
-                       <h3 class = "bold mobile_font" style = "margin-bottom:10px;"><span class="highlight"> <strong>Step 03.</strong></span> 직접요리</h3> 
-                       <p class = "bold sub_mobile_font" >배송 받은 정량의 식재료와 레시피 카드를</p>
-                       <p class = "bold sub_mobile_font" >활용하여 직접 요리하여 먹습니다.</p>
-                       <p class = "bold sub_mobile_font" >* 수령 후 24시간 이내 요리해 드실 것을 권장합니다.</p>   
-                  </div>
-              </div>
 
-            </div>
-
-            
-    </div><!-- end container -->
-
-     <!-- 간단한 궁금증 Section
-    ================================================== -->
-        <div class="container" style = "margin-bottom:45px;"> <!-- container -->
-            <div class="section-header" style = "margin-top:0px; padding-top:0px;">
-                <h2 class = "bold">무엇이<span class="highlight"> 좋은걸까요</span></h2> 
-                <h6>요리를 쉽게 할 수 있도록 도와드리겠습니다.</h6>
-                <div class="fancy"><span><img src="img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
-            </div>
-            
-            <div class = "row" style = "text-align:center; margin-bottom:80px;">
-                <div class = "col-md-4">
-                    <img src = "harvest.png" style = "width:130px; height:130px;">
-                    <h3 class = "bold" style = "margin-top:40px;">식재료가 남지 않습니다</h3>
-                    <p class = "bold">사실 저희가 필요한건 감자1개? 고추1개 아닌가요?</p>
-                    <p class = "bold">두 끼 정량의 식재료만 마트에 주문해드리겠습니다.</p>
-                    <p class = "bold">냉장고에 식재료 남는 고민 더 이상 하지 마세요.</p>
-                </div>
-                <div class = "col-md-4">
-                    <img src = "salt.png" class = "mobile_grid" style = "width:130px; height:130px;">
-                    <h3 class = "bold" style = "margin-top:40px;">양념이 없어도 됩니다</h3>
-                    <p class = "bold">선택하신 요리를 만드는데 필요한</p>
-                    <p class = "bold">정량의 일회용 양념을 보내드립니다</p>
-                    <p class = "bold">(선택시 즉석밥도 주문 가능합니다)</p>
-                </div>
-                <div class = "col-md-4">
-                    <img src = "table.png" class = "mobile_grid" style = "width:130px; height:130px;">
-                    <h3 class = "bold" style = "margin-top:40px;">편리합니다</h3>
-                    <p class = "bold">배달음식처럼 먹고 싶을때 언제든지 시켜드세요.</p>
-                    <p class = "bold">귀찮은 장보기를 하지 않아도 정량의 식재료와 함께</p>
-                    <p class = "bold">주문 즉시 간편하게 요리를 할 수 있습니다.</p>
-                </div>
-            </div>
-            <hr style = "margin-bottom:0px;">
-            <div class = "row" style = "text-align: center;">
-                <div class = "col-md-6 bold" style = "margin-top:40px;">
-                    <a href = "/home/info"><img src = "left_12_1.png" style = "width:100%;" /></a>
-                </div>
-                <div class = "col-md-6 bold" style = "margin-top:40px;">
-                    <a href = "/home/choice"><img src = "right_1.png" style = "width:100%;" /></a>
-                </div>
-            </div>
-        </div><!-- end container -->
-        
-        
-    
-         <!-- Footer 
-         ================================================== -->
-         <%= render :partial => "home/footer" %> 
-  
-    
-         <!-- Javascripts
-         ================================================== -->
-         <script type="text/javascript" src="js/main.js"></script>   
-
-
-
-        <script>
-
-            
-            $("#bye_button").click(function(){
-                $( "#bye_div" ).slideUp();
-            });
-       
-        </script>
-        
-        
-        <script type="text/javascript">
-         
-        </script>
-        
-        
-
-        <script>
-        
-        
-        
-        if ( localStorage.getItem("popup") == "1") {
-            
-            
-            } else {
-                document.getElementById("popup_button").click();
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="asset/js/bootstrap.min.js"></script>
+    <script src="asset/js/jquery.ajaxchimp.min.js"></script>
+    <script src="asset/js/TimeCircles.js"></script>
+    <script src="asset/js/jquery.placeholder.js"></script>
+    <script src="asset/js/script.js"></script>
+    <script type="text/javascript">
+    	$(function() {
+				// Invoke the plugin
+				$('input, textarea').placeholder();
+			});
+    </script>
+    <script>
+      $("#count-down").TimeCircles(
+       {   
+           circle_bg_color: "#639094",
+           use_background: true,
+           bg_width: 1,
+           fg_width: 0.02,
+           time: {
+                Days: { color: "#fefeee" },
+                Hours: { color: "#fefeee" },
+                Minutes: { color: "#fefeee" },
+                Seconds: { color: "#fefeee" }
             }
-            
-         $("#popup_bye").click(function(){
-               var storedValue = "0"
-               localStorage.setItem("popup", "1");
-         });
-
-  
- 
-            
-
-        </script>
+       }
+    );
+    </script>
+    
+  </body>
+</html>

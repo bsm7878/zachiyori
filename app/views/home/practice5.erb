@@ -1,0 +1,340 @@
+
+    <!-- index css -->
+    <link rel="stylesheet" type="text/css" href="css/index_style.css">
+    <style>
+    
+    /* Mobile */
+    @media (max-width: 768px) { 
+        #bye_div{padding-left:0px; height: 60px; background-color:#00b050;}
+        #close{margin-top:17px; padding-left:0px;}
+        #bye_button{font-size:20px; }
+        #pack{display: none;}
+        #index_main{padding:0px; background-color: #fa4b00; height: 750px; padding-top:50px;}
+        #three_list{text-align:center;}
+        #three_list img{width:90%; margin-top:15px;}
+        #first_row{margin-top:30px;}
+        #order_button{text-align:center;}
+        #bar_main{display: none;}
+        #one{width:80%; }
+        #order {margin-top:55px;}
+    }
+    
+    @media (min-width: 414px) { 
+           #order{margin-top:20px;}
+        }   
+    
+    @media (max-width: 414px) and (min-width: 410px) { 
+        #bye_div{padding-left:0px; height: 60px; background-color:#00b050;}
+        #close{margin-top:17px; padding-left:0px;}
+        #bye_button{font-size:20px; }
+        #pack{display: none;}
+        #index_main{padding:0px; background-color: #fa4b00; height: 750px; padding-top:50px;}
+        #three_list{text-align:center;}
+        #three_list img{width:90%; margin-top:15px;}
+        #first_row{margin-top:30px;}
+        #order_button{text-align:center;}
+        #bar_main{display: none;}
+        #order {margin-top:23px;}
+        #one{width:80%;}
+    }
+    
+     /* Pc */
+    @media (min-width: 1200px) { 
+        #bye_div{padding-left:0px; height: 70px; background-color:#00b050;}
+        #close{margin-top:9px;}
+        #bye_button{font-size:30px; cursor:pointer;}
+        #one{margin-right:10px;}
+        #three{margin-right:10px;}
+        #only_mobile{display: none;}
+        #index_main{padding:0px; background-color: #fa4b00;}
+        #three_list img{width:95%; margin-left:32px; margin-top:20px;}
+        #first_row{margin-top:100px; margin-bottom:100px;}
+        #order_button{margin-left:38px; text-align:center;}
+        #one{height:70px;}
+        #bar_mobile_main{display: none;}
+        #order {margin-top:55px;}
+    }
+
+    </style>
+    
+
+    
+    
+
+    <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img src="logo.png" alt="자취요리연구소"></a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right" >
+                <li class = "bold"><a href="/home/choice" class="scroll">주문하기</a></li>
+                <% if user_signed_in? %>
+                <li class = "bold"><a href="/home/my_list" class="scroll">내정보</a></li>
+                <li class = "bold"><a href="/users/sign_out" class="scroll">로그아웃</a></li>
+                <% else %>
+                <li class = "bold"><a href="/home/contact" class="scroll">연락하기</a></li>
+                <% end %>
+              </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Event Bar start -->
+    <div class = "container-fluid" id = "bye_div" style = "margin-top:70px;">
+        <div class = "row">
+            <div class = "col-md-1"></div>
+            <div class = "col-md-10 col-xs-11" id = "bar_main" style = "text-align:center; margin-top:4px;" >
+                <a href= "/home/choice">
+                    <img src = "bar_1.png" style = "width:4%; margin-right:10px;" /> 
+                    <img src = "bar_4.png" style = "width:35%; margin-top:10px; margin-right:10px;" /> 
+                    <img src = "bar_5.png" style = "width:35%; margin-top:10px;" /> 
+                </a>
+            </div>
+            <div class = "col-md-10 col-xs-11" id = "bar_mobile_main" style = "text-align:right; margin-top:4px;" >
+                <a href= "/home/choice">
+                    <img src = "bar_10.png" style = "width:90%; margin-top:5px;" /> 
+                </a>
+            </div>
+            <div class = "col-md-1 col-xs-1" id = "close">
+                <span id = "bye_button"><i class="fa fa-times" style = "color:white;" aria-hidden="true"></i></span>
+            </div>
+        </div>
+    </div>
+    <!-- Event Bar end -->
+
+    <!-- Index Main start -->
+    <div class = "container-fluid" id = "index_main">
+        <div class = "row" id = "first_row">
+            <div class = "col-md-2"></div>
+            <div class = "col-md-4" style = "padding-right:0px;">
+                <div style = "text-align:center;"><!-- 제목 -->
+                    <img src = "title_12_1.png" style = "width:85%;" />
+                </div>
+                <div id = "only_mobile" style = "text-align:center; margin-top:15px;"><!-- only mobile pack -->
+                    <img src= "image_10_17.png" style = "width:80%;">
+                </div>
+                <div id = "three_list"><!-- 3가지 나열 --> 
+                    <img src = "list.png" />
+                </div>
+                <div id = "order"><!-- 주문하기 버튼 -->
+                    <div id = "order_button">
+                        <a href = "/home/choice"><img id = "one" src = "order_button_10_14.png"/></a>
+                    </div>
+                </div>
+            </div>
+            <div class = "col-md-4" id = "pack" style = "margin-left: 60px; padding-left:0px; text-align:center;"> <!-- 패키징 이미지 -->
+                <img src = "image_10_17.png" style = "width:90%;" />
+            </div>
+            <div class = "col-md-2"> </div>
+        </div>
+    </div>
+    <!-- Index Main end -->
+    
+    <!-- popup start -->
+    <button type="button" id = "popup_button" style = "display: none;" class="btn btn-primary" data-toggle="modal" data-target=".gridSystemModalLabel">Small modal</button>
+    <div class="modal fade gridSystemModalLabel" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style = "padding:0px;">
+          <div class="container-fluid" style = "padding:0px;">
+            <img src = "/popup.png" style = "width:100%;"/>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class = "bold" style = "text-align: center;">
+              <button type="button" id = "popup_bye" class="btn btn-link" style = "color:black;" data-dismiss="modal" aria-label="Close"><u>다시 보지 않기</u></button>
+          </div>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+    <!-- popup end -->    
+    
+    <div id="tf-counter" class="text-center" style = "background-color: #F3F3F3;">
+        <div class="container">
+            <div class="row"> <!-- Row -->
+                <div class="counter"> 
+                
+                    <div class="col-xs-6 col-md-3 facts"><!-- counter #1 -->
+                        <div class="count-box"> 
+                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                            <h4 class="count">6748</h4>
+                            <p class="small bold">페이스북 좋아요</p>
+                        </div> 
+                    </div><!-- end counter #1 -->
+
+                    <div class="col-xs-6 col-md-3 facts"><!-- counter #2 -->
+                        <div class="count-box">
+                          <i class="fa fa-user"></i>
+                          <h4 class="count"><%= number_with_delimiter(@user_count, :delimiter => ',') %></h4>
+                          <p class="small bold">요리하는 자취생</p>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3 facts"> <!-- counter #3 -->
+                        <div class="count-box">
+                            <i class="fa fa-gift" aria-hidden="true"></i>
+                            <h4 class="count"><%= number_with_delimiter(@sell_count + 8, :delimiter => ',') %></h4>
+                            <p class="small bold">총 주문 건수</p>
+                        </div>
+                    </div>
+                    
+                     <div class="col-xs-6 col-md-3 facts"> <!-- counter #4 -->
+                            <div class="count-box last">
+                            <i class="fa fa-desktop" aria-hidden="true"></i>
+                            <h4 class="count" >3440</h4>
+                            <p class="small bold">총 방문자수</p>
+                        </div>
+                    </div>
+
+                 </div>
+            </div> <!-- End Row -->
+        </div>
+    </div>
+   
+
+    
+    <!-- Service 소개
+    ================================================== -->
+    <div id="tf-services">
+        <div class="container"> <!-- container -->
+            <div class="section-header" style = "padding-top:0px;">
+                <h2 class = "bold">주문방법은<span class="highlight"> 간단합니다</span></h2> 
+                <h6>여러분 대신 저희가 인근 중형마트에 주문해드립니다.</h6>
+                <div class="fancy"><span><img src="img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
+            </div>
+            <!-- 어떤 요리를 해야할지 몰라요 -->
+            <div class = "row " style = "text-align:center;">
+                  <div class = "col-md-4">
+                        <img src = "screen.png" style = "width: 160px; height: 160px; "/>    
+                        <h3 class = "bold mobile_font" style = "margin-bottom:10px;"><span class="highlight"> <strong>Step 01.</strong></span> 웹에서 요리를 주문</h3>
+                        <p class = "bold sub_mobile_font" >회원가입 후 요리를 선택하고 결제를 합니다.</p>
+                        <p class = "bold sub_mobile_font" >주문 판매마트 영업시간 이내  언제든 가능합니다.</p>   
+                        <p class = "bold sub_mobile_font" ><a href= "/home/choice">여기를 클릭하시면 지금 바로도 가능합니다.</a></p>  
+                  </div>
+                  
+                  <div class = "col-md-4">
+                        <img src = "truck2.png" class = "mobile_grid" style = "width: 160px; height: 160px; "/>    
+                        <h3 class = "bold mobile_font" style = "margin-bottom:10px;"><span class="highlight"> <strong>Step 02.</strong></span> 마트에서 식재료 배달</h3> 
+                        <p class = "bold sub_mobile_font" >저희와 협약한 중형마트로 대신 주문접수해드립니다.</p>
+                        <p class = "bold sub_mobile_font" >선택하신 요리를 만들어 먹을 수 있는 정량의 식재료와</p>
+                        <p class = "bold sub_mobile_font" >레시피 카드가 주문즉시 인근마트에서 배달됩니다.</p> 
+                        <!-- <p class = "bold sub_mobile_font" >(주문가능시간 보기)-[보기]</p> -->
+                  </div>
+                  
+                  <div class = "col-md-4">
+                       <img src = "frying-pan.png" class = "mobile_grid" style = "width: 160px; height: 160px; "/>      
+                       <h3 class = "bold mobile_font" style = "margin-bottom:10px;"><span class="highlight"> <strong>Step 03.</strong></span> 직접요리</h3> 
+                       <p class = "bold sub_mobile_font" >배송 받은 정량의 식재료와 레시피 카드를</p>
+                       <p class = "bold sub_mobile_font" >활용하여 직접 요리하여 먹습니다.</p>
+                       <p class = "bold sub_mobile_font" >* 수령 후 24시간 이내 요리해 드실 것을 권장합니다.</p>   
+                  </div>
+              </div>
+
+            </div>
+
+            
+    </div><!-- end container -->
+
+     <!-- 간단한 궁금증 Section
+    ================================================== -->
+        <div class="container" style = "margin-bottom:45px;"> <!-- container -->
+            <div class="section-header" style = "margin-top:0px; padding-top:0px;">
+                <h2 class = "bold">무엇이<span class="highlight"> 좋은걸까요</span></h2> 
+                <h6>요리를 쉽게 할 수 있도록 도와드리겠습니다.</h6>
+                <div class="fancy"><span><img src="img/flask.png" style = "width: 50px; height: 60px;" alt="로고모양"></span></div>
+            </div>
+            
+            <div class = "row" style = "text-align:center; margin-bottom:80px;">
+                <div class = "col-md-4">
+                    <img src = "harvest.png" style = "width:130px; height:130px;">
+                    <h3 class = "bold" style = "margin-top:40px;">식재료가 남지 않습니다</h3>
+                    <p class = "bold">사실 저희가 필요한건 감자1개? 고추1개 아닌가요?</p>
+                    <p class = "bold">두 끼 정량의 식재료만 마트에 주문해드리겠습니다.</p>
+                    <p class = "bold">냉장고에 식재료 남는 고민 더 이상 하지 마세요.</p>
+                </div>
+                <div class = "col-md-4">
+                    <img src = "salt.png" class = "mobile_grid" style = "width:130px; height:130px;">
+                    <h3 class = "bold" style = "margin-top:40px;">양념이 없어도 됩니다</h3>
+                    <p class = "bold">선택하신 요리를 만드는데 필요한</p>
+                    <p class = "bold">정량의 일회용 양념을 보내드립니다</p>
+                    <p class = "bold">(선택시 즉석밥도 주문 가능합니다)</p>
+                </div>
+                <div class = "col-md-4">
+                    <img src = "table.png" class = "mobile_grid" style = "width:130px; height:130px;">
+                    <h3 class = "bold" style = "margin-top:40px;">편리합니다</h3>
+                    <p class = "bold">배달음식처럼 먹고 싶을때 언제든지 시켜드세요.</p>
+                    <p class = "bold">귀찮은 장보기를 하지 않아도 정량의 식재료와 함께</p>
+                    <p class = "bold">주문 즉시 간편하게 요리를 할 수 있습니다.</p>
+                </div>
+            </div>
+            <hr style = "margin-bottom:0px;">
+            <div class = "row" style = "text-align: center;">
+                <div class = "col-md-6 bold" style = "margin-top:40px;">
+                    <a href = "/home/info"><img src = "left_12_1.png" style = "width:100%;" /></a>
+                </div>
+                <div class = "col-md-6 bold" style = "margin-top:40px;">
+                    <a href = "/home/choice"><img src = "right_1.png" style = "width:100%;" /></a>
+                </div>
+            </div>
+        </div><!-- end container -->
+        
+        
+    
+         <!-- Footer 
+         ================================================== -->
+         <%= render :partial => "home/footer" %> 
+  
+    
+         <!-- Javascripts
+         ================================================== -->
+         <script type="text/javascript" src="js/main.js"></script>   
+
+
+
+        <script>
+
+            
+            $("#bye_button").click(function(){
+                $( "#bye_div" ).slideUp();
+            });
+       
+        </script>
+        
+        
+        <script type="text/javascript">
+         
+        </script>
+        
+        
+
+        <script>
+        
+        
+        
+        if ( localStorage.getItem("popup") == "1") {
+            
+            
+            } else {
+                document.getElementById("popup_button").click();
+            }
+            
+         $("#popup_bye").click(function(){
+               var storedValue = "0"
+               localStorage.setItem("popup", "1");
+         });
+
+  
+ 
+            
+
+        </script>

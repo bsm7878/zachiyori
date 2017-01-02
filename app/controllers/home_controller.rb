@@ -30,7 +30,7 @@ class HomeController < ApplicationController
   
   
   def practice2 #엑셀 파싱
-    xlsx = Roo::Excelx.new(Rails.root.join('app', 'assets',  'abcd.xlsx'))
+    xlsx = Roo::Excelx.new(Rails.root.join('app', 'assets',  'abcde.xlsx'))
     i = 1 #행
     while i < 1000
       address =Address.new
@@ -50,6 +50,17 @@ class HomeController < ApplicationController
   
   def practice4 #날짜 및 시간 선택하기
     
+  end
+  
+  def practice5 #comming soon
+    
+  end
+  
+  def reservation_email #예약자 db 명단
+    email = Email.new
+    email.email = params[:email]
+    email.save
+    redirect_to :back
   end
   
   def reservation
