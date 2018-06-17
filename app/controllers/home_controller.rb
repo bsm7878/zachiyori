@@ -22,7 +22,7 @@ class HomeController < ApplicationController
      if params[:address].nil?
      
      else
-       @address = Address.where("ok_address like ?", "%" + abc + "%").paginate(:page => params[:page], :per_page => 15)
+       @address = Address.where("ok_address like ?", "%" + abc + "%").paginate(:page => params[:page], :per_page => 10)
      end
      
     
@@ -424,8 +424,8 @@ class HomeController < ApplicationController
     #token을 가져오자!
     url = "https://api.iamport.kr/users/getToken"
     body = {
-        imp_key: 3842921403225799,
-        imp_secret: "NVMlNEa8xzqvRAYSUg7q45o1KFskZIeND08rFjzdT0JKBHCvXKW1Pl3z0vT0e8NS9VjOfT18TLSvsv0p"
+        imp_key: ,
+        imp_secret: ""
     }
 
     result = HTTParty.post url, body: body
@@ -483,8 +483,8 @@ class HomeController < ApplicationController
     #token을 가져오자!
     url = "https://api.iamport.kr/users/getToken"
     body = {
-        imp_key: 3842921403225799,
-        imp_secret: "NVMlNEa8xzqvRAYSUg7q45o1KFskZIeND08rFjzdT0JKBHCvXKW1Pl3z0vT0e8NS9VjOfT18TLSvsv0p"
+        imp_key: ,
+        imp_secret: ""
     }
 
     result = HTTParty.post url, body: body
@@ -543,8 +543,8 @@ class HomeController < ApplicationController
     #token을 가져오자!
     url = "https://api.iamport.kr/users/getToken"
     body = {
-        imp_key: 3842921403225799,
-        imp_secret: "NVMlNEa8xzqvRAYSUg7q45o1KFskZIeND08rFjzdT0JKBHCvXKW1Pl3z0vT0e8NS9VjOfT18TLSvsv0p"
+        imp_key: ,
+        imp_secret: ""
     }
 
     result = HTTParty.post url, body: body
